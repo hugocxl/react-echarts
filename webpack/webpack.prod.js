@@ -14,6 +14,8 @@ const common = require('./webpack.common.js')
 const srcPath = path.resolve(__dirname, '..', 'src')
 
 const webpackconfig = {
+  mode: 'production',
+
   plugins: [
     new CleanWebpackPlugin(),
     new UglifyJsPlugin({
@@ -24,10 +26,7 @@ const webpackconfig = {
   ],
 
   optimization: {
-    minimize: false,
-    moduleIds: 'deterministic',
-    mergeDuplicateChunks: true,
-    chunkIds: 'deterministic',
+    minimize: true,
     minimizer: [
       new TerserPlugin({
         parallel: true
