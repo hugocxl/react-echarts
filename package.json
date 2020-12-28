@@ -2,7 +2,7 @@
   "name": "@hcorta/react-echarts",
   "productName": "react-echarts",
   "version": "0.1.0",
-  "description": "Unofficial React implementation for ECharts",
+  "description": "Lightweight React implementation for ECharts",
   "license": "MIT",
   "private": false,
   "author": "hcorta",
@@ -11,7 +11,7 @@
     "url": "https://github.com/hcorta/react-echarts"
   },
   "main": "lib/index.js",
-  "module": "src/index.js",
+  "module": "lib/index.js",
   "source": "src/index.js",
   "engines": {
     "node": ">=10"
@@ -28,6 +28,7 @@
     "postversion": "git push && git push --tags"
   },
   "dependencies": {
+    "classnames": "^2.2.6",
     "echarts": "^5.0.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1"
@@ -35,23 +36,14 @@
   "devDependencies": {
     "@babel/cli": "^7.4.3",
     "@babel/core": "^7.4.3",
-    "@babel/plugin-proposal-class-properties": "^7.4.0",
-    "@babel/plugin-proposal-export-default-from": "^7.2.0",
-    "@babel/plugin-proposal-export-namespace-from": "^7.2.0",
-    "@babel/plugin-proposal-json-strings": "^7.2.0",
-    "@babel/plugin-proposal-optional-chaining": "^7.2.0",
-    "@babel/plugin-proposal-throw-expressions": "^7.2.0",
-    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
-    "@babel/plugin-syntax-import-meta": "^7.2.0",
-    "@babel/plugin-transform-runtime": "^7.4.3",
+    "@babel/plugin-proposal-class-properties": "^7.12.1",
     "@babel/preset-env": "^7.4.3",
     "@babel/preset-react": "^7.0.0",
     "@babel/register": "^7.4.0",
     "babel-eslint": "^10.0.1",
     "babel-loader": "^8.0.4",
-    "babel-plugin-react-require": "^3.1.1",
-    "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
     "clean-webpack-plugin": "^3.0.0",
+    "css-loader": "^5.0.1",
     "eslint": "^7.14.0",
     "eslint-config-prettier": "^6.15.0",
     "eslint-config-standard": "^16.0.2",
