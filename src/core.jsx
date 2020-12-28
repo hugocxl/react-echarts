@@ -1,8 +1,12 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import isEqual from 'fast-deep-equal'
+// import isEqual from 'fast-deep-equal'
 // import { bind, clear } from 'size-sensor'
 import { pick } from './utils'
+
+function isEqual (el1, el2) {
+  return JSON.stringify(el1) === JSON.stringify(el2)
+}
 
 export default class EchartsReactCore extends Component {
   constructor (props) {
