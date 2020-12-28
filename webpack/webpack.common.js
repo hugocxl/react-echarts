@@ -29,7 +29,7 @@ module.exports = {
     extensions: ['.js', '.json', '.jsx'],
     alias: {
       constants$: path.resolve(__dirname, '../src/constants'),
-      helpers$: path.resolve(__dirname, '../src/helpers'),
+      utils$: path.resolve(__dirname, '../src/utils'),
       components$: path.resolve(__dirname, '../src/components'),
       themes$: path.resolve(__dirname, '../src/themes')
     }
