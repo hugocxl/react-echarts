@@ -21,6 +21,7 @@ export class ReactEcharts extends Component {
     this.setEchartsInstance()
     this.setResizeObserver()
     this.bindEchartsEvents()
+    this.renderLoading()
     this.renderDOM()
   }
 
@@ -29,25 +30,22 @@ export class ReactEcharts extends Component {
   }
 
   componentWillUnmount () {
+    console.log('UNMONUT')
     this.disposeEchartsInstance()
   }
 
   componentDidUpdate (prevProps) {
-    this.renderLoading()
-
-    const pickKeys = [
-      'option',
-      'notMerge',
-      'lazyUpdate',
-      'showLoading',
-      'loadingOption'
-    ]
+    if (!isEqual(prevProps.isLoading, this.props.isLoading)) {
+      this.renderLoading()
+    }
 
     if (
+      !isEqual(prevProps.lazyUpdate, this.props.lazyUpdate) ||
+      !isEqual(prevProps.notMerge, this.props.notMerge) ||
+      !isEqual(prevProps.option, this.props.option) ||
       !isEqual(prevProps.theme, this.props.theme) ||
-      !isEqual(prevProps.opts, this.props.opts) ||
-      !isEqual(prevProps.onEvents, this.props.onEvents) ||
-      !isEqual(pick(this.props, pickKeys), pick(prevProps, pickKeys))
+      !isEqual(prevProps.options, this.props.options) ||
+      !isEqual(prevProps.onEvents, this.props.onEvents)
     ) {
       return this.renderDOM()
     }
@@ -67,7 +65,7 @@ export class ReactEcharts extends Component {
   setEchartsInstance = () => {
     this.echartsInstance = this.echartsLib.init(this.containerRef,
       this.props.theme,
-      this.props.opts)
+      this.props.options)
   }
 
   setResizeObserver = () => {
@@ -103,7 +101,9 @@ export class ReactEcharts extends Component {
   renderLoading = () => {
     if (this.props.isLoading) {
       this.echartsInstance.showLoading(this.props.loadingOption)
-    } else this.echartsInstance.hideLoading()
+    }
+
+    this.echartsInstance.hideLoading()
   }
 
   render () {
@@ -132,7 +132,7 @@ export class ReactEcharts extends Component {
 //   showLoading: PropTypes.bool,
 //   loadingOption: PropTypes.object, // eslint-disable-line react/forbid-prop-types
 //   onEvents: PropTypes.object, // eslint-disable-line react/forbid-prop-types
-//   opts: PropTypes.shape({
+//   options: PropTypes.shape({
 //     devicePixelRatio: PropTypes.number,
 //     renderer: PropTypes.oneOf(['canvas', 'svg']),
 //     width: PropTypes.oneOfType([
@@ -151,7 +151,6 @@ ReactEcharts.defaultProps = {
   style: {},
   className: '',
   shouldComponentUpdate: () => true,
-  // shouldSetOption: () => true,
   notMerge: false,
   lazyUpdate: false,
   theme: null,
@@ -160,5 +159,54 @@ ReactEcharts.defaultProps = {
   loadingOption: null,
   onEvents: {},
   on: null,
-  opts: {}
+  options: {
+    renderer: 'svg'
+  },
+
+  // External added props
+  echartsRef: null,
+  onMount: null,
+  onChange: null,
+
+  // echarts option as props
+  title: null,
+  legend: null,
+  grid: null,
+  xAxis: null,
+  yAxis: null,
+  polar: null,
+  radiusAxis: null,
+  angleAxis: null,
+  radar: null,
+  dataZoom: null,
+  visualMap: null,
+  tooltip: null,
+  axisPointer: null,
+  toolbox: null,
+  brush: null,
+  geo: null,
+  parallel: null,
+  parallelAxis: null,
+  singleAxis: null,
+  timeline: null,
+  graphic: null,
+  calendar: null,
+  dataset: null,
+  aria: null,
+  series: null,
+  color: null,
+  backgroundColor: null,
+  textStyle: null,
+  animation: true,
+  animationThreshold: 2000,
+  animationDuration: 1000,
+  animationEasing: 'cubicOut',
+  animationDelay: 0,
+  animationDurationUpdate: 300,
+  animationEasingUpdate: 'cubicOut',
+  animationDelayUpdate: 0,
+  blendMode: 'source-over',
+  hoverLayerThreshold: 3000,
+  useUTC: false,
+  media: null
 }

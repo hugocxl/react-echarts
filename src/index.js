@@ -39,7 +39,9 @@ import 'echarts/lib/component/markArea'
 import 'echarts/lib/component/timeline'
 import 'echarts/lib/component/toolbox'
 
-// import 'zrender/lib/vml/vml';
+// import 'zrender/lib/vml'
+// import 'zrender/lib/vml/graphic'
+import 'zrender/lib/svg/svg'
 
 export * from './components'
 export * from './constants'

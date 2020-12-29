@@ -11,21 +11,43 @@ export default class App extends Component {
     };
   }
 
-  // componentDidMount() {
-  //   setInterval(() => {
-  //     const newData = this.state.data;
-  //     newData[0] = newData[0] * Math.random() * 10;
-  //     this.setState({
-  //       data: newData,
-  //     });
-  //   }, 2000);
-  // }
+  getData = () => {
+    const data = [];
+    for (let i = 0; i < 7; i++) {
+      data.push(Math.random() * 1000);
+    }
+
+    return data;
+  };
+
+  componentDidMount() {
+    setInterval(() => {
+      this.setState({
+        data: this.getData(),
+        isLoading: !this.state.isLoading,
+      });
+    }, 2000);
+  }
 
   render() {
     return (
       <div className="App">
         <ReactEcharts
+          isLoading={this.state.isLoading}
           option={{
+            grid: {
+              show: false,
+              containLabel: true,
+              x: 0,
+              y: 0,
+              x2: 0,
+              y2: 0,
+            },
+            title: {
+              text: "React Echarts",
+              show: true,
+            },
+            animation: true,
             xAxis: {
               type: "category",
               data: this.state.xAxis,
@@ -37,6 +59,10 @@ export default class App extends Component {
               {
                 data: this.state.data,
                 type: "bar",
+              },
+              {
+                data: this.state.data,
+                type: "line",
               },
             ],
           }}
