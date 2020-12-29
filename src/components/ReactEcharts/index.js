@@ -1,12 +1,13 @@
+'use strict'
+
+// Dependencies
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import echarts from 'echarts/lib/echarts'
-import { pick } from 'utils'
 import cx from 'classnames'
 
-function isEqual (a, b) {
-  return JSON.stringify(a) !== JSON.stringify(b)
-}
+// Utils
+import { pick, isEqual } from 'utils'
 
 export class ReactEcharts extends Component {
   constructor (props) {
@@ -17,44 +18,22 @@ export class ReactEcharts extends Component {
   }
 
   componentDidMount () {
-    const { onEvents, onChartReady } = this.props
-    this.startEchartsInstance()
-
-    //
-    this.startResizeObserver()
-    this.bindEchartsEvents(this.echartsInstance, this.props.onEvents)
+    this.setEchartsInstance()
+    this.setResizeObserver()
+    this.bindEchartsEvents()
     this.renderDOM()
+  }
+
+  shouldComponentUpdate (prevProps) {
+    return this.props.shouldComponentUpdate(prevProps, this.props)
   }
 
   componentWillUnmount () {
     this.disposeEchartsInstance()
   }
 
-  disposeEchartsInstance = () => {
-    this.echartsLib.dispose(this.containerRef)
-  }
-
-  startEchartsInstance = () => {
-    this.echartsInstance = this.echartsLib.init(this.containerRef,
-      this.props.theme,
-      this.props.opts)
-  }
-
-  startResizeObserver = () => {
-    const ro = new ResizeObserver(() => {
-      this.echartsInstance.resize()
-    })
-
-    ro.observe(this.containerRef)
-  }
-
   componentDidUpdate (prevProps) {
-    if (
-      typeof this.props.shouldComponentUpdate === 'function' &&
-      !this.props.shouldComponentUpdate(prevProps, this.props)
-    ) {
-      return
-    }
+    this.renderLoading()
 
     const pickKeys = [
       'option',
@@ -81,18 +60,36 @@ export class ReactEcharts extends Component {
     }
   }
 
-  bindEchartsEvents = (instance, events = {}) => {
-    const _bindEvent = (eventName, func) => {
-      if (typeof eventName === 'string' && typeof func === 'function') {
-        instance.on(eventName, (param) => {
-          func(param, instance)
-        })
-      }
+  disposeEchartsInstance = () => {
+    this.echartsLib.dispose(this.containerRef)
+  }
+
+  setEchartsInstance = () => {
+    this.echartsInstance = this.echartsLib.init(this.containerRef,
+      this.props.theme,
+      this.props.opts)
+  }
+
+  setResizeObserver = () => {
+    const ro = new ResizeObserver(() => {
+      this.echartsInstance.resize()
+    })
+
+    ro.observe(this.containerRef)
+  }
+
+  bindEchartsEvents = () => {
+    const { onEvents, on } = this.props
+
+    if (on) {
+      this.echartsInstance.on(on)
     }
 
-    for (const eventName in events) {
-      if (Object.prototype.hasOwnProperty.call(events, eventName)) {
-        _bindEvent(eventName, events[eventName])
+    for (const event in onEvents) {
+      if (typeof event === 'string' && typeof onEvents[event] === 'function') {
+        this.echartsInstance.on(event, (param) => {
+          onEvents[event](param, this.echartsInstance)
+        })
       }
     }
   }
@@ -104,7 +101,7 @@ export class ReactEcharts extends Component {
   }
 
   renderLoading = () => {
-    if (this.props.showLoading) {
+    if (this.props.isLoading) {
       this.echartsInstance.showLoading(this.props.loadingOption)
     } else this.echartsInstance.hideLoading()
   }
@@ -153,14 +150,15 @@ export class ReactEcharts extends Component {
 ReactEcharts.defaultProps = {
   style: {},
   className: '',
-  shouldComponentUpdate: null,
+  shouldComponentUpdate: () => true,
   // shouldSetOption: () => true,
   notMerge: false,
   lazyUpdate: false,
   theme: null,
   onChartReady: () => {},
-  showLoading: false,
+  isLoading: false,
   loadingOption: null,
   onEvents: {},
+  on: null,
   opts: {}
 }
