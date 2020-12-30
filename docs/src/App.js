@@ -35,6 +35,7 @@ export default class App extends Component {
     return (
       <div className="App">
         <ReactEcharts
+          onClick={(props) => console.log(props)}
           isLoading={this.state.isLoading}
           option={{
             grid: {
