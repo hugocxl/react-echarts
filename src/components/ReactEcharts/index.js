@@ -72,6 +72,10 @@ export class ReactEcharts extends Component {
     this.echartsInstance = this.echartsLib.init(this.containerRef,
       this.props.theme,
       this.props.options)
+
+    if (this.props.group) {
+      this.echartsInstance.group = this.props.group
+    }
   }
 
   setResizeObserver = () => {
@@ -170,7 +174,6 @@ export class ReactEcharts extends Component {
 ReactEcharts.defaultProps = {
   style: {},
   className: '',
-  shouldComponentUpdate: () => true,
   notMerge: false,
   lazyUpdate: false,
   theme: null,
@@ -181,8 +184,10 @@ ReactEcharts.defaultProps = {
   options: {
     renderer: 'svg'
   },
+  group: null,
 
   // External added props
+  shouldComponentUpdate: () => true,
   echartsRef: null,
   getInstance: null,
   onMount: null,
