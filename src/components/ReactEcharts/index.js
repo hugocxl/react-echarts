@@ -2,12 +2,11 @@
 
 // Dependencies
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import echarts from 'echarts/lib/echarts'
 import cx from 'classnames'
 
 // Utils
-import { pick, isEqual } from 'utils'
+import { isEqual } from 'utils'
 
 export class ReactEcharts extends Component {
   constructor (props) {
@@ -20,7 +19,7 @@ export class ReactEcharts extends Component {
   componentDidMount () {
     this.setEchartsInstance()
     this.setResizeObserver()
-    this.bindEchartsEvents()
+    this.registerEchartsEvents()
     this.renderLoading()
     this.renderDOM()
   }
@@ -30,7 +29,6 @@ export class ReactEcharts extends Component {
   }
 
   componentWillUnmount () {
-    console.log('UNMONUT')
     this.disposeEchartsInstance()
   }
 
@@ -76,7 +74,7 @@ export class ReactEcharts extends Component {
     ro.observe(this.containerRef)
   }
 
-  bindEchartsEvents = () => {
+  registerEchartsEvents = () => {
     const { onEvents, on } = this.props
 
     if (on) {
@@ -120,33 +118,6 @@ export class ReactEcharts extends Component {
   }
 }
 
-// ReactEcharts.propTypes = {
-//   option: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
-//   echarts: PropTypes.object, // eslint-disable-line react/forbid-prop-types
-//   notMerge: PropTypes.bool,
-//   lazyUpdate: PropTypes.bool,
-//   style: PropTypes.object, // eslint-disable-line react/forbid-prop-types
-//   className: PropTypes.string,
-//   theme: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-//   onChartReady: PropTypes.func,
-//   showLoading: PropTypes.bool,
-//   loadingOption: PropTypes.object, // eslint-disable-line react/forbid-prop-types
-//   onEvents: PropTypes.object, // eslint-disable-line react/forbid-prop-types
-//   options: PropTypes.shape({
-//     devicePixelRatio: PropTypes.number,
-//     renderer: PropTypes.oneOf(['canvas', 'svg']),
-//     width: PropTypes.oneOfType([
-//       PropTypes.number,
-//       PropTypes.oneOf([null, undefined, 'auto'])
-//     ]),
-//     height: PropTypes.oneOfType([
-//       PropTypes.number,
-//       PropTypes.oneOf([null, undefined, 'auto'])
-//     ])
-//   }),
-//   shouldSetOption: PropTypes.func
-// }
-
 ReactEcharts.defaultProps = {
   style: {},
   className: '',
@@ -167,46 +138,16 @@ ReactEcharts.defaultProps = {
   echartsRef: null,
   onMount: null,
   onChange: null,
+  getInstance: null,
 
-  // echarts option as props
-  title: null,
-  legend: null,
-  grid: null,
-  xAxis: null,
-  yAxis: null,
-  polar: null,
-  radiusAxis: null,
-  angleAxis: null,
-  radar: null,
-  dataZoom: null,
-  visualMap: null,
-  tooltip: null,
-  axisPointer: null,
-  toolbox: null,
-  brush: null,
-  geo: null,
-  parallel: null,
-  parallelAxis: null,
-  singleAxis: null,
-  timeline: null,
-  graphic: null,
-  calendar: null,
-  dataset: null,
-  aria: null,
-  series: null,
-  color: null,
-  backgroundColor: null,
-  textStyle: null,
-  animation: true,
-  animationThreshold: 2000,
-  animationDuration: 1000,
-  animationEasing: 'cubicOut',
-  animationDelay: 0,
-  animationDurationUpdate: 300,
-  animationEasingUpdate: 'cubicOut',
-  animationDelayUpdate: 0,
-  blendMode: 'source-over',
-  hoverLayerThreshold: 3000,
-  useUTC: false,
-  media: null
+  // Events register
+  onClick: null,
+  onDoubleClick: null,
+  onMouseDown: null,
+  onMouseMove: null,
+  onMouseUp: null,
+  onMouseOver: null,
+  onMouseOut: null,
+  onGlobalOut: null,
+  onContextMenu: null
 }
