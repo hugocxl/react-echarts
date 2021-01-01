@@ -68,18 +68,18 @@ For other examples and components, check out the [documentation](hcorta.github.i
 
 ## Component Props
 
-| Prop              |       Type       | Description                                                                                                   |    Default    |
-| :---------------- | :--------------: | ------------------------------------------------------------------------------------------------------------- | :-----------: |
-| style             |      Object      | Styles object passed down to the chart container                                                              |     null      |
-| className         |      String      | Classname applied to the container                                                                            |      ''       |
-| height            | Number or String | Height of the chart                                                                                           |      280      |
-| width             | Number or String | Width of the chart                                                                                            |    '100%'     |
-| useLoading        |     Boolean      | Enables triggering loading                                                                                    |     false     |
-| isLoading         |     Boolean      | Whether the component is loading. In case `useLoading` is set to true, it will display `loadingComponent`.    |     false     |
-| loadingComponent  |    Component     | Custom component to display when `isLoading` is set to true                                                   | `<Loading/>`  |
-| useSkeleton       |     Boolean      | Enables triggering loading                                                                                    |     false     |
-| isMounting        |     Boolean      | Whether the component is mounting. In case `useSkeleton` is set to true, it will display `skeletonComponent`. |     false     |
-| skeletonComponent |    Component     | Custom component to display when `isMounting` is set to true                                                  | `<Skeleton/>` |
+| Prop                  |        Type        | Description                                                                                                   |    Default    |
+| :-------------------- | :----------------: | ------------------------------------------------------------------------------------------------------------- | :-----------: |
+| **style**             |      _Object_      | Styles object passed down to the chart container                                                              |     null      |
+| **className**         |      _String_      | Classname applied to the container                                                                            |      ''       |
+| **height**            | _Number or String_ | Height of the chart                                                                                           |      280      |
+| **width**             | _Number or String_ | Width of the chart                                                                                            |    '100%'     |
+| **useLoading**        |     _Boolean_      | Enables triggering loading                                                                                    |     false     |
+| **isLoading**         |     _Boolean_      | Whether the component is loading. In case `useLoading` is set to true, it will display `loadingComponent`.    |     false     |
+| **loadingComponent**  |    _Component_     | Custom component to display when `isLoading` is set to true                                                   | `<Loading/>`  |
+| **useSkeleton**       |     _Boolean_      | Enables triggering loading                                                                                    |     false     |
+| **isMounting**        |     _Boolean_      | Whether the component is mounting. In case `useSkeleton` is set to true, it will display `skeletonComponent`. |     false     |
+| **skeletonComponent** |    _Component_     | Custom component to display when `isMounting` is set to true                                                  | `<Skeleton/>` |
 
 ## Sponsoring
 
