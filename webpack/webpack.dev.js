@@ -10,7 +10,7 @@ const common = require('./webpack.common.js')
 module.exports = merge(common, {
   mode: 'development',
   cache: true,
-  devtool: 'source-map',
+  devtool: 'eval-source-map',
   watch: true,
   watchOptions: {
     aggregateTimeout: 500,

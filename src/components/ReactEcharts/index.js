@@ -2,16 +2,14 @@
 
 // Dependencies
 import React, { Component, createRef } from 'react'
-import { Skeleton, Loading } from 'components'
-// import echarts from 'echarts/lib/echarts'
-// import 'zrender/lib/svg/svg'
+import { withSkeleton, withLoading } from 'HOC'
 import * as echarts from 'echarts/dist/echarts.simple.js'
 import cx from 'classnames'
 
 // Utils
-import { isEqual } from 'utils'
+import { isEqual, compose } from 'utils'
 
-export class ReactEcharts extends Component {
+export class ReactEchartsCore extends Component {
   constructor (props) {
     super(props)
     this.echartsLib = echarts
@@ -24,28 +22,6 @@ export class ReactEcharts extends Component {
   }
 
   componentDidMount () {
-    if (!this.props.isMounting) {
-      this.start()
-    }
-  }
-
-  componentDidUpdate (prevProps) {
-    if (!this.echartsInstance && !this.props.isMounting) {
-      this.start()
-    } else {
-      this.update()
-    }
-  }
-
-  componentWillUnmount () {
-    this.disposeEchartsInstance()
-
-    if (this.props.onUnmount) {
-      this.props.onUnmount(this)
-    }
-  }
-
-  start = () => {
     const { onMount, getInstance, getRef, getEcharts } = this.props
 
     this.setEchartsInstance()
@@ -70,7 +46,7 @@ export class ReactEcharts extends Component {
     }
   }
 
-  update = (prevProps) => {
+  componentDidUpdate (prevProps) {
     if (
       !isEqual(prevProps.lazyUpdate, this.props.lazyUpdate) ||
       !isEqual(prevProps.notMerge, this.props.notMerge) ||
@@ -94,8 +70,17 @@ export class ReactEcharts extends Component {
     }
   }
 
+  componentWillUnmount () {
+    this.disposeEchartsInstance()
+
+    if (this.props.onUnmount) {
+      this.props.onUnmount(this)
+    }
+  }
+
   disposeEchartsInstance = () => {
     this.echartsLib.dispose(this.containerRef.current)
+    this.echartsInstance = null
   }
 
   setEchartsInstance = () => {
@@ -185,39 +170,21 @@ export class ReactEcharts extends Component {
     })
   }
 
-  renderLoading = () => {
-    return this.props.loadingComponent || <Loading />
-  }
-
-  renderSkeleton = () => {
-    return this.props.skeletonComponent || <Skeleton />
-  }
-
   render () {
-    const {
-      style,
-      className,
-      id,
-      useSkeleton,
-      isMounting,
-      useLoading,
-      isLoading
-    } = this.props
+    const { style, className, id } = this.props
 
     return (
-      <>
-        {!isMounting && useLoading && isLoading && this.renderLoading()}
-
-        <div
-          ref={this.containerRef}
-          style={style}
-          id={id}
-          className={cx('react-echarts', className)}
-        />
-      </>
+      <div
+        ref={this.containerRef}
+        style={style}
+        id={id}
+        className={cx('react-echarts', className)}
+      />
     )
   }
 }
+
+export const ReactEcharts = compose(withSkeleton, withLoading)(ReactEchartsCore)
 
 ReactEcharts.defaultProps = {
   style: {},

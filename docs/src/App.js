@@ -33,6 +33,7 @@ export default class App extends Component {
     return (
       <div className="App">
         <ReactEcharts
+          useSkeleton
           onContextMenu={(props) => console.log(props)}
           onDoubleClick={(props) => console.log(props)}
           isLoading={this.state.isLoading}
