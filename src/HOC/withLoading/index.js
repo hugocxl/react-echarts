@@ -6,13 +6,14 @@ export const withLoading = (Component) => ({
   useLoading,
   isMounting,
   loadingComponent,
+  isLoading,
   ...rest
 }) => {
   if (useLoading) {
     const LoadingComp = loadingComponent || Loading
     return (
       <>
-        <LoadingComp />
+        {isLoading && <LoadingComp />}
         <Component {...rest} />
       </>
     )

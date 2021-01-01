@@ -24,7 +24,6 @@ export default class App extends Component {
     setInterval(() => {
       this.setState({
         data: this.getData(),
-        isLoading: !this.state.isLoading,
       });
     }, 2000);
   }
@@ -34,21 +33,11 @@ export default class App extends Component {
       <div className="App">
         <Chart
           height={"100%"}
-          isLoading={this.state.isLoading}
-          isMounting={!this.state.data.length}
+          title={{
+            text: "React Echarts",
+            show: true,
+          }}
           option={{
-            // grid: {
-            //   show: false,
-            //   containLabel: true,
-            //   x: 0,
-            //   y: 0,
-            //   x2: 0,
-            //   y2: 0,
-            // },
-            title: {
-              text: "React Echarts",
-              show: true,
-            },
             animation: true,
             xAxis: {
               type: "category",
