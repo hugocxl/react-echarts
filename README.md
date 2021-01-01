@@ -15,6 +15,8 @@
 
 ---
 
+</br>
+
 ## Installation
 
 In order to use react-echarts, all you need to do is install the `@hcorta/react-echarts` package:
@@ -22,8 +24,6 @@ In order to use react-echarts, all you need to do is install the `@hcorta/react-
 ```sh
 yarn add @hcorta/react-echarts
 ```
-
----
 
 ## Features
 
