@@ -2,10 +2,13 @@
 
 import { ReactEchartsCore } from 'lib'
 import { withSkeleton, withLoading } from 'HOC'
-import { compose } from 'utils'
+import { compose, getEchartsOption } from 'utils'
+
+const ReactEcharts = compose(withSkeleton, withLoading)(ReactEchartsCore)
 
 export const Chart = (props) => {
-  return compose(withSkeleton, withLoading)(ReactEchartsCore)
+  const option = getEchartsOption(props)
+  return <ReactEcharts {...props} option={option} />
 }
 
 Chart.defaultProps = {
