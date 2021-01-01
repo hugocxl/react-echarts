@@ -34,7 +34,10 @@ export const withCartesianProps = (Component) => ({
       {
         data,
         type,
-        smooth
+        smooth,
+        ...(area && {
+          areaStyle: {}
+        })
       }
     ]
   } else {

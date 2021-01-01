@@ -1,5 +1,5 @@
 import "./App.css";
-import { Chart, AreaChart, BarChart } from "@hcorta/react-echarts";
+import { DoughnutChart } from "@hcorta/react-echarts";
 import { Component } from "react";
 
 export default class App extends Component {
@@ -31,47 +31,14 @@ export default class App extends Component {
   render() {
     return (
       <div className="App">
-        <AreaChart
-          animation={true}
-          data={this.state.data}
-          xAxis={["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]}
-        />
-        <BarChart
-          smooth
-          stacked
-          legend={{ show: true, data: ["1", "2"] }}
-          xAxis={{
-            show: false,
-            data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
-          }}
-          series={[
-            { name: "1", data: this.getData() },
-            { name: "2", data: this.getData() },
+        <DoughnutChart
+          data={[
+            { value: 1048, name: "搜索引擎" },
+            { value: 735, name: "直接访问" },
+            { value: 580, name: "邮件营销" },
+            { value: 484, name: "联盟广告" },
+            { value: 300, name: "视频广告" },
           ]}
-        />
-        <Chart
-          tooltip={{ show: true }}
-          animation={true}
-          title={{
-            text: "React Echarts",
-            show: true,
-          }}
-          option={{
-            xAxis: {
-              type: "category",
-              data: this.state.xAxis,
-            },
-            yAxis: {
-              type: "value",
-            },
-            series: [
-              {
-                data: this.state.data,
-                type: "bar",
-                showBackground: true,
-              },
-            ],
-          }}
         />
       </div>
     );

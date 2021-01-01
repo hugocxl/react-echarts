@@ -14,8 +14,6 @@
 
 ---
 
-</br>
-
 ## Installation
 
 In order to use `react-echarts`, all you need to do is install the npm package:
@@ -26,22 +24,28 @@ yarn add @hcorta/react-echarts
 
 ## Features
 
-- 16 chart types
-- SVG Rendering
-- Lightweight
-- Highly customizable
-- Interactive
-- Responsive design
+- **16** chart types
+- **SVG** Rendering
+- **Lightweight**
+- Highly **customizable**
+- **Themes**
+- **Interactive**
+- **Responsive** design
 
-## Principles
+## Introduction
 
-- **Easy to customize**: In most cases, charts look and behave exactly as you need without modifications. A simple options-structure allows for deep customization, and styling can be done via JavaScript or CSS.
-- **Concise API**: react-echarts makes it easy to generate ECharts.js charts by wrapping the code required to construct the entire chart.
-- **Controlled components**: exports [controlled](https://reactjs.org/docs/forms.html#controlled-components) components only.
+`react-echarts` is an abstraction layer built with [React](https://facebook.github.io/react/) on top of [ECharts](https://echarts.apache.org/en/index.html).
+
+It exposes a set of components for developers that can be combined to set up interactive charts in their web pages.
+Main principles of react-echarts are:
+
+1. **Simplicty:** react-echarts makes it easy to generate ECharts.js components by wrapping the code required to construct the entire chart.
+1. **Easy to customize**: In most cases, charts look and behave exactly as you need without modifications. A simple options-structure allows for deep customization, and styling can be done via JavaScript or CSS.
+1. **Declarative**: components of charts are purely presentational.
 
 ## Usage
 
-`react-echarts` exposes a set of components for developers that can be combined to set up interactive charts in their web pages. In order to render a chart you have to provide a reference to a [valid option object](https://echarts.apache.org/next/en/option.html#title):
+In order to render a chart you have to provide a reference to a [valid option object](https://echarts.apache.org/next/en/option.html#title):
 
 ```jsx
 import { AreaChart } from '@hcorta/react-echarts'
@@ -49,7 +53,8 @@ import { AreaChart } from '@hcorta/react-echarts'
 function MyChart() {
   return (
     <AreaChart
-      animation={true}
+      smooth
+      tooltip={{ show: true }}
       data={[125, 464, 846, 253, 457, 556, 975]}
       xAxis={['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']}
     />
@@ -57,9 +62,13 @@ function MyChart() {
 }
 ```
 
-Check out the [live example](https://codesandbox.io/s/basic-map-wvlol)
+Check out the [live example](https://codesandbox.io/s/react-echarts-simple-area-umnfw)
 
-For other examples and components, check out the [documentation](https://www.react-simple-maps.io/docs/getting-started).
+For other examples and components, check out the [documentation](hcorta.github.io/react-echarts/).
+
+## Sponsoring
+
+I do this open source work in my free time. If you use `react-echarts` for an important work, and you'd like me to invest more time on it, you may [buy me a coffee](https://www.buymeacoffee.com/hcorta). Thanks!
 
 ## License
 
