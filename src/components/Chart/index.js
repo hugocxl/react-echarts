@@ -14,8 +14,8 @@ export const Chart = (props) => {
 Chart.defaultProps = {
   style: {},
   className: '',
-  height: null,
-  width: null,
+  height: 280,
+  width: '100%',
 
   notMerge: false,
   lazyUpdate: false,

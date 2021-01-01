@@ -46,7 +46,7 @@ const optionKeys = [
 ]
 
 export function getEchartsOption ({
-  option = {},
+  option,
   data = null,
   type = null,
   ...rest
@@ -57,5 +57,9 @@ export function getEchartsOption ({
     if (rest[key]) propsOption[key] = rest[key]
   })
 
-  return merge(option, propsOption)
+  if (option) {
+    return merge(option, propsOption)
+  } else {
+    return propsOption
+  }
 }

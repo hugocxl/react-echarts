@@ -32,13 +32,14 @@ export default class App extends Component {
     return (
       <div className="App">
         <Chart
+          tooltip={{ show: true }}
           height={"100%"}
+          animation={true}
           title={{
             text: "React Echarts",
             show: true,
           }}
           option={{
-            animation: true,
             xAxis: {
               type: "category",
               data: this.state.xAxis,
