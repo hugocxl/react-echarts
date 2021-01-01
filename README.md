@@ -66,6 +66,21 @@ Check out the [live example](https://codesandbox.io/s/react-echarts-simple-area-
 
 For other examples and components, check out the [documentation](hcorta.github.io/react-echarts/).
 
+## Component Props
+
+| Prop              |       Type       | Description                                                                                                   |    Default    |
+| :---------------- | :--------------: | ------------------------------------------------------------------------------------------------------------- | :-----------: |
+| style             |      Object      | Styles object passed down to the chart container                                                              |     null      |
+| className         |      String      | Classname applied to the container                                                                            |      ''       |
+| height            | Number or String | Height of the chart                                                                                           |      280      |
+| width             | Number or String | Width of the chart                                                                                            |    '100%'     |
+| useLoading        |     Boolean      | Enables triggering loading                                                                                    |     false     |
+| isLoading         |     Boolean      | Whether the component is loading. In case `useLoading` is set to true, it will display `loadingComponent`.    |     false     |
+| loadingComponent  |    Component     | Custom component to display when `isLoading` is set to true                                                   | `<Loading/>`  |
+| useSkeleton       |     Boolean      | Enables triggering loading                                                                                    |     false     |
+| isMounting        |     Boolean      | Whether the component is mounting. In case `useSkeleton` is set to true, it will display `skeletonComponent`. |     false     |
+| skeletonComponent |    Component     | Custom component to display when `isMounting` is set to true                                                  | `<Skeleton/>` |
+
 ## Sponsoring
 
 I do this open source work in my free time. If you use `react-echarts` for an important work, and you'd like me to invest more time on it, you may [buy me a coffee](https://www.buymeacoffee.com/hcorta). Thanks!
