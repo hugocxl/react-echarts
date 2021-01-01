@@ -13,6 +13,8 @@
 
 </div>
 
+---
+
 ## Installation
 
 In order to use react-echarts, all you need to do is install the `@hcorta/react-echarts` package:
@@ -21,11 +23,22 @@ In order to use react-echarts, all you need to do is install the `@hcorta/react-
 yarn add @hcorta/react-echarts
 ```
 
+---
+
+## Features
+
+- 16 chart types
+- SVG Rendering
+- Lightweight
+- Highly customizable
+- Interactive
+- Responsive design
+
 ## Principles
 
+- **Easy to customize**: In most cases, charts look and behave exactly as you need without modifications. A simple options-structure allows for deep customization, and styling can be done via JavaScript or CSS.
 - **Concise API**: react-echarts makes it easy to generate ECharts.js charts by wrapping the code required to construct the entire chart.
 - **Controlled components**: exports [controlled](https://reactjs.org/docs/forms.html#controlled-components) components only.
-- **Easy to customize**: In most cases, charts look and behave exactly as you need without modifications. A simple options-structure allows for deep customization, and styling can be done via JavaScript or CSS..
 
 ## Usage
 
