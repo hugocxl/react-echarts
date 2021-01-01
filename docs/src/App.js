@@ -1,5 +1,5 @@
 import "./App.css";
-import { Chart } from "@hcorta/react-echarts";
+import { Chart, AreaChart, BarChart } from "@hcorta/react-echarts";
 import { Component } from "react";
 
 export default class App extends Component {
@@ -31,9 +31,26 @@ export default class App extends Component {
   render() {
     return (
       <div className="App">
+        <AreaChart
+          animation={true}
+          data={this.state.data}
+          xAxis={["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]}
+        />
+        <BarChart
+          smooth
+          stacked
+          legend={{ show: true, data: ["1", "2"] }}
+          xAxis={{
+            show: false,
+            data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+          }}
+          series={[
+            { name: "1", data: this.getData() },
+            { name: "2", data: this.getData() },
+          ]}
+        />
         <Chart
           tooltip={{ show: true }}
-          height={"100%"}
           animation={true}
           title={{
             text: "React Echarts",
@@ -51,6 +68,7 @@ export default class App extends Component {
               {
                 data: this.state.data,
                 type: "bar",
+                showBackground: true,
               },
             ],
           }}

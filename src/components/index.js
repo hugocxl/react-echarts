@@ -1,3 +1,6 @@
 export * from './Skeleton'
 export * from './Loading'
 export * from './Chart'
+export * from './LineChart'
+export * from './BarChart'
+export * from './AreaChart'

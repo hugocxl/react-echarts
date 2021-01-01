@@ -24,9 +24,7 @@ Chart.defaultProps = {
   transition: null,
   theme: null,
   group: null,
-  // options: {
-  //   renderer: 'svg'
-  // },
+  options: {},
 
   // External added props
   onEvents: {},
