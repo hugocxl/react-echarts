@@ -2,7 +2,10 @@
 
 // Dependencies
 import React, { Component } from 'react'
-import echarts from 'echarts/lib/echarts'
+import { Skeleton, Loading } from 'components'
+// import echarts from 'echarts/lib/echarts'
+// import 'zrender/lib/svg/svg'
+import * as echarts from 'echarts/dist/echarts.simple.js'
 import cx from 'classnames'
 
 // Utils
@@ -20,7 +23,6 @@ export class ReactEcharts extends Component {
     this.setEchartsInstance()
     this.setResizeObserver()
     this.registerEchartsEvents()
-    this.renderLoading()
     this.renderDOM()
 
     if (this.props.onMount) {
@@ -34,13 +36,13 @@ export class ReactEcharts extends Component {
 
   componentWillUnmount () {
     this.disposeEchartsInstance()
+
+    if (this.props.onUnmount) {
+      this.props.onUnmount(this)
+    }
   }
 
   componentDidUpdate (prevProps) {
-    if (!isEqual(prevProps.isLoading, this.props.isLoading)) {
-      this.renderLoading()
-    }
-
     if (
       !isEqual(prevProps.lazyUpdate, this.props.lazyUpdate) ||
       !isEqual(prevProps.notMerge, this.props.notMerge) ||
@@ -59,8 +61,8 @@ export class ReactEcharts extends Component {
       return this.echartsInstance.resize()
     }
 
-    if (this.props.onChange) {
-      this.props.onChange(this)
+    if (this.props.onUpdate) {
+      this.props.onUpdate(this)
     }
   }
 
@@ -149,16 +151,24 @@ export class ReactEcharts extends Component {
       this.props.lazyUpdate)
   }
 
-  renderLoading = () => {
-    if (this.props.isLoading) {
-      this.echartsInstance.showLoading(this.props.loadingOption)
-    }
+  renderLoader = () => {
+    return this.props.loadingComponent || <Loading />
+  }
 
-    this.echartsInstance.hideLoading()
+  renderSkeleton = () => {
+    return this.props.skeletonComponent || <Skeleton />
   }
 
   render () {
-    const { style, className, id } = this.props
+    const {
+      style,
+      className,
+      id,
+      useSkeleton,
+      isMounting,
+      useLoading,
+      isLoading
+    } = this.props
 
     return (
       <div
@@ -166,7 +176,10 @@ export class ReactEcharts extends Component {
         style={style}
         id={id}
         className={cx('react-echarts', className)}
-      />
+      >
+        {useSkeleton && isMounting && this.renderSkeleton()}
+        {useLoading && isLoading && this.renderLoader()}
+      </div>
     )
   }
 }
@@ -177,21 +190,28 @@ ReactEcharts.defaultProps = {
   notMerge: false,
   lazyUpdate: false,
   theme: null,
-  isLoading: false,
   loadingOption: null,
   onEvents: {},
   on: null,
-  options: {
-    renderer: 'svg'
-  },
+  // options: {
+  //   renderer: 'svg'
+  // },
   group: null,
 
   // External added props
-  shouldComponentUpdate: () => true,
-  echartsRef: null,
-  getInstance: null,
+  useSkeleton: true,
+  skeletonComponent: null,
+  isMounting: false,
+  useLoading: true,
+  loadingComponent: null,
+  isLoading: false,
   onMount: null,
-  onChange: null,
+  onUnmount: null,
+  onUpdate: null,
+  shouldComponentUpdate: () => true,
+
+  getInstance: null,
+  echartsRef: null,
 
   // Events register
   onClick: null,

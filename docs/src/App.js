@@ -38,14 +38,14 @@ export default class App extends Component {
           onClick={(props) => console.log(props)}
           isLoading={this.state.isLoading}
           option={{
-            grid: {
-              show: false,
-              containLabel: true,
-              x: 0,
-              y: 0,
-              x2: 0,
-              y2: 0,
-            },
+            // grid: {
+            //   show: false,
+            //   containLabel: true,
+            //   x: 0,
+            //   y: 0,
+            //   x2: 0,
+            //   y2: 0,
+            // },
             title: {
               text: "React Echarts",
               show: true,
