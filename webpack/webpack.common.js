@@ -30,6 +30,7 @@ module.exports = {
     alias: {
       constants$: path.resolve(__dirname, '../src/constants'),
       HOC$: path.resolve(__dirname, '../src/HOC'),
+      lib$: path.resolve(__dirname, '../src/lib'),
       utils$: path.resolve(__dirname, '../src/utils'),
       components$: path.resolve(__dirname, '../src/components'),
       themes$: path.resolve(__dirname, '../src/themes')

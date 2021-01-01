@@ -8,9 +8,14 @@ export const withLoading = (Component) => ({
   loadingComponent,
   ...rest
 }) => {
-  if (useLoading && isMounting) {
+  if (useLoading) {
     const LoadingComp = loadingComponent || Loading
-    return <LoadingComp />
+    return (
+      <>
+        <LoadingComp />
+        <Component {...rest} />
+      </>
+    )
   }
 
   return <Component {...rest} />

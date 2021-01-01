@@ -1,5 +1,5 @@
 import "./App.css";
-import { ReactEcharts } from "@hcorta/react-echarts";
+import { Chart } from "@hcorta/react-echarts";
 import { Component } from "react";
 
 export default class App extends Component {
@@ -7,7 +7,7 @@ export default class App extends Component {
     super(props);
     this.state = {
       xAxis: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
-      data: [150, 230, 224, 218, 135, 147, 260],
+      data: [],
     };
   }
 
@@ -32,12 +32,10 @@ export default class App extends Component {
   render() {
     return (
       <div className="App">
-        <ReactEcharts
-          useSkeleton
-          onContextMenu={(props) => console.log(props)}
-          onDoubleClick={(props) => console.log(props)}
+        <Chart
+          height={"100%"}
           isLoading={this.state.isLoading}
-          isMounting={!this.state.isLoading}
+          isMounting={!this.state.data.length}
           option={{
             // grid: {
             //   show: false,
@@ -63,18 +61,6 @@ export default class App extends Component {
               {
                 data: this.state.data,
                 type: "bar",
-              },
-              {
-                name: "Reference Page",
-                type: "pie",
-                radius: "55%",
-                data: [
-                  { value: 400, name: "Searching Engine" },
-                  { value: 335, name: "Direct" },
-                  { value: 310, name: "Email" },
-                  { value: 274, name: "Alliance Advertisement" },
-                  { value: 235, name: "Video Advertisement" },
-                ],
               },
             ],
           }}
