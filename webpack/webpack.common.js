@@ -43,6 +43,10 @@ module.exports = {
       NODE_ENV: env,
       ENV_PRODUCTION: env === 'production',
       ENV_DEVELOPMENT: env !== 'production'
+    }),
+    new webpack.ProvidePlugin({
+      React: 'react',
+      PropTypes: 'prop-types'
     })
   ],
   module: {

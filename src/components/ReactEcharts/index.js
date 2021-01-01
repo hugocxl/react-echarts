@@ -1,7 +1,7 @@
 'use strict'
 
 // Dependencies
-import React, { Component } from 'react'
+import React, { Component, createRef } from 'react'
 import { Skeleton, Loading } from 'components'
 // import echarts from 'echarts/lib/echarts'
 // import 'zrender/lib/svg/svg'
@@ -16,22 +16,25 @@ export class ReactEcharts extends Component {
     super(props)
     this.echartsLib = echarts
     this.echartsInstance = null
-    this.containerRef = null
-  }
-
-  componentDidMount () {
-    this.setEchartsInstance()
-    this.setResizeObserver()
-    this.registerEchartsEvents()
-    this.renderDOM()
-
-    if (this.props.onMount) {
-      this.props.onMount(this)
-    }
+    this.containerRef = createRef()
   }
 
   shouldComponentUpdate (prevProps) {
-    return this.props.shouldComponentUpdate(prevProps, this.props)
+    return this.props.shouldUpdate(prevProps, this.props)
+  }
+
+  componentDidMount () {
+    if (!this.props.isMounting) {
+      this.start()
+    }
+  }
+
+  componentDidUpdate (prevProps) {
+    if (!this.echartsInstance && !this.props.isMounting) {
+      this.start()
+    } else {
+      this.update()
+    }
   }
 
   componentWillUnmount () {
@@ -42,7 +45,32 @@ export class ReactEcharts extends Component {
     }
   }
 
-  componentDidUpdate (prevProps) {
+  start = () => {
+    const { onMount, getInstance, getRef, getEcharts } = this.props
+
+    this.setEchartsInstance()
+    this.setResizeObserver()
+    this.setEchartsEvents()
+    this.renderEchart()
+
+    if (onMount) {
+      onMount(this)
+    }
+
+    if (getInstance) {
+      getInstance(this.echartsInstance)
+    }
+
+    if (getRef) {
+      getRef(this.containerRef.current)
+    }
+
+    if (getEcharts) {
+      getRef(this.echartsLib)
+    }
+  }
+
+  update = (prevProps) => {
     if (
       !isEqual(prevProps.lazyUpdate, this.props.lazyUpdate) ||
       !isEqual(prevProps.notMerge, this.props.notMerge) ||
@@ -51,7 +79,7 @@ export class ReactEcharts extends Component {
       !isEqual(prevProps.options, this.props.options) ||
       !isEqual(prevProps.onEvents, this.props.onEvents)
     ) {
-      return this.renderDOM()
+      return this.renderEchart()
     }
 
     if (
@@ -67,28 +95,30 @@ export class ReactEcharts extends Component {
   }
 
   disposeEchartsInstance = () => {
-    this.echartsLib.dispose(this.containerRef)
+    this.echartsLib.dispose(this.containerRef.current)
   }
 
   setEchartsInstance = () => {
-    this.echartsInstance = this.echartsLib.init(this.containerRef,
-      this.props.theme,
-      this.props.options)
+    const { theme, options, group } = this.props
 
-    if (this.props.group) {
-      this.echartsInstance.group = this.props.group
+    this.echartsInstance = this.echartsLib.init(this.containerRef.current,
+      theme,
+      options)
+
+    if (group) {
+      this.echartsInstance.group = group
     }
   }
 
   setResizeObserver = () => {
-    const ro = new ResizeObserver(() => {
+    const resizeObserver = new ResizeObserver(() => {
       this.echartsInstance.resize()
     })
 
-    ro.observe(this.containerRef)
+    resizeObserver.observe(this.containerRef.current)
   }
 
-  registerEchartsEvents = () => {
+  setEchartsEvents = () => {
     const { onEvents, on } = this.props
 
     if (on) {
@@ -104,13 +134,13 @@ export class ReactEcharts extends Component {
     }
 
     this.echartsInstance.on('click', this.props.onClick)
-    this.echartsInstance.on('dbclick', this.props.onDoubleClick)
+    this.echartsInstance.on('dblclick', this.props.onDoubleClick)
     this.echartsInstance.on('mousedown', this.props.onMouseDown)
     this.echartsInstance.on('mousemove', this.props.onMouseMove)
     this.echartsInstance.on('mouseover', this.props.onMouseOver)
     this.echartsInstance.on('mouseout', this.props.onMouseOut)
     this.echartsInstance.on('globalout', this.props.onGlobalOut)
-    this.echartsInstance.on('contextMenu', this.props.onContextMenu)
+    this.echartsInstance.on('contextmenu', this.props.onContextMenu)
     this.echartsInstance.on('highlight', this.props.onHighlight)
     this.echartsInstance.on('downplay', this.props.onDownplay)
     this.echartsInstance.on('selectchanged', this.props.onSelectChanged)
@@ -145,13 +175,17 @@ export class ReactEcharts extends Component {
     this.echartsInstance.on('finished', this.props.onFinished)
   }
 
-  renderDOM = () => {
-    this.echartsInstance.setOption(this.props.option,
-      this.props.notMerge,
-      this.props.lazyUpdate)
+  renderEchart = () => {
+    this.echartsInstance.setOption(this.props.option, {
+      notMerge: this.props.notMerge,
+      replaceMerge: this.props.replaceMerge,
+      lazyUpdate: this.props.lazyUpdate,
+      silent: this.props.silent,
+      transition: this.props.transition
+    })
   }
 
-  renderLoader = () => {
+  renderLoading = () => {
     return this.props.loadingComponent || <Loading />
   }
 
@@ -171,15 +205,16 @@ export class ReactEcharts extends Component {
     } = this.props
 
     return (
-      <div
-        ref={(ref) => (this.containerRef = ref)}
-        style={style}
-        id={id}
-        className={cx('react-echarts', className)}
-      >
-        {useSkeleton && isMounting && this.renderSkeleton()}
-        {useLoading && isLoading && this.renderLoader()}
-      </div>
+      <>
+        {!isMounting && useLoading && isLoading && this.renderLoading()}
+
+        <div
+          ref={this.containerRef}
+          style={style}
+          id={id}
+          className={cx('react-echarts', className)}
+        />
+      </>
     )
   }
 }
@@ -189,16 +224,18 @@ ReactEcharts.defaultProps = {
   className: '',
   notMerge: false,
   lazyUpdate: false,
+  replaceMerge: null,
+  silent: false,
+  transition: null,
   theme: null,
-  loadingOption: null,
-  onEvents: {},
-  on: null,
+  group: null,
   // options: {
   //   renderer: 'svg'
   // },
-  group: null,
 
   // External added props
+  onEvents: {},
+  on: null,
   useSkeleton: true,
   skeletonComponent: null,
   isMounting: false,
@@ -208,10 +245,11 @@ ReactEcharts.defaultProps = {
   onMount: null,
   onUnmount: null,
   onUpdate: null,
-  shouldComponentUpdate: () => true,
+  shouldUpdate: () => true,
 
   getInstance: null,
-  echartsRef: null,
+  getRef: null,
+  getEcharts: null,
 
   // Events register
   onClick: null,

@@ -7,8 +7,7 @@ export default class App extends Component {
     super(props);
     this.state = {
       xAxis: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
-      data1: [150, 230, 224, 218, 135, 147, 260],
-      data2: [150, 230, 224, 218, 135, 147, 260],
+      data: [150, 230, 224, 218, 135, 147, 260],
     };
   }
 
@@ -24,8 +23,7 @@ export default class App extends Component {
   componentDidMount() {
     setInterval(() => {
       this.setState({
-        data1: this.getData(),
-        data2: this.getData(),
+        data: this.getData(),
         isLoading: !this.state.isLoading,
       });
     }, 2000);
@@ -35,8 +33,10 @@ export default class App extends Component {
     return (
       <div className="App">
         <ReactEcharts
-          onClick={(props) => console.log(props)}
+          onContextMenu={(props) => console.log(props)}
+          onDoubleClick={(props) => console.log(props)}
           isLoading={this.state.isLoading}
+          isMounting={!this.state.isLoading}
           option={{
             // grid: {
             //   show: false,
@@ -60,12 +60,20 @@ export default class App extends Component {
             },
             series: [
               {
-                data: this.state.data1,
+                data: this.state.data,
                 type: "bar",
               },
               {
-                data: this.state.data2,
-                type: "bar",
+                name: "Reference Page",
+                type: "pie",
+                radius: "55%",
+                data: [
+                  { value: 400, name: "Searching Engine" },
+                  { value: 335, name: "Direct" },
+                  { value: 310, name: "Email" },
+                  { value: 274, name: "Alliance Advertisement" },
+                  { value: 235, name: "Video Advertisement" },
+                ],
               },
             ],
           }}

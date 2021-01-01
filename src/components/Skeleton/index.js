@@ -1,3 +1,3 @@
 export function Skeleton () {
-  return 'Mounting...'
+  return <div>{'Mounting...'}</div>
 }
