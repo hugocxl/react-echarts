@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="public/logo.png" width="100%" align="center">
+  <img src="public/main-logo.png" width="100%" align="center">
 
 [![NPM](https://img.shields.io/npm/v/@hcorta/react-echarts.svg)](https://www.npmjs.com/package/@hcorta/react-echarts)
 [![NPM](https://badgen.net/bundlephobia/minzip/@hcorta/react-echarts)](https://bundlephobia.com/result?p=@hcorta/react-echarts)
