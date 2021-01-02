@@ -1,6 +1,6 @@
 'use strict'
 
-import { ReactEchartsCore } from 'lib'
+import { ReactEchartsCore } from 'core'
 import { withSkeleton, withLoading } from 'HOC'
 import { compose, getEchartsOption } from 'utils'
 
@@ -25,19 +25,14 @@ Chart.defaultProps = {
   theme: null,
   group: null,
   options: {},
-
-  // External added props
   skeletonComponent: null,
   isMounting: false,
   loadingComponent: null,
   isLoading: false,
   shouldUpdate: () => true,
-
   getInstance: null,
   getRef: null,
   getEcharts: null,
-
-  // Events register
   onMount: null,
   onUnmount: null,
   onUpdate: null,
