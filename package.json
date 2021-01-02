@@ -2,7 +2,7 @@
   "name": "@hcorta/react-echarts",
   "productName": "react-echarts",
   "version": "0.5.0",
-  "description": "Lightweight React implementation for ECharts",
+  "description": "A simple and declarative set of powerful React components built on top of Apache ECharts",
   "license": "MIT",
   "private": false,
   "author": "hcorta",
@@ -30,8 +30,7 @@
   "dependencies": {
     "classnames": "^2.2.6",
     "echarts": "^5.0.0",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1"
+    "react": "^17.0.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.4.3",
@@ -43,7 +42,7 @@
     "babel-eslint": "^10.0.1",
     "babel-loader": "^8.0.4",
     "clean-webpack-plugin": "^3.0.0",
-    "css-loader": "^5.0.1",
+    "copy-webpack-plugin": "^7.0.0",
     "eslint": "^7.14.0",
     "eslint-config-prettier": "^6.15.0",
     "eslint-config-standard": "^16.0.2",
@@ -53,12 +52,11 @@
     "eslint-plugin-promise": "^4.1.1",
     "eslint-plugin-react": "^7.11.1",
     "eslint-plugin-standard": "^5.0.0",
-    "file-loader": "^6.2.0",
     "prettier": "2.2.0",
-    "style-loader": "^2.0.0",
     "terser-webpack-plugin": "^5.0.3",
     "uglifyjs-webpack-plugin": "^2.2.0",
     "webpack": "^5.6.0",
+    "webpack-bundle-analyzer": "^4.3.0",
     "webpack-cli": "^4.2.0",
     "webpack-dev-server": "^3.11.0",
     "webpack-merge": "^5.4.0"
