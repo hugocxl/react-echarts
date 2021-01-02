@@ -3,13 +3,13 @@
 <div align="center">
   <img src="public/img/logo.png" width="100%" align="center">
 
-[![NPM](https://img.shields.io/npm/v/@hcorta/react-echarts.svg?style=flat-square&logo=appveyor)](https://www.npmjs.com/package/@hcorta/react-echarts)
-[![NPM](https://img.shields.io/bundlephobia/minzip/@hcorta/react-echarts?style=flat-square)](https://bundlephobia.com/result?p=@hcorta/react-echarts)
+[![Version](https://img.shields.io/npm/v/@hcorta/react-echarts.svg?style=flat-square&logo=appveyor)](https://www.npmjs.com/package/@hcorta/react-echarts)
+[![Size](https://img.shields.io/bundlephobia/minzip/@hcorta/react-echarts?style=flat-square)](https://bundlephobia.com/result?p=@hcorta/react-echarts)
+[![dependencies Status](https://img.shields.io/npm/v/echarts?color=mediumorchid&label=echarts&style=flat-square)](https://github.com/apache/incubator-echarts)
+[![ECharts Version](https://david-dm.org/hcorta/react-echarts/status.svg?style=flat-square&logo=appveyor)](https://david-dm.org/hcorta/react-echarts)
 [![NPM](https://img.shields.io/npm/dm/@hcorta/react-echarts.svg?style=flat-square&logo=appveyor)](https://www.npmjs.com/package/@hcorta/react-echarts)
-[![dependencies Status](https://david-dm.org/hcorta/react-echarts/status.svg?style=flat-square&logo=appveyor)](https://david-dm.org/hcorta/react-echarts)
-[![License MIT](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square&logo=appveyor)](https://opensource.org/licenses/MIT)
 
-<p>A <strong>simple</strong> and <strong>declarative</strong> set of powerful React components built on top of <strong><a href="https://echarts.apache.org/en/index.html">ECharts.js</a></strong></p>
+<p>A <strong>simple</strong> and <strong>declarative</strong> set of powerful React components built on top of <strong><a href="https://echarts.apache.org/en/index.html">Apache ECharts</a></strong></p>
 
 </div>
 
@@ -19,6 +19,7 @@
 
 - **16** chart types
 - **SVG** Rendering
+- **Free**
 - **Lightweight**
 - Highly **customizable**
 - **Themes**
@@ -39,23 +40,22 @@ I do this open source work in my free time. If you use `react-echarts` for an im
 
 ## Introduction
 
-`react-echarts` is an abstraction layer built with [React](https://facebook.github.io/react/) on top of [ECharts](https://echarts.apache.org/en/index.html).
+[Apache ECharts](https://echarts.apache.org/en/index.html) is a free, powerful charting and visualization library offering an easy way of adding intuitive, interactive, and highly customizable charts to your commercial products. It is written in pure JavaScript and based on zrender, a whole new lightweight canvas library.
 
-It exposes a set of components for developers that can be combined to set up interactive charts in their web pages.
-Main principles of `react-echarts` are:
+`react-echarts` is an abstraction layer built with [React](https://facebook.github.io/react/) on top of ECharts. It exposes a set of components for developers that can be combined to set up interactive charts in their web pages. Main principles of `react-echarts` are:
 
 1. **Simplicty:** `react-echarts` makes it easy to generate ECharts.js components by wrapping the code required to render the entire chart.
-2. **Easy to customize**: In most cases, charts look and behave exactly as you need without modifications. A simple options-structure allows for deep customization, and styling can be done via JavaScript or CSS.
-3. **Declarative**: components of charts are purely presentational.
+2. **Declarative**: components are purely presentational.
+3. **Easy to customize**: In most cases, charts look and behave exactly as you need without modifications. A simple options-structure allows for deep customization, and styling can be done via JavaScript or CSS.
 
 ## Usage
 
-While some props have been provided to facilitate some use cases, most of them follow the [ECharts option schema](https://echarts.apache.org/next/en/option.html#title):
+While some props have been provided to facilitate specific use cases, most of them follow the [ECharts option schema](https://echarts.apache.org/next/en/option.html#title):
 
 - **Quick start example:** Check out the [live demo](https://codesandbox.io/s/react-echarts-simple-area-umnfw)
 
 ```jsx
-import { AreaChart, ColumnChart } from '@hcorta/react-echarts'
+import { AreaChart } from '@hcorta/react-echarts'
 
 function App() {
   return (
@@ -69,8 +69,6 @@ function App() {
 ```
 
 <img src="public/img/example-area-chart.png" width="100%">
-
----
 
 - **A bit more complex example:** Check out the [live demo](https://codesandbox.io/s/react-echarts-simple-area-umnfw)
 
@@ -121,7 +119,7 @@ For other examples and components, check out the [documentation](hcorta.github.i
 
 ## Components Props
 
-- **_`Common Props`_**
+### Common
 
 | Prop            |        Type        | Description                                                                 | Default |
 | :-------------- | :----------------: | --------------------------------------------------------------------------- | :-----: |
@@ -133,7 +131,7 @@ For other examples and components, check out the [documentation](hcorta.github.i
 | **getRef**      |     `Function`     | Get the div container ref after mount                                       |  null   |
 | **getEcharts**  |     `Function`     | Returns the ECharts lib on first mount                                      |  null   |
 
-- **_`State Props`_**
+### State
 
 | Prop             |    Type    | Description                                                                                                          |   Default    |
 | :--------------- | :--------: | -------------------------------------------------------------------------------------------------------------------- | :----------: |
@@ -143,28 +141,12 @@ For other examples and components, check out the [documentation](hcorta.github.i
 | **useSkeleton**  | `Boolean`  | Enables triggering loading                                                                                           |     true     |
 | **useLoading**   | `Boolean`  | Enables triggering loading                                                                                           |    false     |
 
-- **_`Custom Components`_**
+### Custom Components
 
 | Prop                  |    Type     | Description               |    Default    |
 | :-------------------- | :---------: | ------------------------- | :-----------: |
 | **loadingComponent**  | `Component` | Custom loading component  | `<Loading/>`  |
 | **skeletonComponent** | `Component` | Custom skeleton component | `<Skeleton/>` |
-
-- **_`ECharts Props`_**
-
-| Prop           |    Type    | Description                                              | Default |
-| :------------- | :--------: | -------------------------------------------------------- | :-----: |
-| **onUnmmount** | `Function` | Callback to be called when the component is unmounted.   |  null   |
-| **onMount**    | `Function` | Callback to be called on first component mount.          |  null   |
-| **onUpdate**   | `Function` | Callback to be called whenever the component is updated. |  null   |
-
-- **_`Events Props`_**
-
-| Prop           |    Type    | Description                                              | Default |
-| :------------- | :--------: | -------------------------------------------------------- | :-----: |
-| **onUnmmount** | `Function` | Callback to be called when the component is unmounted.   |  null   |
-| **onMount**    | `Function` | Callback to be called on first component mount.          |  null   |
-| **onUpdate**   | `Function` | Callback to be called whenever the component is updated. |  null   |
 
 <!--
 notMerge: false,
@@ -178,46 +160,54 @@ options: {},
 
 // External added props
 onEvents: {},
-on: null,
+on: null, -->
 
-// Events register
-onClick: null,
-onDoubleClick: null,
-onMouseDown: null,
-onMouseMove: null,
-onMouseUp: null,
-onMouseOver: null,
-onMouseOut: null,
-onGlobalOut: null,
-onContextMenu: null,
-onHighlight: null,
-onDownplay: null,
-onSelectChanged: null,
-onLegendSelectChanged: null,
-onLegendSelected: null,
-onLegendUnselected: null,
-onLegendSelectAll: null,
-onLegendInverseSelect: null,
-onLegendScroll: null,
-onDataZoom: null,
-onDataRangeSelected: null,
-onTimelineChanged: null,
-onTimelinePlayChanged: null,
-onRestore: null,
-onDataViewChanged: null,
-onMagicTypeChanged: null,
-onGeoSelectChanged: null,
-onGeoSelected: null,
-onGeoUnselected: null,
-onAxisAreaSelected: null,
-onFocusNodeadJacency: null,
-onUnfocusNodeAdjacency: null,
-onBrush: null,
-onBrushEnd: null,
-onBrushSelected: null,
-onGlobalCursorTaken: null,
-onRendered: null,
-onFinished: null -->
+### Events
+
+| Prop                       |    Type    | Description                                                                                                 | Default |
+| :------------------------- | :--------: | ----------------------------------------------------------------------------------------------------------- | :-----: |
+| **onMount**                | `Function` | Callback to be called on first component mount.                                                             |  null   |
+| **onUpdate**               | `Function` | Callback to be called whenever the component is updated.                                                    |  null   |
+| **onUnmmount**             | `Function` | Callback to be called when the component is unmounted.                                                      |  null   |
+| **onRendered**             | `Function` | Trigger when a frame rendered. Notice that the rendered event does not indicate that the animation finished |  null   |
+| **onFinished**             | `Function` | Triggered when render finished, that is, when animation finished                                            |  null   |
+| **onClick**                | `Function` | Event of chart click.                                                                                       |  null   |
+| **onDoubleClick**          | `Function` | Event of double chart click.                                                                                |  null   |
+| **onMouseDown**            | `Function` | Event of mouse down chart                                                                                   |  null   |
+| **onMouseMove**            | `Function` | Event of mouse mouse chart                                                                                  |  null   |
+| **onMouseUp**              | `Function` | Event of mouse up chart                                                                                     |  null   |
+| **onMouseOver**            | `Function` | Event of mouse over chart                                                                                   |  null   |
+| **onMouseOut**             | `Function` | Event of global out chart                                                                                   |  null   |
+| **onGlobalOut**            | `Function` | Event of global out chart                                                                                   |  null   |
+| **onContextMenu**          | `Function` | Event of context menu                                                                                       |  null   |
+| **onHighlight**            | `Function` | Event of data highlight.                                                                                    |  null   |
+| **onDownplay.**            | `Function` | Event of data downplay.                                                                                     |  null   |
+| **onSelectChanged**        | `Function` | Event emitted when data selection is changed.                                                               |  null   |
+| **onLegendSelectChanged**  | `Function` | Event emitted after legend selecting state changes.                                                         |  null   |
+| **onLegendSelected**       | `Function` | Event emitted after legend is selected.                                                                     |  null   |
+| **onLegendUnselected**     | `Function` | Event emitted after unselecting legend.                                                                     |  null   |
+| **onLegendSelectAll**      | `Function` | Event emitted after all legends are selected.                                                               |  null   |
+| **onLegendInverseSelect**  | `Function` | Event emitted after inversing all legends.                                                                  |  null   |
+| **onLegendScroll**         | `Function` | Event when trigger legend scroll.                                                                           |  null   |
+| **onDataZoom**             | `Function` | Event emitted after zooming data area.                                                                      |  null   |
+| **onDataRangeSelected**    | `Function` | Event emitted after range is changed in visualMap.                                                          |  null   |
+| **onTimelineChanged**      | `Function` | Event emitted after time point in timeline is changed.                                                      |  null   |
+| **onTimelinePlayChanged**  | `Function` | Switching event of play state in timeline.                                                                  |  null   |
+| **onRestore**              | `Function` | Resets option event.                                                                                        |  null   |
+| **onDataViewChanged**      | `Function` | Changing event of data view tool in toolbox.                                                                |  null   |
+| **onMagicTypeChanged**     | `Function` | Switching event of magic type tool in toolbox.                                                              |  null   |
+| **onGeoSelectChanged**     | `Function` | Event emitted after selecting state changes.                                                                |  null   |
+| **onGeoSelected**          | `Function` | Event after selecting.                                                                                      |  null   |
+| **onGeoUnselected**        | `Function` | Cancels selected event.                                                                                     |  null   |
+| **onAxisAreaSelected**     | `Function` | Selecting event of range of parallel axis.                                                                  |  null   |
+| **onFocusNodeadJacency**   | `Function` | Adjacent nodes highlight event in graph.                                                                    |  null   |
+| **onUnfocusNodeAdjacency** | `Function` | Adjacent nodes reverse-highlight event in graph.                                                            |  null   |
+| **onBrush**                | `Function` | Event triggered after action brush dispatched.                                                              |  null   |
+| **onBrushEnd**             | `Function` | Event triggered after action brushEnd dispatched.                                                           |  null   |
+| **onBrushSelected**        | `Function` | Notice what are selected.                                                                                   |  null   |
+| **onGlobalCursorTaken**    | `Function` | -                                                                                                           |  null   |
+
+// HOOKS
 
 ## Contributing
 
@@ -226,8 +216,6 @@ No one’s perfect. If you’ve found any errors, want to suggest enhancements, 
 ## Code of Conduct
 
 [Contributor Code of Conduct](public/docs/CODE_OF_CONDUCT.md). By participating in this project you agree to abide by its terms.
-
-<br>
 
 ## License
 

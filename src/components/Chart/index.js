@@ -29,10 +29,8 @@ Chart.defaultProps = {
   // External added props
   onEvents: {},
   on: null,
-  useSkeleton: true,
   skeletonComponent: null,
   isMounting: false,
-  useLoading: true,
   loadingComponent: null,
   isLoading: false,
   onMount: null,

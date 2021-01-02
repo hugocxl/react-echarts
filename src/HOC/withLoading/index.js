@@ -3,13 +3,12 @@
 import { Loading } from 'components'
 
 export const withLoading = (Component) => ({
-  useLoading,
   isMounting,
   loadingComponent,
   isLoading,
   ...rest
 }) => {
-  if (useLoading) {
+  if (isLoading) {
     const LoadingComp = loadingComponent || Loading
     return (
       <>
