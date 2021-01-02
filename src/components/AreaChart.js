@@ -1,6 +1,6 @@
 'use strict'
 
-import { Chart } from '../Chart'
+import { Chart } from './Chart.js'
 import { withCartesianProps } from 'HOC'
 
 const ChartWithCartersianProps = withCartesianProps(Chart)
