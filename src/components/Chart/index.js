@@ -27,15 +27,10 @@ Chart.defaultProps = {
   options: {},
 
   // External added props
-  onEvents: {},
-  on: null,
   skeletonComponent: null,
   isMounting: false,
   loadingComponent: null,
   isLoading: false,
-  onMount: null,
-  onUnmount: null,
-  onUpdate: null,
   shouldUpdate: () => true,
 
   getInstance: null,
@@ -43,6 +38,9 @@ Chart.defaultProps = {
   getEcharts: null,
 
   // Events register
+  onMount: null,
+  onUnmount: null,
+  onUpdate: null,
   onClick: null,
   onDoubleClick: null,
   onMouseDown: null,

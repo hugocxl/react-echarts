@@ -34,9 +34,11 @@ In order to use `react-echarts`, all you need to do is install the npm package:
 yarn add @hcorta/react-echarts
 ```
 
-## Sponsoring
+## ⚠️ Sponsoring
 
 I do this open source work in my free time. If you use `react-echarts` for an important work, and you'd like me to invest more time on it, you may [buy me a coffee](https://www.buymeacoffee.com/hcorta). Thanks!
+
+---
 
 ## Introduction
 
@@ -70,58 +72,44 @@ function App() {
 
 <img src="public/img/example-area-chart.png" width="100%">
 
-- **A bit more complex example:** Check out the [live demo](https://codesandbox.io/s/react-echarts-simple-area-umnfw)
+For other examples and components, check out the [documentation](hcorta.github.io/react-echarts/).
+
+## Charts
+
+The library exports the following React components:
 
 ```jsx
-function CustomChart() {
-  return (
-    <ColumnChart
-      tooltip
-      grid={{ bottom: 100 }}
-      legend={{
-        data: ['bar', 'bar2', 'bar3', 'bar4'],
-        left: '10%'
-      }}
-      series={[
-        {
-          name: 'bar',
-          stack: 'one',
-          data: [2, 6, 8, 2]
-        },
-        {
-          name: 'bar2',
-          stack: 'one',
-          data: [5, 7, 1, 0]
-        },
-        {
-          name: 'bar3',
-          data: [3, 4, -2, 8]
-        },
-        {
-          name: 'bar4',
-          data: [3, 5, 6, 9]
-        }
-      ]}
-      xAxis={{
-        data: ['class1', 'class2', 'class3', 'class4'],
-        name: 'X Axis',
-        axisLine: { onZero: true },
-        splitLine: { show: true }
-      }}
-    />
-  )
-}
+import {
+  LineChart,
+  AreaChart,
+  BarChart,
+  ColumnChart,
+  PieChart,
+  DonutChart
+} from '@hcorta/react-echarts'
 ```
-
-<img src="public/img/example-bar-chart.png" width="100%">
-
-For other examples and components, check out the [documentation](hcorta.github.io/react-echarts/).
 
 ## Hooks
 
 ### useEcharts
 
 Useful when you need, for example, to connect charts or register a new theme, it returns those methods provided by the ECharts core library:
+
+```jsx
+import { useEcharts } from '@hcorta/react-echarts'
+
+const {
+  connect,
+  disconnect,
+  registerMap,
+  registerTheme,
+  registerAction,
+  registerCoordinateSystem,
+  getInstanceByDom,
+  getInstanceById,
+  getMap
+} = useEcharts()
+```
 
 | Method               | Description                                       | Parameters                                                       |
 | :------------------- | ------------------------------------------------- | :--------------------------------------------------------------- |
@@ -134,11 +122,11 @@ Useful when you need, for example, to connect charts or register a new theme, it
 | **registerTheme**    | Registers a theme.                                | `(themeName: string, theme: Object)`                             |
 | **registerAction**   | Registers an action.                              | `(actionName: string, callback: Function)`                       |
 
+A simple use case would look like this:
+
 ```jsx
 import { useEffect } from 'react'
 import { useEcharts, AreaChart } from '@hcorta/react-echarts'
-
-const xAxis = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
 
 export default function App() {
   const { connect, registerTheme } = useEcharts()
@@ -189,8 +177,6 @@ export default function App() {
 | **shouldUpdate** | `Function` | Callback to control whether the component should update or not. Custom `shouldComponentUpdate` method.               | `() => true` |
 | **isLoading**    | `Boolean`  | Whether the component is loading. When is set to true, it will display the loading component.                        |    false     |
 | **isMounting**   | `Boolean`  | Whether the component is mounting. When is set to true, it will display the skeleton commponent instead of the chart |    false     |
-| **useSkeleton**  | `Boolean`  | Enables triggering loading                                                                                           |     true     |
-| **useLoading**   | `Boolean`  | Enables triggering loading                                                                                           |    false     |
 
 ### Custom Components
 
@@ -208,10 +194,7 @@ transition: null,
 theme: null,
 group: null,
 options: {},
-
-// External added props
-onEvents: {},
-on: null, -->
+-->
 
 ### Events
 
@@ -257,8 +240,6 @@ on: null, -->
 | **onBrushEnd**             | `Function` | Event triggered after action brushEnd dispatched.                                                           |  null   |
 | **onBrushSelected**        | `Function` | Notice what are selected.                                                                                   |  null   |
 | **onGlobalCursorTaken**    | `Function` | -                                                                                                           |  null   |
-
-// HOOKS
 
 ## Contributing
 
