@@ -3,14 +3,13 @@
 import {
   connect,
   disconnect,
+  getInstanceByDom,
+  getInstanceById,
+  getMap,
   registerMap,
   registerTheme,
   registerAction,
-  registerCoordinateSystem,
-  dispose,
-  getInstanceByDom,
-  getInstanceById,
-  getMap
+  registerCoordinateSystem
 } from 'echarts/lib/echarts'
 
 export function useEcharts () {
@@ -21,7 +20,6 @@ export function useEcharts () {
     registerTheme,
     registerAction,
     registerCoordinateSystem,
-    dispose,
     getInstanceByDom,
     getInstanceById,
     getMap

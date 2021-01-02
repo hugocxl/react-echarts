@@ -117,6 +117,57 @@ function CustomChart() {
 
 For other examples and components, check out the [documentation](hcorta.github.io/react-echarts/).
 
+## Hooks
+
+### useEcharts
+
+Useful when you need, for example, to connect charts or register a new theme, it returns those methods provided by the ECharts core library:
+
+| Method               | Description                                       | Parameters                                                       |
+| :------------------- | ------------------------------------------------- | :--------------------------------------------------------------- |
+| **connect**          | Connects interaction of multiple chart series.    | `(group: string or Array)` Group id, or array of chart instance. |
+| **disconnect**       | Disconnects interaction of multiple chart series. | `(group: string)` Group id.                                      |
+| **getInstanceByDom** | Returns chart instance of dom container.          | `(target: HTMLDivElement or HTMLCanvasElement) => ECharts`       |
+| **getInstanceById**  | Returns chart instance of id passed.              | `(id: string) => ECharts`                                        |
+| **getMap**           | Get a registered map.                             | `(mapName: string) => Object`                                    |
+| **registerMap**      | Registers available maps.                         | `(mapName: string, geoJson: Object, specialAreas?: Object`       |
+| **registerTheme**    | Registers a theme.                                | `(themeName: string, theme: Object)`                             |
+| **registerAction**   | Registers an action.                              | `(actionName: string, callback: Function)`                       |
+
+```jsx
+import { useEffect } from 'react'
+import { useEcharts, AreaChart } from '@hcorta/react-echarts'
+
+const xAxis = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+
+export default function App() {
+  const { connect, registerTheme } = useEcharts()
+
+  useEffect(() => {
+    connect('clothes')
+    registerTheme('andromeda', andromedaThemeObject)
+  }, [])
+
+  return (
+    <div className="App">
+      <AreaChart
+        theme={'andromeda'}
+        group={'clothes'}
+        tooltip={{ show: true }}
+        data={[2, 5, 8]}
+        xAxis={['Big', 'Medium', 'Small']}
+      />
+      <AreaChart
+        group={'clothes'}
+        tooltip={{ show: true }}
+        data={[5, 9, 1]}
+        xAxis={['Big', 'Medium', 'Small']}
+      />
+    </div>
+  )
+}
+```
+
 ## Components Props
 
 ### Common
