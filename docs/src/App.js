@@ -1,5 +1,5 @@
 import "./App.css";
-import { DoughnutChart } from "@hcorta/react-echarts";
+import { AreaChart, ColumnChart } from "@hcorta/react-echarts";
 import { Component } from "react";
 
 export default class App extends Component {
@@ -31,14 +31,39 @@ export default class App extends Component {
   render() {
     return (
       <div className="App">
-        <DoughnutChart
-          data={[
-            { value: 1048, name: "搜索引擎" },
-            { value: 735, name: "直接访问" },
-            { value: 580, name: "邮件营销" },
-            { value: 484, name: "联盟广告" },
-            { value: 300, name: "视频广告" },
+        <ColumnChart
+          tooltip
+          grid={{ bottom: 100 }}
+          legend={{
+            data: ["bar", "bar2", "bar3", "bar4"],
+            left: "10%",
+            top: 20,
+          }}
+          series={[
+            {
+              name: "bar",
+              stack: "one",
+              data: [2, 6, 8, 2],
+            },
+            {
+              name: "bar2",
+              stack: "one",
+              data: [5, 7, 1, 12],
+            },
+            {
+              name: "bar3",
+              data: [3, 4, -2, 8],
+            },
+            {
+              name: "bar4",
+              data: [-3, 5, 6, -9],
+            },
           ]}
+          xAxis={{
+            data: ["class1", "class2", "class3", "class4"],
+            name: "X Axis",
+            splitLine: { show: true },
+          }}
         />
       </div>
     );
