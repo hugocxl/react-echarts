@@ -3,7 +3,7 @@
 import { Chart } from './Chart.js'
 import { useOption } from 'hooks'
 
-export function TreemapChart (props) {
+export function TreeMapChart (props) {
   const option = useOption({
     ...props,
     type: 'treemap'

@@ -3,35 +3,30 @@
 import { getOptionFromProps } from 'utils'
 
 export function useOption ({
-  series,
+  series = [],
   xAxis,
   yAxis,
   data,
   type,
+  links,
   serieCustomization,
   stacked,
   ...rest
 }) {
   let finalSeries = series
-  let finalXaxis = {
-    type: 'category',
-    ...(type === 'line' && {
-      boundaryGap: false
-    })
-  }
-
-  let finalYaxis = { type: 'value', ...yAxis }
+  let finalXaxis = xAxis
 
   // Single serie conversion
   if (data) {
     finalSeries = [
       {
+        links,
         data,
         type,
         ...serieCustomization
       }
     ]
-  } else if (series) {
+  } else {
     finalSeries = series.map((serie) => ({
       ...serie,
       type,
@@ -40,19 +35,30 @@ export function useOption ({
     }))
   }
 
-  if (Array.isArray(xAxis)) {
+  let finalYaxis = { type: 'value', ...yAxis }
+
+  if (xAxis) {
     finalXaxis = {
-      ...finalXaxis,
-      data: xAxis
+      type: 'category',
+      ...(type === 'line' && {
+        boundaryGap: false
+      })
     }
-  } else {
-    finalXaxis = { ...finalXaxis, ...xAxis }
+
+    if (Array.isArray(xAxis)) {
+      finalXaxis = {
+        ...finalXaxis,
+        data: xAxis
+      }
+    } else {
+      finalXaxis = { ...finalXaxis, ...xAxis }
+    }
   }
 
   return getOptionFromProps({
     ...rest,
-    series: finalSeries,
-    xAxis: finalXaxis,
-    yAxis: finalYaxis
+    series: finalSeries
+    // xAxis: finalXaxis,
+    // yAxis: finalYaxis
   })
 }

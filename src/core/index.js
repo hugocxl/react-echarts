@@ -14,6 +14,7 @@ import 'echarts/lib/chart/sankey'
 import 'echarts/lib/chart/map'
 import 'echarts/lib/chart/treemap'
 import 'echarts/lib/chart/funnel'
+import 'echarts/lib/chart/sunburst'
 
 // import 'echarts/lib/chart/gauge'
 // import 'echarts/lib/chart/graph'
@@ -190,7 +191,6 @@ export class ReactEchartsCore extends Component {
 
   render () {
     const { style, className, id, height, width } = this.props
-    console.log('RENDER')
 
     return (
       <div
