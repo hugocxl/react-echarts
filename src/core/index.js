@@ -195,6 +195,7 @@ export class ReactEchartsCore extends Component {
 
   render () {
     const { style, className, id, height, width } = this.props
+    console.log('RENDER')
 
     return (
       <div

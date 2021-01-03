@@ -1,10 +1,16 @@
 'use strict'
 
 import { Chart } from './Chart.js'
-import { withRadialProps } from 'HOC'
+import { useOption } from 'hooks'
 
-const ChartWithRadialProps = withRadialProps(Chart)
+export function DoughnutChart (props) {
+  const option = useOption({
+    ...props,
+    type: 'pie',
+    serieCustomization: {
+      radius: ['40%', '70%']
+    }
+  })
 
-export const DoughnutChart = (props) => (
-  <ChartWithRadialProps {...props} type={'doughnut'} />
-)
+  return <Chart {...props} option={option} />
+}

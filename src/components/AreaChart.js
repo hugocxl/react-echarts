@@ -1,10 +1,16 @@
 'use strict'
 
 import { Chart } from './Chart.js'
-import { withCartesianProps } from 'HOC'
+import { useOption } from 'hooks'
 
-const ChartWithCartersianProps = withCartesianProps(Chart)
+export function AreaChart (props) {
+  const option = useOption({
+    ...props,
+    type: 'line',
+    serieCustomization: {
+      areaStyle: {}
+    }
+  })
 
-export const AreaChart = (props) => (
-  <ChartWithCartersianProps {...props} area={true} type={'line'} />
-)
+  return <Chart {...props} option={option} />
+}

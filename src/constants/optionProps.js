@@ -1,8 +1,4 @@
-'use strict'
-
-import { merge } from './merge'
-
-const optionKeys = [
+export const optionProps = [
   'title',
   'legend',
   'grid',
@@ -44,22 +40,3 @@ const optionKeys = [
   'useUTC',
   'media'
 ]
-
-export function getEchartsOption ({
-  option,
-  data = null,
-  type = null,
-  ...rest
-}) {
-  const propsOption = {}
-
-  optionKeys.forEach((key) => {
-    if (rest[key]) propsOption[key] = rest[key]
-  })
-
-  if (option) {
-    return merge(option, propsOption)
-  } else {
-    return propsOption
-  }
-}

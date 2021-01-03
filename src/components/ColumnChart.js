@@ -1,10 +1,13 @@
 'use strict'
 
 import { Chart } from './Chart.js'
-import { withCartesianProps } from 'HOC'
+import { useOption } from 'hooks'
 
-const ChartWithCartersianProps = withCartesianProps(Chart)
+export function ColumnChart (props) {
+  const option = useOption({
+    ...props,
+    type: 'bar'
+  })
 
-export const ColumnChart = (props) => (
-  <ChartWithCartersianProps {...props} type={'bar'} />
-)
+  return <Chart {...props} option={option} />
+}

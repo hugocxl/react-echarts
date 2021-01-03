@@ -1,10 +1,13 @@
 'use strict'
 
 import { Chart } from './Chart.js'
-import { withRadialProps } from 'HOC'
+import { useOption } from 'hooks'
 
-const ChartWithRadialProps = withRadialProps(Chart)
+export function RadarChart (props) {
+  const option = useOption({
+    ...props,
+    type: 'radar'
+  })
 
-export const RadarChart = (props) => (
-  <ChartWithRadialProps {...props} type={'radar'} />
-)
+  return <Chart {...props} option={option} />
+}
