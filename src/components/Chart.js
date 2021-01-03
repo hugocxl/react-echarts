@@ -1,16 +1,36 @@
 'use strict'
 
 import { ReactEchartsCore } from 'core'
-import { withSkeleton, withLoading } from 'HOC'
-import { compose, getOptionFromProps } from 'utils'
+import { getOptionFromProps } from 'utils'
 import { defaultProps } from 'constants'
+import { Skeleton, Loading } from 'components'
 
-const ReactEcharts = compose(withSkeleton, withLoading)(ReactEchartsCore)
-
-export function Chart ({ option: optionProp, ...rest }) {
+export function Chart ({
+  option: optionProp,
+  isMounting,
+  skeletonComponent,
+  isLoading,
+  loadingComponent,
+  ...rest
+}) {
   const option = optionProp || getOptionFromProps(rest)
 
-  return <ReactEcharts {...rest} option={option} />
+  if (isMounting) {
+    const SkeletonComp = skeletonComponent || Skeleton
+    return <SkeletonComp />
+  }
+
+  if (isLoading) {
+    const LoadingComp = loadingComponent || Loading
+    return (
+      <>
+        {isLoading && <LoadingComp />}
+        <ReactEchartsCore {...rest} option={option} />
+      </>
+    )
+  }
+
+  return <ReactEchartsCore {...rest} option={option} />
 }
 
 Chart.defaultProps = defaultProps
