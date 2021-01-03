@@ -17,14 +17,14 @@ export function Chart ({
 
   if (isMounting) {
     const SkeletonComp = skeletonComponent || Skeleton
-    return <SkeletonComp />
+    return <SkeletonComp {...rest} />
   }
 
   if (isLoading) {
     const LoadingComp = loadingComponent || Loading
     return (
       <>
-        {isLoading && <LoadingComp />}
+        {isLoading && <LoadingComp {...rest} />}
         <ReactEchartsCore {...rest} option={option} />
       </>
     )

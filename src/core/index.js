@@ -36,7 +36,7 @@ import 'echarts/lib/component/markPoint'
 import 'echarts/lib/component/markLine'
 import 'echarts/lib/component/markArea'
 import 'echarts/lib/component/timeline'
-import 'echarts/lib/component/toolbox'
+// import 'echarts/lib/component/toolbox'
 
 import 'zrender/lib/svg/svg'
 
@@ -56,7 +56,7 @@ export class ReactEchartsCore extends Component {
   }
 
   componentDidMount () {
-    const { onMount, getInstance, getRef, getEcharts } = this.props
+    const { onMount, getInstance, getRef } = this.props
 
     this.setEchartsInstance()
     this.setResizeObserver()
@@ -73,10 +73,6 @@ export class ReactEchartsCore extends Component {
 
     if (getRef) {
       getRef(this.containerRef.current)
-    }
-
-    if (getEcharts) {
-      getRef(this.echartsLib)
     }
   }
 
@@ -118,13 +114,12 @@ export class ReactEchartsCore extends Component {
   }
 
   setEchartsInstance = () => {
-    const { theme, options, group } = this.props
+    const { theme, group, renderer = 'svg' } = this.props
 
     this.echartsInstance = this.echartsLib.init(this.containerRef.current,
       theme,
       {
-        renderer: 'svg',
-        ...options
+        renderer
       })
 
     if (group) {

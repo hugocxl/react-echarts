@@ -1,6 +1,6 @@
 'use strict'
 
-import { optionProps } from 'constants'
+import { optionPropsKeys } from 'constants'
 
 export function getOptionFromProps ({
   option,
@@ -10,7 +10,7 @@ export function getOptionFromProps ({
 }) {
   const propsOption = {}
 
-  optionProps.forEach((key) => {
+  optionPropsKeys.forEach((key) => {
     if (rest[key]) propsOption[key] = rest[key]
   })
 
