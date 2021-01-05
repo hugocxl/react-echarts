@@ -80,22 +80,22 @@ For other examples and components, check out the [documentation](hcorta.github.i
 
 The library exports the following React components:
 
-- Chart
-- AreaChart
-- BarChart
-- ColumnChart
-- DoughnutChart
-- FunnelChart
-- HeatmapChart
-- LineChart
-- MapChart
-- PieChart
-- RadarChart
-- SankeyChart
-- ScatterChart
-- SunburstChart
-- TreeChart
-- TreeMapChart
+- `<Chart />`
+- `<AreaChart />`
+- `<BarChart />`
+- `<ColumnChart />`
+- `<DoughnutChart />`
+- `<FunnelChart />`
+- `<HeatmapChart />`
+- `<LineChart />`
+- `<MapChart />`
+- `<PieChart />`
+- `<RadarChart />`
+- `<SankeyChart />`
+- `<ScatterChart />`
+- `<SunburstChart />`
+- `<TreeChart />`
+- `<TreeMapChart />`
 
 ```jsx
 import {
@@ -112,7 +112,7 @@ import {
 
 ### **`useEcharts`**
 
-Useful when you need, for example, to connect charts or register a new theme, it returns those methods provided by the ECharts core library:
+Useful when you need, for example, to connect charts or register a new theme. It returns those methods provided by the ECharts core library:
 
 ```jsx
 import { useEcharts } from '@hcorta/react-echarts'
@@ -200,12 +200,12 @@ The following props, grouped by category, are available for all components expor
 
 ### Custom Components
 
-| Prop                    |     Type      | Description                              |    Default    |
-| :---------------------- | :-----------: | ---------------------------------------- | :-----------: |
-| **`loadingComponent`**  | `{Component}` | Custom loading component                 | `<Loading/>`  |
-| **`loadingProps`**      |  `{Object}`   | Props spreaded to the loading component  |      {}       |
-| **`skeletonComponent`** | `{Component}` | Custom skeleton component                | `<Skeleton/>` |
-| **`skeletonProps`**     |  `{Object}`   | Props spreaded to the skeleton component |      {}       |
+| Prop                    |     Type      | Description                                                                |    Default    |
+| :---------------------- | :-----------: | -------------------------------------------------------------------------- | :-----------: |
+| **`loadingComponent`**  | `{Component}` | Custom loading component                                                   | `<Loading/>`  |
+| **`loadingProps`**      |  `{Object}`   | Props spreaded to the loading component, both default or custom if passed  |      {}       |
+| **`skeletonComponent`** | `{Component}` | Custom skeleton component                                                  | `<Skeleton/>` |
+| **`skeletonProps`**     |  `{Object}`   | Props spreaded to the skeleton component, both default or custom if passed |      {}       |
 
 <br>
 
