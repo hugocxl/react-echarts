@@ -1,7 +1,7 @@
 # react-echarts
 
 <div align="center">
-  <img src="public/img/logo.png" width="100%" align="center">
+  <img src="public/img/logo-text-vertical.png" width="100%" align="center">
 
 [![Version](https://img.shields.io/npm/v/@hcorta/react-echarts.svg?style=flat-square&logo=appveyor)](https://www.npmjs.com/package/@hcorta/react-echarts)
 [![Size](https://img.shields.io/bundlephobia/minzip/@hcorta/react-echarts?style=flat-square)](https://bundlephobia.com/result?p=@hcorta/react-echarts)
