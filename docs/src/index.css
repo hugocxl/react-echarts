@@ -1,7 +1,65 @@
-body {
+:root {
+  --font-color: #002b3b;
+  --background-color: white;
+  --border-radius: 8px;
+  --navbar-height: 60px
+}
+
+* {
   margin: 0;
   padding: 0;
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--font-color);
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
 }
+
+button {
+  font-size: 14px;
+  color: white;
+  padding: 12px 20px;
+  border-radius: var(--border-radius);
+  border: none;
+  background-image: radial-gradient( circle farthest-corner at 11.7% 80.6%,  rgba(249,185,255,1) 0%, rgba(177,172,255,1) 49.3%, rgba(98,203,255,1) 89% );
+}
+
+iframe {
+  box-shadow: 1px 1px 10px grey;
+  border-radius: var(--border-radius);
+  border: none;
+}
+
+.react_echarts__main {
+  height: calc(100vh - var(--navbar-height));
+}
+
+header {
+  position: sticky;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--navbar-height);
+  border-bottom: 1px solid #e5e7eb;
+}
+
+header > a {
+  text-decoration: none;
+  padding: 0 8px;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  border-bottom: 4px solid transparent;
+  color: var(--font-color);
+  min-width: 96px;
+  justify-content:center;
+}
+
+header > a.active {
+  border-bottom: 4px solid var(--font-color);
+}
+

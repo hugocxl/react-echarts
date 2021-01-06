@@ -6,14 +6,22 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 // Paths setup
 const srcPath = path.resolve(__dirname, '../src')
+const publicPath = path.resolve(__dirname, '../public')
 const entryPoint = path.resolve(__dirname, '../src/index.js')
 
 module.exports = {
   entry: entryPoint,
   target: 'web',
   resolve: {
-    modules: [srcPath, 'node_modules'],
+    modules: [srcPath, publicPath, 'node_modules'],
     extensions: ['.js', '.json', '.jsx', '.css'],
+    alias: {
+      public$: path.resolve(__dirname, '../public'),
+      constants$: path.resolve(__dirname, '../src/constants'),
+      helpers$: path.resolve(__dirname, '../src/helpers'),
+      components$: path.resolve(__dirname, '../src/components'),
+      pages$: path.resolve(__dirname, '../src/pages'),
+    },
   },
   plugins: [
     new HtmlWebpackPlugin({

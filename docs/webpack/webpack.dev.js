@@ -14,8 +14,6 @@ const srcPath = path.resolve(__dirname, '../src')
 module.exports = merge(common, {
   mode: 'development',
   output: {
-    filename: '[name].[chunkhash].js',
-    chunkFilename: '[name].[chunkhash].js',
     publicPath: '',
     pathinfo: false,
   },

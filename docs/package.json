@@ -1,9 +1,15 @@
 {
-  "name": "docs",
-  "productName": "YOUBORA App",
-  "description": "",
-  "version": "1.0.0",
-  "private": true,
+  "name": "@hcorta/react-echarts",
+  "productName": "react-echarts",
+  "version": "0.5.0",
+  "description": "A simple and declarative set of React components built on top of Apache ECharts",
+  "license": "MIT",
+  "private": false,
+  "author": "hcorta",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hcorta/react-echarts"
+  },
   "scripts": {
     "start": "webpack serve --progress --stats=minimal --config webpack/webpack.dev.js",
     "build": "rm -rf build && webpack --progress --stats=minimal --config webpack/webpack.prod.js"
@@ -11,7 +17,8 @@
   "dependencies": {
     "@hcorta/react-echarts": "^0.5.0",
     "react": "^17.0.1",
-    "react-dom": "^17.0.1"
+    "react-dom": "^17.0.1",
+    "react-router-dom": "^5.2.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.4.3",
