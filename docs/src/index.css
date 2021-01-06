@@ -5,13 +5,3 @@ body {
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
 }
-
-.youbora-app {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  color: white;
-  background-image: linear-gradient(135deg, #134660 0%, #005a7e 37.15%, #1c738b 54.98%, #55a6a6 100%);
-}

@@ -24,10 +24,7 @@ const webpackconfig = {
   },
 
   plugins: [
-    new MiniCssExtractPlugin({
-      filename: '[name].[contenthash].css',
-      chunkFilename: '[id].[contenthash].css',
-    }),
+    new MiniCssExtractPlugin(),
     new OptimizeCSSAssetsPlugin(),
     new UglifyJsPlugin({
       include: [srcPath],
