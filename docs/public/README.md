@@ -9,7 +9,7 @@
 [![ECharts Version](https://david-dm.org/hcorta/react-echarts/status.svg?style=flat-square&logo=appveyor)](https://david-dm.org/hcorta/react-echarts)
 [![NPM](https://img.shields.io/npm/dm/@hcorta/react-echarts.svg?style=flat-square&logo=appveyor)](https://www.npmjs.com/package/@hcorta/react-echarts)
 
-A _simple_ and _declarative_ set of React components built on top of ECharts
+A **simple** and **declarative** set of React components built on top of **ECharts**
 
 </div>
 
