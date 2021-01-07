@@ -48,6 +48,10 @@ module.exports = {
         test: /\.(eot|svg|ttf|woff|woff2)$/,
         use: [{ loader: 'file-loader' }],
       },
+      {
+        test: /\.(md|mdx)$/,
+        use: ['babel-loader', '@mdx-js/loader'],
+      },
     ],
   },
 }

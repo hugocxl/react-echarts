@@ -58,17 +58,17 @@ While some props have been provided to facilitate specific use cases (single ser
 
 - **Quick start example:** Check out the [live demo](https://codesandbox.io/s/react-echarts-simple-area-umnfw)
 
-```js
-import { AreaChart } from '@hcorta/react-echarts'
+```jsx
+import { AreaChart } from "@hcorta/react-echarts";
 
 function App() {
   return (
     <AreaChart
       smooth
       data={[125, 464, 846, 253, 457, 556, 975]}
-      xAxis={['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']}
+      xAxis={["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]}
     />
-  )
+  );
 }
 ```
 
@@ -95,15 +95,15 @@ The library exports the following React components:
 - `<TreeChart />`
 - `<TreeMapChart />`
 
-```js
+```jsx
 import {
   LineChart,
   AreaChart,
   BarChart,
   ColumnChart,
   PieChart,
-  DonutChart
-} from '@hcorta/react-echarts'
+  DonutChart,
+} from "@hcorta/react-echarts";
 ```
 
 ## Hooks
@@ -112,8 +112,8 @@ import {
 
 Useful when you need, for example, to connect charts or register a new theme. It returns those methods provided by the ECharts core library:
 
-```js
-import { useEcharts } from '@hcorta/react-echarts'
+```jsx
+import { useEcharts } from "@hcorta/react-echarts";
 
 const {
   connect,
@@ -124,8 +124,8 @@ const {
   registerCoordinateSystem,
   getInstanceByDom,
   getInstanceById,
-  getMap
-} = useEcharts()
+  getMap,
+} = useEcharts();
 ```
 
 | Method                 | Description                                       | Parameters                                                       |
@@ -141,29 +141,29 @@ const {
 
 A simple use case would look like this:
 
-```js
-import { useEffect } from 'react'
-import { useEcharts, AreaChart } from '@hcorta/react-echarts'
+```jsx
+import { useEffect } from "react";
+import { useEcharts, AreaChart } from "@hcorta/react-echarts";
 
 export default function App() {
-  const { connect, registerTheme } = useEcharts()
+  const { connect, registerTheme } = useEcharts();
   const commonChartProps = {
-    xAxis: ['Big', 'Medium', 'Small'],
+    xAxis: ["Big", "Medium", "Small"],
     tooltip: { show: true },
-    group: 'clothes'
-  }
+    group: "clothes",
+  };
 
   useEffect(() => {
-    connect('clothes')
-    registerTheme('andromeda', andromedaThemeObject)
-  }, [])
+    connect("clothes");
+    registerTheme("andromeda", andromedaThemeObject);
+  }, []);
 
   return (
     <div className="App">
-      <AreaChart {...commonChartProps} theme={'andromeda'} data={[2, 5, 8]} />
+      <AreaChart {...commonChartProps} theme={"andromeda"} data={[2, 5, 8]} />
       <AreaChart {...commonChartProps} data={[5, 9, 1]} />
     </div>
-  )
+  );
 }
 ```
 

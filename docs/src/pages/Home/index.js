@@ -2,14 +2,14 @@ import './index.css'
 
 export const Home = {
   label: 'Home',
-  route: '/',
+  route: '',
   order: 0,
   exact: true,
   component: (props) => {
     return (
       <div className={'react_echarts__home'}>
         <div className={'react_echarts__home_header'}>
-          <div>
+          <div className={'react_echarts__home_header_text'}>
             <span>A simple and declarative set of React components built on top of Apache ECharts</span>
             <button>Check out the examples</button>
           </div>
@@ -19,23 +19,23 @@ export const Home = {
         <div className={'react_echarts__home_articles'}>
           <article>
             <h2>Simplicity</h2>
-            <p>
+            <span>
               react-echarts makes it easy to generate ECharts components by wrapping the code required to render the
               entire chart.
-            </p>
+            </span>
           </article>
 
           <article>
             <h2>Easy to customize</h2>
-            <p>
+            <span>
               In most cases, charts look and behave exactly as you need without modifications. A simple
               options-structure allows for deep customization, and styling can be done via JavaScript or CSS.
-            </p>
+            </span>
           </article>
 
           <article>
             <h2>Declarative</h2>
-            <p>components are purely presentational</p>
+            <span>components are purely presentational</span>
           </article>
         </div>
       </div>

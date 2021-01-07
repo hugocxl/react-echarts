@@ -19,12 +19,13 @@ body {
 }
 
 button {
-  font-size: 14px;
+  cursor: pointer;
+  font-size: 16px;
   color: white;
   padding: 12px 20px;
   border-radius: var(--border-radius);
   border: none;
-  background-image: radial-gradient( circle farthest-corner at 11.7% 80.6%,  rgba(249,185,255,1) 0%, rgba(177,172,255,1) 49.3%, rgba(98,203,255,1) 89% );
+  background-image: linear-gradient(to right,  rgba(249,185,255,1) 0%, rgba(177,172,255,1) 49.3%, rgba(98,203,255,1) 89% );
 }
 
 iframe {
@@ -57,6 +58,11 @@ header > a {
   color: var(--font-color);
   min-width: 96px;
   justify-content:center;
+}
+
+header > a:hover {
+  text-decoration: none;
+  border-bottom: 4px solid rgba(150,150,150,0.3);
 }
 
 header > a.active {
