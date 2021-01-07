@@ -9,7 +9,7 @@
 [![ECharts Version](https://david-dm.org/hcorta/react-echarts/status.svg?style=flat-square&logo=appveyor)](https://david-dm.org/hcorta/react-echarts)
 [![NPM](https://img.shields.io/npm/dm/@hcorta/react-echarts.svg?style=flat-square&logo=appveyor)](https://www.npmjs.com/package/@hcorta/react-echarts)
 
-A _simple_ and _declarative_ set of React components built on top of Apache ECharts
+A **simple** and **declarative** set of React components built on top of **ECharts**
 
 </div>
 
@@ -44,7 +44,7 @@ I do this open source work in my free time. If you use **`react-echarts`** for a
 
 ## Introduction
 
-[Apache ECharts](https://echarts.apache.org/en/index.html) is a free, powerful charting and visualization library offering intuitive, interactive, and highly customizable charts. It is written in pure **JavaScript** and based on **zrender**, a canvas library.
+[ECharts](https://echarts.apache.org/en/index.html) is a free, powerful charting and visualization library offering intuitive, interactive, and highly customizable charts. It is written in pure **JavaScript** and based on **zrender**, a canvas library.
 
 **`react-echarts`** is an abstraction library built with [React](https://facebook.github.io/react/) on top of ECharts. It exposes a set of components for developers that can be combined to set up amazing charts in their web pages. Main principles of **`react-echarts`** are:
 
