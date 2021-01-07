@@ -1,4 +1,5 @@
 import './index.css'
+import { NavLink } from 'react-router-dom'
 
 export const Home = {
   label: 'Home',
@@ -10,8 +11,14 @@ export const Home = {
       <div className={'react_echarts__home'}>
         <div className={'react_echarts__home_header'}>
           <div className={'react_echarts__home_header_text'}>
-            <span>A simple and declarative set of React components built on top of Apache ECharts</span>
-            <button>Check out the examples</button>
+            <span>
+              A <strong>simple</strong> and <strong>declarative</strong> set of <br />
+              React components <br />
+              built on top of <strong>ECharts</strong>
+            </span>
+            <NavLink to={'/examples'}>
+              <button>Check out the examples</button>
+            </NavLink>
           </div>
           <iframe src='https://codesandbox.io/embed/react-echarts-simple-area-umnfw?autoresize=1&fontsize=14&hidenavigation=1&theme=dark&view=editor' />
         </div>

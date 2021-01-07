@@ -4,6 +4,7 @@
   align-items: center;
   justify-content: space-between;
   height: 100%;
+  overflow: hidden;
 }
 
 .react_echarts__home_header {
@@ -25,10 +26,10 @@
   max-width: 300px;
   width: 50%;
   padding-right: 10vh;
-  font-size: 28px
+  font-size: 32px
 }
 
-.react_echarts__home_header_text  > button {
+.react_echarts__home_header_text  > a {
   margin-top: 32px;
 }
 

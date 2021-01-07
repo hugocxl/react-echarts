@@ -15,7 +15,7 @@
     "build": "rm -rf build && webpack --progress --stats=minimal --config webpack/webpack.prod.js"
   },
   "dependencies": {
-    "@hcorta/react-echarts": "^0.5.0",
+    "@hcorta/react-echarts": "^0.7.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-router-dom": "^5.2.0"
@@ -35,12 +35,13 @@
     "@babel/preset-env": "^7.4.3",
     "@babel/preset-react": "^7.0.0",
     "@babel/register": "^7.4.0",
+    "@mdx-js/loader": "^1.6.22",
     "babel-eslint": "^10.0.1",
     "babel-loader": "^8.0.4",
     "babel-plugin-react-require": "^3.1.1",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
     "clean-webpack-plugin": "^3.0.0",
-    "copy-webpack-plugin": "^6.3.2",
+    "copy-webpack-plugin": "^7.0.0",
     "css-loader": "^5.0.1",
     "eslint": "^7.14.0",
     "eslint-config-prettier": "^6.15.0",
@@ -65,6 +66,5 @@
     "webpack-cli": "^4.2.0",
     "webpack-dev-server": "^3.11.0",
     "webpack-merge": "^5.4.0"
-  },
-  "template": "default"
+  }
 }

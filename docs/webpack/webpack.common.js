@@ -3,11 +3,14 @@
 // Dependencies
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const CopyPlugin = require('copy-webpack-plugin')
 
 // Paths setup
 const srcPath = path.resolve(__dirname, '../src')
 const publicPath = path.resolve(__dirname, '../public')
 const entryPoint = path.resolve(__dirname, '../src/index.js')
+const readmePath = path.resolve(__dirname, '../../README.md')
+const externalPublicPath = path.resolve(__dirname, '../../public')
 
 module.exports = {
   entry: entryPoint,
@@ -27,6 +30,12 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './src/index.html',
       title: 'React ECharts',
+    }),
+    new CopyPlugin({
+      patterns: [
+        { from: readmePath, to: publicPath },
+        { from: externalPublicPath, to: publicPath },
+      ],
     }),
   ],
   module: {
@@ -49,7 +58,7 @@ module.exports = {
         use: [{ loader: 'file-loader' }],
       },
       {
-        test: /\.(md|mdx)$/,
+        test: /\.mdx?$/,
         use: ['babel-loader', '@mdx-js/loader'],
       },
     ],

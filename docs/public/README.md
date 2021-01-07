@@ -9,7 +9,7 @@
 [![ECharts Version](https://david-dm.org/hcorta/react-echarts/status.svg?style=flat-square&logo=appveyor)](https://david-dm.org/hcorta/react-echarts)
 [![NPM](https://img.shields.io/npm/dm/@hcorta/react-echarts.svg?style=flat-square&logo=appveyor)](https://www.npmjs.com/package/@hcorta/react-echarts)
 
-A _simple_ and _declarative_ set of React components built on top of Apache ECharts
+A _simple_ and _declarative_ set of React components built on top of ECharts
 
 </div>
 
@@ -44,7 +44,7 @@ I do this open source work in my free time. If you use **`react-echarts`** for a
 
 ## Introduction
 
-[Apache ECharts](https://echarts.apache.org/en/index.html) is a free, powerful charting and visualization library offering intuitive, interactive, and highly customizable charts. It is written in pure **JavaScript** and based on **zrender**, a canvas library.
+[ECharts](https://echarts.apache.org/en/index.html) is a free, powerful charting and visualization library offering intuitive, interactive, and highly customizable charts. It is written in pure **JavaScript** and based on **zrender**, a canvas library.
 
 **`react-echarts`** is an abstraction library built with [React](https://facebook.github.io/react/) on top of ECharts. It exposes a set of components for developers that can be combined to set up amazing charts in their web pages. Main principles of **`react-echarts`** are:
 
@@ -58,17 +58,17 @@ While some props have been provided to facilitate specific use cases (single ser
 
 - **Quick start example:** Check out the [live demo](https://codesandbox.io/s/react-echarts-simple-area-umnfw)
 
-```jsx
-import { AreaChart } from "@hcorta/react-echarts";
+```js
+import { AreaChart } from '@hcorta/react-echarts'
 
 function App() {
   return (
     <AreaChart
       smooth
       data={[125, 464, 846, 253, 457, 556, 975]}
-      xAxis={["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]}
+      xAxis={['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']}
     />
-  );
+  )
 }
 ```
 
@@ -95,15 +95,15 @@ The library exports the following React components:
 - `<TreeChart />`
 - `<TreeMapChart />`
 
-```jsx
+```js
 import {
   LineChart,
   AreaChart,
   BarChart,
   ColumnChart,
   PieChart,
-  DonutChart,
-} from "@hcorta/react-echarts";
+  DonutChart
+} from '@hcorta/react-echarts'
 ```
 
 ## Hooks
@@ -112,8 +112,8 @@ import {
 
 Useful when you need, for example, to connect charts or register a new theme. It returns those methods provided by the ECharts core library:
 
-```jsx
-import { useEcharts } from "@hcorta/react-echarts";
+```js
+import { useEcharts } from '@hcorta/react-echarts'
 
 const {
   connect,
@@ -124,8 +124,8 @@ const {
   registerCoordinateSystem,
   getInstanceByDom,
   getInstanceById,
-  getMap,
-} = useEcharts();
+  getMap
+} = useEcharts()
 ```
 
 | Method                 | Description                                       | Parameters                                                       |
@@ -141,29 +141,29 @@ const {
 
 A simple use case would look like this:
 
-```jsx
-import { useEffect } from "react";
-import { useEcharts, AreaChart } from "@hcorta/react-echarts";
+```js
+import { useEffect } from 'react'
+import { useEcharts, AreaChart } from '@hcorta/react-echarts'
 
 export default function App() {
-  const { connect, registerTheme } = useEcharts();
+  const { connect, registerTheme } = useEcharts()
   const commonChartProps = {
-    xAxis: ["Big", "Medium", "Small"],
+    xAxis: ['Big', 'Medium', 'Small'],
     tooltip: { show: true },
-    group: "clothes",
-  };
+    group: 'clothes'
+  }
 
   useEffect(() => {
-    connect("clothes");
-    registerTheme("andromeda", andromedaThemeObject);
-  }, []);
+    connect('clothes')
+    registerTheme('andromeda', andromedaThemeObject)
+  }, [])
 
   return (
     <div className="App">
-      <AreaChart {...commonChartProps} theme={"andromeda"} data={[2, 5, 8]} />
+      <AreaChart {...commonChartProps} theme={'andromeda'} data={[2, 5, 8]} />
       <AreaChart {...commonChartProps} data={[5, 9, 1]} />
     </div>
-  );
+  )
 }
 ```
 

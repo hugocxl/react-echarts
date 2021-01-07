@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import { Header } from './components'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import * as pages from './pages'
+import './normalizer.css'
 import './index.css'
 
 function App() {
