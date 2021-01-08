@@ -1,0 +1,32 @@
+header {
+  position: sticky;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--navbar-height);
+  border-bottom: 1px solid var(--border-color);
+  padding: 0 var(--side-padding)
+}
+
+header a {
+  text-decoration: none;
+  padding: 0 8px;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  border-bottom: 4px solid transparent;
+  color: var(--font-color);
+  min-width: 96px;
+  justify-content:center;
+}
+
+header a:hover {
+  text-decoration: none;
+  border-bottom: 4px solid var(--font-color);
+}
+
+header a.active {
+  border-bottom: 4px solid var(--font-color);
+  font-weight: bold;
+}
+
