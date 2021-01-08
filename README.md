@@ -26,6 +26,19 @@ A **simple** and **declarative** set of React components built on top of **EChar
 - **Interactive**
 - **Responsive** design
 
+## Table of Contents 📚
+
+- [Installation](#installation)
+- [Sponsoring](#sponsoring)
+- [Introducction](#Introducction)
+- [Usage](#Usage)
+- [Charts](#Charts)
+- [Hooks](#Hooks)
+- [Components props](#Components-props)
+- [Contributing](#Contributing)
+- [Code of Conduct](#code-of-conduct)
+- [License](#License)
+
 ## Installation
 
 In order to use **`react-echarts`**, all you need to do is install the npm package:
