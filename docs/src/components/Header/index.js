@@ -1,8 +1,9 @@
 import { useMemo } from 'react'
-import * as pages from '../pages'
+import * as pages from 'pages'
 import { NavLink } from 'react-router-dom'
 const root = document.documentElement
-import logo from '../../../public/img/logo.png'
+import logo from '../../../../public/img/logo.png'
+import './index.css'
 
 export function Header() {
   const headerLinks = useMemo(getLinks, [])
@@ -12,7 +13,7 @@ export function Header() {
     for (let page in pages) {
       const { route: path, label, component, ...rest } = pages[page]
       links.push(
-        <NavLink {...rest} to={path}>
+        <NavLink key={path} {...rest} to={path}>
           {label}
         </NavLink>
       )
@@ -32,8 +33,6 @@ export function Header() {
     <header>
       <div
         style={{
-          position: 'absolute',
-          left: 'var(--side-padding)',
           height: '100%',
           display: 'flex',
           alignItems: 'center',
@@ -42,10 +41,15 @@ export function Header() {
         <img src={logo} style={{ height: '70%' }} />
         <span style={{ fontWeight: 'bolder', fontSize: 20, marginLeft: 8 }}>React ECharts</span>
       </div>
-      {headerLinks}
-      <button style={{ position: 'absolute', right: 'var(--side-padding)' }} onClick={onClickTheme}>
-        theme
-      </button>
+      <div
+        style={{
+          height: '100%',
+          display: 'flex',
+          alignItems: 'center',
+        }}
+      >
+        {headerLinks}
+      </div>
     </header>
   )
 }

@@ -15,13 +15,13 @@ import 'echarts/lib/chart/map'
 import 'echarts/lib/chart/treemap'
 import 'echarts/lib/chart/funnel'
 import 'echarts/lib/chart/sunburst'
+import 'echarts/lib/chart/graph'
+import 'echarts/lib/chart/effectScatter'
 
 // import 'echarts/lib/chart/gauge'
-// import 'echarts/lib/chart/graph'
 // import 'echarts/lib/chart/parallel'
 // import 'echarts/lib/chart/boxplot'
 // import 'echarts/lib/chart/candlestick'
-// import 'echarts/lib/chart/effectScatter'
 // import 'echarts/lib/chart/lines'
 
 // import 'echarts/lib/component/graphic'
@@ -53,11 +53,11 @@ export class ReactEchartsCore extends Component {
     this.containerRef = createRef()
   }
 
-  shouldComponentUpdate(prevProps) {
+  shouldComponentUpdate (prevProps) {
     return this.props.shouldUpdate(prevProps, this.props)
   }
 
-  componentDidMount() {
+  componentDidMount () {
     const { onMount, getInstance, getRef } = this.props
 
     this.setEchartsInstance()
@@ -78,7 +78,7 @@ export class ReactEchartsCore extends Component {
     }
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate (prevProps) {
     if (
       !isEqual(prevProps.lazyUpdate, this.props.lazyUpdate) ||
       !isEqual(prevProps.notMerge, this.props.notMerge) ||
@@ -90,7 +90,10 @@ export class ReactEchartsCore extends Component {
       return this.renderEchart()
     }
 
-    if (!isEqual(prevProps.style, this.props.style) || !isEqual(prevProps.className, this.props.className)) {
+    if (
+      !isEqual(prevProps.style, this.props.style) ||
+      !isEqual(prevProps.className, this.props.className)
+    ) {
       return this.echartsInstance.resize()
     }
 
@@ -99,7 +102,7 @@ export class ReactEchartsCore extends Component {
     }
   }
 
-  componentWillUnmount() {
+  componentWillUnmount () {
     this.disposeEchartsInstance()
 
     if (this.props.onUnmount) {
@@ -115,9 +118,13 @@ export class ReactEchartsCore extends Component {
   setEchartsInstance = () => {
     const { theme, group, renderer = 'svg' } = this.props
 
-    this.echartsInstance = this.echartsLib.init(this.containerRef.current, theme, {
-      renderer,
-    })
+    this.echartsInstance = this.echartsLib.init(
+      this.containerRef.current,
+      theme,
+      {
+        renderer,
+      }
+    )
 
     if (group) {
       this.echartsInstance.group = group
@@ -144,15 +151,24 @@ export class ReactEchartsCore extends Component {
     this.echartsInstance.on('highlight', this.props.onHighlight)
     this.echartsInstance.on('downplay', this.props.onDownplay)
     this.echartsInstance.on('selectchanged', this.props.onSelectChanged)
-    this.echartsInstance.on('legendsselectchanged', this.props.onLegendSelectChanged)
+    this.echartsInstance.on(
+      'legendsselectchanged',
+      this.props.onLegendSelectChanged
+    )
     this.echartsInstance.on('legendselected', this.props.onLegendSelected)
     this.echartsInstance.on('legendunselected', this.props.onLegendUnselected)
-    this.echartsInstance.on('legendinverseselect', this.props.onLegendInverseSelect)
+    this.echartsInstance.on(
+      'legendinverseselect',
+      this.props.onLegendInverseSelect
+    )
     this.echartsInstance.on('legendscroll', this.props.onLegendScroll)
     this.echartsInstance.on('datazoom', this.props.onDataZoom)
     this.echartsInstance.on('datarangeselected', this.props.onDataRangeSelected)
     this.echartsInstance.on('timelinechanged', this.props.onTimelineChanged)
-    this.echartsInstance.on('timelineplaychanged', this.props.onTimelinePlayChanged)
+    this.echartsInstance.on(
+      'timelineplaychanged',
+      this.props.onTimelinePlayChanged
+    )
     this.echartsInstance.on('restore', this.props.onRestore)
     this.echartsInstance.on('dataviewchanged', this.props.onDataViewChanged)
     this.echartsInstance.on('magictypechanged', this.props.onMagicTypeChanged)
@@ -160,8 +176,14 @@ export class ReactEchartsCore extends Component {
     this.echartsInstance.on('geoselected', this.props.onGeoSelected)
     this.echartsInstance.on('geounselected', this.props.onGeoUnselected)
     this.echartsInstance.on('axisareaselected', this.props.onAxisAreaSelected)
-    this.echartsInstance.on('focusnodeadjacency', this.props.onFocusNodeadJacency)
-    this.echartsInstance.on('unfocusnodeadjacency', this.props.onUnfocusNodeAdjacency)
+    this.echartsInstance.on(
+      'focusnodeadjacency',
+      this.props.onFocusNodeadJacency
+    )
+    this.echartsInstance.on(
+      'unfocusnodeadjacency',
+      this.props.onUnfocusNodeAdjacency
+    )
     this.echartsInstance.on('brush', this.props.onBrush)
     this.echartsInstance.on('brushend', this.props.onBrushEnd)
     this.echartsInstance.on('brushselected', this.props.onBrushSelected)
@@ -181,7 +203,7 @@ export class ReactEchartsCore extends Component {
     })
   }
 
-  render() {
+  render () {
     const { style, className, id, height, width } = this.props
 
     return (
