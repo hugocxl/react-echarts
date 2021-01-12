@@ -982,13 +982,9 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
-"@hcorta/react-echarts@^0.7.0":
-  version "0.7.0"
-  resolved "https://registry.yarnpkg.com/@hcorta/react-echarts/-/react-echarts-0.7.0.tgz#8b2f905c138e02c76148e78dcd7ec3a5f89c2abb"
-  integrity sha512-D4TnyBQc8zz3KUB433kzzioG7vHak+dPRANOdaT0/k+EZsfN9PcmjkNfBa8PAYVLt3Mng779ddc9vj0JmtSd0A==
-  dependencies:
-    echarts "^5.0.0"
-    react "^17.0.1"
+"@hcorta/react-echarts@link:..":
+  version "0.0.0"
+  uid ""
 
 "@mdx-js/loader@^1.6.22":
   version "1.6.22"

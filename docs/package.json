@@ -11,11 +11,11 @@
     "url": "https://github.com/hcorta/react-echarts"
   },
   "scripts": {
-    "start": "rm -rf node_modules && yarn && webpack serve --progress --stats=minimal --config webpack/webpack.dev.js",
+    "start": "webpack serve --progress --stats=minimal --config webpack/webpack.dev.js",
     "build": "rm -rf build && webpack --progress --stats=minimal --config webpack/webpack.prod.js"
   },
   "dependencies": {
-    "@hcorta/react-echarts": "^0.7.0",
+    "@hcorta/react-echarts": "link:..",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-router-dom": "^5.2.0"

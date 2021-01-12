@@ -1,7 +1,7 @@
 'use strict'
 
 import { Chart } from './Chart.js'
-import { useOption } from 'hooks'
+import { useOption } from '../hooks'
 
 export function FunnelChart (props) {
   const option = useOption({

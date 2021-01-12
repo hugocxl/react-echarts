@@ -17,8 +17,8 @@
     "node": ">=10"
   },
   "scripts": {
-    "start": "webpack --progress --stats=minimal --config webpack/webpack.dev.js",
-    "build": "rm -rf build && webpack --progress --stats=minimal --config webpack/webpack.prod.js",
+    "start": "rm -rf lib  && webpack --progress --stats=minimal --config webpack/webpack.dev.js",
+    "build": "rm -rf lib && webpack --progress --stats=minimal --config webpack/webpack.prod.js",
     "test": "yarn build",
     "lint": "eslint . --cache --color",
     "clean": "rm -rf dist && rm -rf node_modules",
