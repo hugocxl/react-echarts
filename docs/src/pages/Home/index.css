@@ -1,10 +1,12 @@
 .react_echarts__home {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
   height: 100%;
   overflow: hidden;
+  padding: var(--page-padding);
+  position: relative;
+  place-content: center;
+  place-items: center;
 }
 
 .react_echarts__home_header {
@@ -16,6 +18,14 @@
   text-align: center;
   color: white;
   height: inherit;
+}
+
+.react_echarts__home_header > img {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: -1;
+  height: 70vh;
 }
 
 .react_echarts__home_header > h1 {
@@ -41,9 +51,8 @@
 .react_echarts__home_description {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  padding: 100px 5vw;
-  padding-top: 0;
-  gap: 12px
+  gap: 12px;
+  place-items: start;
 }
 
 .react_echarts__home_description > article {

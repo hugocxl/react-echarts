@@ -8,9 +8,9 @@ const { merge } = require('webpack-merge')
 const common = require('./webpack.common.js')
 
 module.exports = merge(common, {
-  mode: 'development',
-  cache: true,
-  devtool: 'eval-source-map',
+  mode: 'production',
+  cache: false,
+  devtool: 'source-map',
   watch: true,
   watchOptions: {
     aggregateTimeout: 500,
@@ -18,6 +18,9 @@ module.exports = merge(common, {
   },
   resolve: {
     unsafeCache: true
+  },
+  optimization: {
+    minimize: false
   },
   plugins: [new webpack.HotModuleReplacementPlugin()]
 })

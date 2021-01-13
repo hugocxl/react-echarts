@@ -39,7 +39,9 @@ export function Header() {
         }}
       >
         <img src={logo} style={{ height: '70%' }} />
-        <span style={{ fontWeight: 'bolder', fontSize: 20, marginLeft: 8 }}>React ECharts</span>
+        <span style={{ fontWeight: 'bolder', fontSize: 20, marginLeft: 8 }}>
+          React ECharts
+        </span>
       </div>
       <div
         style={{

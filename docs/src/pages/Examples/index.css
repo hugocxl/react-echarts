@@ -1,0 +1,58 @@
+.react_echarts__examples {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  overflow: hidden;
+  height: 100%;
+}
+
+
+.react_echarts__examples_sidebar {
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid var(--border-color);
+  overflow: hidden auto;
+  padding: 12px
+}
+
+.react_echarts__examples_sidebar a:hover {
+  text-decoration: underline
+}
+
+
+.react_echarts__examples_container {
+  display: grid;
+  grid-template-columns: repeat( auto-fit, minmax(360px, 1fr));
+  padding: 20px;
+  gap: 20px;
+  grid-auto-rows: 280px;
+  overflow: hidden auto;
+}
+
+.react_echarts__examples_item {
+  border-radius: var(--border-radius);
+  height: 100%;
+  width: 100%;
+  display: grid;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+  place-content: center;
+  transition: all 0.17s ease;
+}
+
+.react_echarts__examples_item:hover {
+  transform: translateY(-4px);
+}
+
+.react_echarts__examples_item iframe {
+  opacity: 0.3;
+  width: 100%;
+  height: 100%;
+  border-radius: 0;
+  pointer-events: none;
+}
+.react_echarts__examples_item span {
+  font-size: 20px;
+  text-align: center;
+  vertical-align: middle;
+  font-weight: bold;
+  color: white;
+}

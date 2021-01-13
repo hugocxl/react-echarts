@@ -28,8 +28,10 @@
     "postversion": "git push && git push --tags"
   },
   "dependencies": {
+    "classnames": "^2.2.6",
     "echarts": "^5.0.0",
-    "react": "^17.0.1"
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.4.3",
