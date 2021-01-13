@@ -20,7 +20,7 @@ export function useOption ({
   if (data) {
     finalSeries = [
       {
-        links,
+        // links,
         data,
         type,
         ...serieCustomization
@@ -57,8 +57,8 @@ export function useOption ({
 
   return getOptionFromProps({
     ...rest,
-    series: finalSeries
-    // xAxis: finalXaxis,
-    // yAxis: finalYaxis
+    series: finalSeries,
+    xAxis: finalXaxis,
+    yAxis: finalYaxis
   })
 }

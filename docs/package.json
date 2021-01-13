@@ -15,7 +15,6 @@
     "build": "rm -rf build && webpack --progress --stats=minimal --config webpack/webpack.prod.js"
   },
   "dependencies": {
-    "@hcorta/react-echarts": "link:..",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-router-dom": "^5.2.0"

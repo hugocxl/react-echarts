@@ -8,21 +8,9 @@ export const Testing = {
     return (
       <div>
         <AreaChart
-          option={{
-            xAxis: {
-              type: "category",
-              data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
-            },
-            yAxis: {
-              type: "value",
-            },
-            series: [
-              {
-                data: [150, 230, 224, 218, 135, 147, 260],
-                type: "line",
-              },
-            ],
-          }}
+          smooth
+          data={[125, 464, 846, 253, 457, 556, 975]}
+          xAxis={["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]}
         />
       </div>
     );
