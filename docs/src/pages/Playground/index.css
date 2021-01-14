@@ -1,0 +1,10 @@
+.react_echarts__playground {
+  display: grid;
+  grid-template-columns: 0.5fr 1fr;
+  overflow: hidden;
+  height: 100%;
+}
+
+.react_echarts__playground > .item_code {
+  background-color: #eeeeee !important;  
+}

@@ -4,7 +4,7 @@
   --border-radius: 8px;
   --navbar-height: 60px;
   --border-color: #e5e7eb;
-  --side-padding: 10vw;
+  --side-padding: 0vw;
   --page-padding: 0 var(--side-padding);
 }
 

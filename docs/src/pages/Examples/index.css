@@ -3,56 +3,41 @@
   grid-template-columns: 200px 1fr;
   overflow: hidden;
   height: 100%;
+  /* padding: var(--page-padding) */
 }
-
 
 .react_echarts__examples_sidebar {
   display: flex;
   flex-direction: column;
   border-right: 1px solid var(--border-color);
   overflow: hidden auto;
-  padding: 12px
+  padding: 12px;
 }
 
 .react_echarts__examples_sidebar a:hover {
-  text-decoration: underline
+  text-decoration: underline;
 }
 
-
 .react_echarts__examples_container {
-  display: grid;
-  grid-template-columns: repeat( auto-fit, minmax(360px, 1fr));
-  padding: 20px;
-  gap: 20px;
-  grid-auto-rows: 280px;
+  display: flex;
+  flex-direction: column;
+  padding: 0px 0 0 20px;
   overflow: hidden auto;
 }
 
 .react_echarts__examples_item {
-  border-radius: var(--border-radius);
-  height: 100%;
   width: 100%;
   display: grid;
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
-  place-content: center;
-  transition: all 0.17s ease;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 80px 1fr;
+}
+.react_echarts__examples_item h2 {
+ grid-column: span 2;
 }
 
-.react_echarts__examples_item:hover {
-  transform: translateY(-4px);
-}
-
-.react_echarts__examples_item iframe {
-  opacity: 0.3;
-  width: 100%;
-  height: 100%;
-  border-radius: 0;
-  pointer-events: none;
-}
-.react_echarts__examples_item span {
-  font-size: 20px;
-  text-align: center;
-  vertical-align: middle;
-  font-weight: bold;
-  color: white;
+.react_echarts__examples_item > .item_code {
+  background-color: rgb(40, 44, 52) !important;
+  border-radius: var(--border-radius);
+  margin-bottom: 40px;
+  font-size: 13px;
 }
