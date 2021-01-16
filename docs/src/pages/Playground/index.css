@@ -1,10 +1,6 @@
 .react_echarts__playground {
   display: grid;
-  grid-template-rows: 0.5fr 1fr;
+  grid-template-rows: 1fr;
   padding: var(--page-padding);
   overflow: hidden;
-}
-
-.react_echarts__playground > .item_code {
-  background-color: #eeeeee !important;  
 }
