@@ -1,8 +1,6 @@
 .react_echarts__home {
   display: grid;
   grid-template-rows: 1fr 1fr;
-  height: 100%;
-  overflow: hidden;
   padding: var(--page-padding);
   position: relative;
   place-content: center;
@@ -10,56 +8,61 @@
 }
 
 .react_echarts__home_header {
+  background: rgba(243, 0, 75, 1);
   display: flex;
   flex-direction: column;
-  justify-content:center;
+  justify-content: center;
   align-items: center;
   width: 100%;
   text-align: center;
   color: white;
   height: inherit;
+  border-radius: var(--border-radius);
 }
 
-.react_echarts__home_header > img {
-  position: absolute;
-  top: 0;
-  width: 100%;
-  z-index: -1;
-  height: 70vh;
-}
-
-.react_echarts__home_header > h1 {
-    text-shadow: 0px 12px 20px rgba(0, 0, 0, 0.35);
-  font-size: 72px;
-  margin: 0
-}
-
-.react_echarts__home_header > span {
-  font-size: 26px;
-  color: rgba(255,255,255,0.95)
-}
-
-.react_echarts__home_header_buttons {
-  padding-top: 50px;
-}
-
-.react_echarts__home_header_buttons button {
-  width: 200px;
-  margin-left: 8px;
-}
-
-.react_echarts__home_description {
+.react_echarts__home_content {
   display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--padding);
+  padding: 20px 0;
+}
+
+.react_echarts__home_content__description {
   grid-template-columns: 1fr 1fr 1fr;
   gap: 12px;
   place-items: start;
 }
 
-.react_echarts__home_description > article {
-  text-align: center;
+.react_echarts__home_content__description > span {
+  font-size: 36px;
+  line-height: 1em;
+  width: 80%;
+  padding: 1rem 0px 3rem 0;
+  font-weight: 300;
+  color: rgb(118, 118, 118);
 }
 
+.react_echarts__home_content__cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 60px repeat(2, minmax(320px, 1fr));
+  gap: 20px;
+}
 
-.react_echarts__home_description > article > span {
-  color: grey
+.react_echarts__home_content__cards > a {
+    grid-column: span 2;
+    font-size: 22px;
+    background-color: rgb(235, 235, 235);
+    border-radius: var(--border-radius);
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: var(--font-color)
+}
+
+.react_echarts__home_content__cards > div {
+  background-color: rgb(235, 235, 235);
+  border-radius: var(--border-radius);
 }

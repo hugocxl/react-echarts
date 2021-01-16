@@ -1,16 +1,16 @@
 :root {
-  --font-color: #382e48;
+  --font-color: rgb(39, 39, 39);
   --background-color: white;
-  --border-radius: 8px;
+  --border-radius: 16px;
   --navbar-height: 60px;
   --border-color: #e5e7eb;
-  --side-padding: 0vw;
-  --page-padding: 0 var(--side-padding);
+  --padding: 60px;
+  --page-padding: 0 var(--padding);
 }
 
 body {
   line-height: 1.6;
-  font-size: 16px;
+  font-size: 20px;
   text-rendering: optimizeLegibility;
   margin: 0;
   padding: 0;
@@ -127,6 +127,7 @@ tr:nth-child(even) {
 }
 
 a {
+  cursor: pointer;
   color: #4183C4;
   text-decoration: none;
 }
@@ -292,4 +293,9 @@ pre code, pre tt {
 .react_echarts__main {
   height: calc(100vh - var(--navbar-height));
   overflow: hidden auto;
+   background-color: #fff;
+  background-image: radial-gradient(circle, rgba(0,0,0,0.15) 5%, transparent 5%), radial-gradient(circle, rgba(0,0,0,0.15) 5%, transparent 5%);
+  background-size: 25px 25px;
+  background-position: 0 0, 0 0;
 }
+

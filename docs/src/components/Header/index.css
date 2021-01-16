@@ -5,28 +5,25 @@ header {
   justify-content: space-between;
   height: var(--navbar-height);
   border-bottom: 1px solid var(--border-color);
-  padding: 0 var(--side-padding)
+  padding: 0 var(--padding)
 }
 
 header a {
   text-decoration: none;
-  padding: 0 8px;
+  padding: 0 12px;
   display: flex;
   align-items: center;
+  font-size: 16px;
   height: 100%;
-  border-bottom: 4px solid transparent;
   color: var(--font-color);
-  min-width: 96px;
   justify-content:center;
 }
 
 header a:hover {
   text-decoration: none;
-  border-bottom: 4px solid var(--font-color);
 }
 
 header a.active {
-  border-bottom: 4px solid var(--font-color);
-  font-weight: bold;
+  font-weight: 600;
 }
 

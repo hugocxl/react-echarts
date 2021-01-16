@@ -3,6 +3,7 @@ import * as pages from 'pages'
 import { NavLink } from 'react-router-dom'
 const root = document.documentElement
 import logo from '../../../../public/img/logo.png'
+import github from '../../../../public/img/github-icon.svg'
 import './index.css'
 
 export function Header() {
@@ -38,20 +39,21 @@ export function Header() {
           alignItems: 'center',
         }}
       >
-        <img src={logo} style={{ height: '70%' }} />
-        <span style={{ fontWeight: 'bolder', fontSize: 20, marginLeft: 8 }}>
-          React ECharts
-        </span>
+        <img src={logo} style={{ height: '70%', marginRight: 12 }} />
+        {headerLinks}
       </div>
-      <div
+      <a
+        target='_blank'
+        rel='noopener noreferrer'
+        href={'https://github.com/hcorta/react-echarts'}
         style={{
           height: '100%',
           display: 'flex',
           alignItems: 'center',
         }}
       >
-        {headerLinks}
-      </div>
+        <img src={github} style={{ height: '50%' }} />
+      </a>
     </header>
   )
 }
