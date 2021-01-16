@@ -2,10 +2,12 @@
 
 export const SimpleLineChart = {
   label: "Simple Line Chart",
-  background: "linear-gradient(to bottom, red, yellow)",
+  subLabel: "<LineChart />",
+  id: "simple-line-chart",
+  background: "rgb(243, 243, 243)",
+  color: "black",
   code: `
     <LineChart
-      height={'100%'}
       smooth
       tooltip={{ show: true }}
       data={[125, 464, 846, 253, 457, 556, 975]}

@@ -5,7 +5,6 @@ export const StackedAreaChart = {
   background: "linear-gradient(to bottom, red, green)",
   code: `
   <AreaChart
-    height={'100%'}
     stacked={true}
     tooltip={{
       trigger: 'axis'

@@ -1,7 +1,7 @@
 export const defaultProps = {
   style: {},
   className: '',
-  height: 320,
+  height: '100%',
   width: '100%',
   notMerge: false,
   lazyUpdate: false,
@@ -58,5 +58,5 @@ export const defaultProps = {
   onBrushSelected: null,
   onGlobalCursorTaken: null,
   onRendered: null,
-  onFinished: null,
+  onFinished: null
 }
