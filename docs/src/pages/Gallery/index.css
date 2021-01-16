@@ -1,12 +1,12 @@
-.react_echarts__examples {
+.react_echarts__gallery {
   display: grid;
   grid-template-columns: 200px 1fr;
   overflow: hidden;
   height: 100%;
-  /* padding: var(--page-padding) */
+  padding: var(--page-padding)
 }
 
-.react_echarts__examples_sidebar {
+.react_echarts__gallery_sidebar {
   display: flex;
   flex-direction: column;
   border-right: 1px solid var(--border-color);
@@ -14,28 +14,28 @@
   padding: 12px;
 }
 
-.react_echarts__examples_sidebar a:hover {
+.react_echarts__gallery_sidebar a:hover {
   text-decoration: underline;
 }
 
-.react_echarts__examples_container {
+.react_echarts__gallery_container {
   display: flex;
   flex-direction: column;
   padding: 0px 0 0 20px;
   overflow: hidden auto;
 }
 
-.react_echarts__examples_item {
+.react_echarts__gallery_item {
   width: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 80px 1fr;
 }
-.react_echarts__examples_item h2 {
+.react_echarts__gallery_item h2 {
  grid-column: span 2;
 }
 
-.react_echarts__examples_item > .item_code {
+.react_echarts__gallery_item > .item_code {
   background-color: rgb(40, 44, 52) !important;
   border-radius: var(--border-radius);
   margin-bottom: 40px;

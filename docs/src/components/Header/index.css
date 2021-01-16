@@ -1,11 +1,14 @@
 header {
+  z-index: 1;
   position: sticky;
   display: flex;
   align-items: center;
   justify-content: space-between;
   height: var(--navbar-height);
   border-bottom: 1px solid var(--border-color);
-  padding: 0 var(--padding)
+  padding: 0 var(--padding);
+  top: 0;
+  background-color: var(--background-color);
 }
 
 header a {

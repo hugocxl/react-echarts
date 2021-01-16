@@ -7,8 +7,8 @@ import { LiveProvider, LiveEditor, LiveError, LivePreview } from 'react-live'
 import theme from 'prism-react-renderer/themes/shadesOfPurple'
 
 export const Examples = {
-  label: 'Examples',
-  route: '/examples',
+  label: 'Gallery',
+  route: '/gallery',
   order: 2,
   component: (props) => {
     const examplesItems = []
@@ -20,7 +20,7 @@ export const Examples = {
 
       sidebarItems.push(<a href={'#' + label}>{label}</a>)
       examplesItems.push(
-        <div className={'react_echarts__examples_item'}>
+        <div className={'react_echarts__gallery_item'}>
           <h2 id={label}>{label}</h2>
           <LiveProvider code={code} scope={scope}>
             <LivePreview />
@@ -32,9 +32,9 @@ export const Examples = {
     }
 
     return (
-      <div className='react_echarts__examples'>
-        <div className='react_echarts__examples_sidebar'>{sidebarItems}</div>
-        <div className='react_echarts__examples_container'>{examplesItems}</div>
+      <div className='react_echarts__gallery'>
+        <div className='react_echarts__gallery_sidebar'>{sidebarItems}</div>
+        <div className='react_echarts__gallery_container'>{examplesItems}</div>
       </div>
     )
   },

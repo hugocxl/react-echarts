@@ -1,30 +1,27 @@
 'use strict'
 
-import { AreaChart } from '@hcorta/react-echarts'
-import { LiveProvider, LiveEditor, LiveError, LivePreview } from 'react-live'
-import theme from 'prism-react-renderer/themes/ultramin'
 import './index.css'
 
 export const Playground = {
   label: 'Playground',
   route: '/playground',
   order: 4,
-  component: (props) => {
-    const code = `
-      <AreaChart
-        height={'100%'}
-        data={[125, 464, 846, 253, 457, 556, 975]}
-        xAxis={['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']}
-      />
-    `
-
+  component: () => {
     return (
       <div className='react_echarts__playground'>
-        <LiveProvider code={code} scope={{ AreaChart }}>
-          <LiveEditor theme={theme} className={'item_code'} />
-          <LivePreview />
-          <LiveError />
-        </LiveProvider>
+        <iframe
+          src='https://codesandbox.io/embed/react-echarts-playground-tlihb?fontsize=14&hidenavigation=1&theme=dark'
+          style={{
+            width: '100%',
+            height: '100%',
+            border: '1px solid var(--font-color)',
+            borderRadius: 'var(border-radius)',
+            overflow: 'hidden',
+          }}
+          title='react-echarts-playground'
+          allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
+          sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'
+        ></iframe>
       </div>
     )
   },

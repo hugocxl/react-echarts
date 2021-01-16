@@ -39,21 +39,33 @@ export function Header() {
           alignItems: 'center',
         }}
       >
-        <img src={logo} style={{ height: '70%', marginRight: 12 }} />
-        {headerLinks}
+        <img src={logo} style={{ height: '70%' }} />
+        <span style={{ fontWeight: 'bolder', fontSize: 20, marginLeft: 8 }}>
+          React ECharts
+        </span>
       </div>
-      <a
-        target='_blank'
-        rel='noopener noreferrer'
-        href={'https://github.com/hcorta/react-echarts'}
+
+      <div
         style={{
           height: '100%',
           display: 'flex',
           alignItems: 'center',
         }}
       >
-        <img src={github} style={{ height: '50%' }} />
-      </a>
+        {headerLinks}
+        <a
+          target='_blank'
+          rel='noopener noreferrer'
+          href={'https://github.com/hcorta/react-echarts'}
+          style={{
+            height: '100%',
+            display: 'flex',
+            alignItems: 'center',
+          }}
+        >
+          <img src={github} style={{ height: '35%' }} />
+        </a>
+      </div>
     </header>
   )
 }

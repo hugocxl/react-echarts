@@ -1,4 +1,4 @@
 export * from './Playground'
-export * from './Examples'
+export * from './Gallery'
 export * from './Docs/index.mdx'
 export * from './Home'

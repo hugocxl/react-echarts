@@ -1,8 +1,8 @@
 .react_echarts__playground {
   display: grid;
-  grid-template-columns: 0.5fr 1fr;
+  grid-template-rows: 0.5fr 1fr;
+  padding: var(--page-padding);
   overflow: hidden;
-  height: 100%;
 }
 
 .react_echarts__playground > .item_code {
