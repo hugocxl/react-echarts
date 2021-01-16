@@ -1,31 +1,31 @@
-import './index.css'
-import { NavLink } from 'react-router-dom'
-import background from '../../../../public/img/logo.png'
+import "./index.css";
+import { NavLink } from "react-router-dom";
+import background from "../../../../public/img/logo.png";
 
 export const Home = {
-  label: 'Home',
-  route: '',
+  label: "Home",
+  route: "",
   order: 0,
   exact: true,
   component: (props) => {
     return (
-      <div className={'react_echarts__home'}>
-        <div className={'react_echarts__home__description'}>
+      <div className={"react_echarts__home"}>
+        <div className={"react_echarts__home__description"}>
           <span>
             <span
               style={{
-                fontWeight: 'bold',
-                color: 'var(--font-color)',
+                fontWeight: "bold",
+                color: "var(--font-color)",
               }}
             >
               React ECharts
-            </span>{' '}
+            </span>{" "}
             is a simple and declarative set of React components built on top of
             ECharts
           </span>
 
           <p>
-            <a href='https://echarts.apache.org/en/index.html'>ECharts</a> is a
+            <a href="https://echarts.apache.org/en/index.html">ECharts</a> is a
             pure Javascript chart library, providing intuitive, vivid,
             interactive, highly personalized and customized data visualization
             charts.
@@ -56,14 +56,14 @@ export const Home = {
             </li>
           </ol>
         </div>
-        <div className={'react_echarts__home__cards'}>
-          <NavLink to={'/examples'}>Gallery</NavLink>
+        <div className={"react_echarts__home__cards"}>
+          <NavLink to={"/gallery"}>Gallery</NavLink>
           <div>1</div>
           <div>2</div>
           <div>3</div>
           <div>4</div>
         </div>
       </div>
-    )
+    );
   },
-}
+};

@@ -1,9 +1,11 @@
-'use strict'
+"use strict";
 
 export const StackedAreaChart = {
-  label: 'Stacked Area Chart',
+  label: "Stacked Area Chart",
+  background: "linear-gradient(to bottom, red, green)",
   code: `
   <AreaChart
+    height={'100%'}
     stacked={true}
     tooltip={{
       trigger: 'axis'
@@ -44,4 +46,4 @@ export const StackedAreaChart = {
     ]}
   />
 `,
-}
+};

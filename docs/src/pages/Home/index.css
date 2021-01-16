@@ -4,7 +4,6 @@
   padding: var(--page-padding);
   position: relative;
   place-content: center;
-  place-items: center;
   gap: 40px;
 }
 
