@@ -34,15 +34,10 @@ export const exportedComponents = `<AreaChart />
 `;
 
 export const useEchartsExample = `import { useEffect } from "react";
-import { useEcharts, AreaChart } from "@hcorta/react-echarts";
+import { useEcharts, LineChart } from "@hcorta/react-echarts";
 
 export default function App() {
   const { connect, registerTheme } = useEcharts();
-  const commonChartProps = {
-    xAxis: ["Big", "Medium", "Small"],
-    tooltip: { show: true },
-    group: "clothes",
-  };
 
   useEffect(() => {
     connect("clothes");
@@ -51,8 +46,29 @@ export default function App() {
 
   return (
     <div className="App">
-      <AreaChart {...commonChartProps} theme={"andromeda"} data={[2, 5, 8]} />
-      <AreaChart {...commonChartProps} data={[5, 9, 1]} />
+      <LineChart {...rest} group={'clothes'} theme={"andromeda"} />
+      <LineChart {...rest} group={'clothes'} />
     </div>
+  );
+}`;
+
+export const commonPropsExample = `<AreaChart
+  style={{ backgroundColor: 'red' }}
+  className={"chart-example"}
+  height={260}
+  width={'50%'}
+  {...rest}
+/>`;
+
+export const statePropsExample = `function StateProps() {
+  const { isMounting, isLoading, data } = useFetchedData();
+
+  return (
+    <AreaChart
+      data={data}
+      isLoading={isLoading}
+      isMounting={isMounting}
+      {...rest}
+    />
   );
 }`;

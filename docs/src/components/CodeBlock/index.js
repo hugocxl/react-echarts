@@ -7,9 +7,9 @@ import * as ReactEcharts from "@hcorta/react-echarts";
 
 const scope = { ...ReactEcharts };
 
-export function CodeBlock({ code }) {
+export function CodeBlock(props) {
   return (
-    <LiveProvider code={code} scope={scope}>
+    <LiveProvider scope={scope} {...props}>
       <LiveEditor theme={theme} className={"react_echarts__code_block"} />
     </LiveProvider>
   );

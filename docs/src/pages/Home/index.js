@@ -58,12 +58,17 @@ export const Home = {
           </p>
 
           <p>
-            react-echarts is an abstraction library built with React on top of
-            ECharts. It exposes a set of components for developers that can be
-            combined to set up amazing charts in their applications.
+            <code>
+              <strong>react-echarts</strong>
+            </code>{" "}
+            is an abstraction library built with React on top of ECharts. It
+            exposes a set of components for developers that can be combined to
+            set up amazing charts in their applications.
           </p>
 
-          <p>Main principles of React ECharts are:</p>
+          <p>
+            Main principles of <strong>React ECharts</strong> are:
+          </p>
 
           <ol>
             <li>
@@ -81,7 +86,32 @@ export const Home = {
               modifications.
             </li>
           </ol>
+
+          <br />
+          <p
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            Made with ❤️ by
+            <a
+              href={"https://github.com/hcorta"}
+              style={{ marginRight: 20, marginLeft: 4 }}
+            >
+              <strong>Hugo Corta</strong>
+            </a>
+            <a href="https://www.buymeacoffee.com/hcorta" target="_blank">
+              <img
+                src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png"
+                alt="Buy Me A Coffee"
+                style={{ height: 30, width: 110 }}
+              />
+            </a>
+          </p>
         </div>
+
         <div className={"react_echarts__home__cards"}>
           {galleryItems}
           <NavLink to={"/gallery"} id={"react_echarts__home__cards_link"}>

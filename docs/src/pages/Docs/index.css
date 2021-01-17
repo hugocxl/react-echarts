@@ -27,3 +27,12 @@
 .react_echarts__docs__sidebar a {
   color: var(--font-color);
 }
+
+.react_echarts__docs__sidebar ul {
+  margin: 0
+}
+
+.react_echarts__docs__sidebar li {
+  margin: 0;
+  font-size: 16px;
+}

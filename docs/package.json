@@ -1,6 +1,7 @@
 {
   "name": "@hcorta/react-echarts",
   "productName": "react-echarts",
+  "homepage": "https://hcorta.github.io/react-echarts/",
   "version": "0.5.0",
   "description": "A simple and declarative set of React components built on top of Apache ECharts",
   "license": "MIT",

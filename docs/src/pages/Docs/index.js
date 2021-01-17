@@ -2,15 +2,7 @@
 
 import "./index.css";
 import { CodeBlock } from "components";
-import * as text from "./examples";
-
-function StrongCode({ children }) {
-  return (
-    <strong>
-      <code>{children}</code>
-    </strong>
-  );
-}
+import * as codeBlocks from "./codeBlocks";
 
 function TableRow({ children }) {
   return (
@@ -33,7 +25,7 @@ function TableRow({ children }) {
 }
 
 export const Docs = {
-  label: "API Docs",
+  label: "Docs",
   route: "/docs",
   order: 1,
   component: (props) => {
@@ -42,8 +34,20 @@ export const Docs = {
         <div className={"react_echarts__docs__sidebar"}>
           <a href={"#installation"}>Installation</a>
           <a href={"#usage"}>Usage</a>
-          <a href={"#components"}>Components</a>
-          <a href={"#license"}>License</a>
+          <ul>
+            <li>
+              <a href={"#components"}>Components</a>
+            </li>
+            <li>
+              <a href={"#hooks"}>Hooks</a>
+              <ul>
+                <li>useEcharts</li>
+              </ul>
+            </li>
+            <li>
+              <a href={"#props"}>Props</a>
+            </li>
+          </ul>
         </div>
 
         <div className={"react_echarts__docs__content"}>
@@ -64,7 +68,7 @@ export const Docs = {
             Import any of the exported elements and you'll be ready to go. A
             simple use case would look like this:
           </p>
-          <CodeBlock code={text.quickExample} />
+          <CodeBlock code={codeBlocks.quickExample} />
 
           <p>
             While some props have been provided to facilitate specific use cases
@@ -78,7 +82,7 @@ export const Docs = {
           </p>
 
           <p>The following examples are equivalent:</p>
-          <CodeBlock code={text.comparison} />
+          <CodeBlock code={codeBlocks.comparison} />
 
           <blockquote>
             <h4>The "option" prop</h4>
@@ -87,6 +91,10 @@ export const Docs = {
             <strong>using the generic {`<Chart />`} component</strong>, as the
             rest of exported charts usually apply some transformations over the
             option object.
+            <br />
+            <br />
+            In case it is passed down to the component, the rest of option-like
+            props will be ommited.
           </blockquote>
 
           <p>
@@ -95,7 +103,7 @@ export const Docs = {
 
           <h3 id={"components"}>Components</h3>
           <p>The library exports the following React components:</p>
-          <pre>{text.exportedComponents}</pre>
+          <pre>{codeBlocks.exportedComponents}</pre>
 
           <blockquote>
             <h4>
@@ -212,15 +220,17 @@ export const Docs = {
 
           <p>A simple use case would look like this:</p>
 
-          <CodeBlock code={text.useEchartsExample} />
+          <CodeBlock code={codeBlocks.useEchartsExample} />
 
-          <h2 id={"props"}>Props</h2>
+          <h3 id={"props"}>Props</h3>
           <p>
             The following props, grouped by category, are available for all
             components exported by the library.
           </p>
 
           <h3>Common</h3>
+
+          <p>Common props of the component</p>
 
           <table>
             <thead>
@@ -235,7 +245,7 @@ export const Docs = {
                   `style`,
                   <code>{`{Object}`}</code>,
                   "Styles applied to the container",
-                  "{}",
+                  <code>{"{}"}</code>,
                 ]}
               </TableRow>
 
@@ -244,7 +254,7 @@ export const Docs = {
                   `className`,
                   <code>{`{String}`}</code>,
                   "Classname of the container",
-                  "",
+                  <code>{`""`}</code>,
                 ]}
               </TableRow>
 
@@ -253,7 +263,7 @@ export const Docs = {
                   `height`,
                   <code>{`{Number} of {String}`}</code>,
                   "Height of the container",
-                  "100%",
+                  <code>{`100%`}</code>,
                 ]}
               </TableRow>
 
@@ -262,13 +272,16 @@ export const Docs = {
                   `width`,
                   <code>{`{Number} of {String}`}</code>,
                   "Width of the container",
-                  "100%",
+                  <code>{`100%`}</code>,
                 ]}
               </TableRow>
             </tbody>
           </table>
 
+          <CodeBlock code={codeBlocks.commonPropsExample} />
+
           <h3>State</h3>
+          <p>State-related props</p>
 
           <table>
             <thead>
@@ -306,6 +319,8 @@ export const Docs = {
               </TableRow>
             </tbody>
           </table>
+
+          <CodeBlock code={codeBlocks.statePropsExample} />
 
           <h3>Custom components</h3>
 
@@ -443,6 +458,323 @@ export const Docs = {
                   <code>{`{Function}`}</code>,
                   "Callback called on mount that returns the ref of the container",
                   <code>{`(containerRef) => null`}</code>,
+                ]}
+              </TableRow>
+            </tbody>
+          </table>
+
+          <h3>Events</h3>
+
+          <table>
+            <thead>
+              <th>Prop</th>
+              <th>Type</th>
+              <th>Description</th>
+              <th>Default</th>
+            </thead>
+            <tbody>
+              <TableRow>
+                {[
+                  `onMount`,
+                  <code>{`{Function}`}</code>,
+                  "Callback called on mount",
+                  <code>{`null`}</code>,
+                ]}
+              </TableRow>
+              <TableRow>
+                {[
+                  `onUpdate`,
+                  <code>{`{Function}`}</code>,
+                  `Callback called whenever the component is updated. Relates to "shouldUpdate"`,
+                  <code>{`null`}</code>,
+                ]}
+              </TableRow>
+              <TableRow>
+                {[
+                  `onUnmount`,
+                  <code>{`{Function}`}</code>,
+                  "Callback called on unmounted",
+                  <code>{`null`}</code>,
+                ]}
+              </TableRow>
+              <TableRow>
+                {[
+                  `onRendered`,
+                  <code>{`{Function}`}</code>,
+                  "Trigger when a frame rendered. Notice that the rendered event does not indicate that the animation finished",
+                  <code>{`null`}</code>,
+                ]}
+              </TableRow>
+              <TableRow>
+                {[
+                  `onFinished`,
+                  <code>{`{Function}`}</code>,
+                  "Triggered when render finished, that is, when animation",
+                  <code>{`null`}</code>,
+                ]}
+              </TableRow>
+              <TableRow>
+                {[
+                  `onClick`,
+                  <code>{`{Function}`}</code>,
+                  "Event of chart click",
+                  <code>{`null`}</code>,
+                ]}
+              </TableRow>
+              <TableRow>
+                {[
+                  `onDoubleClick`,
+                  <code>{`{Function}`}</code>,
+                  "Event of double chart click",
+                  <code>{`null`}</code>,
+                ]}
+              </TableRow>
+              <TableRow>
+                {[
+                  `onMouseDown`,
+                  <code>{`{Function}`}</code>,
+                  "Event of mouse down chart",
+                  <code>{`null`}</code>,
+                ]}
+              </TableRow>
+              <TableRow>
+                {[
+                  `onMouseMove`,
+                  <code>{`{Function}`}</code>,
+                  "Event of mouse move chart",
+                  <code>{`null`}</code>,
+                ]}
+              </TableRow>
+              <TableRow>
+                {[
+                  `onMouseUp`,
+                  <code>{`{Function}`}</code>,
+                  "Event of mouse up chart",
+                  <code>{`null`}</code>,
+                ]}
+              </TableRow>
+              <TableRow>
+                {[
+                  `onMouseOver`,
+                  <code>{`{Function}`}</code>,
+                  "Event of mouse over chart",
+                  <code>{`null`}</code>,
+                ]}
+              </TableRow>
+              <TableRow>
+                {[
+                  `onMouseOut`,
+                  <code>{`{Function}`}</code>,
+                  "Event of mouse out chart",
+                  <code>{`null`}</code>,
+                ]}
+              </TableRow>
+              <TableRow>
+                {[
+                  `onGlobalOut`,
+                  <code>{`{Function}`}</code>,
+                  "Event of global out chart",
+                  <code>{`null`}</code>,
+                ]}
+              </TableRow>
+              <TableRow>
+                {[
+                  `onContextMenu`,
+                  <code>{`{Function}`}</code>,
+                  "Event of context menu",
+                  <code>{`null`}</code>,
+                ]}
+              </TableRow>
+              <TableRow>
+                {[
+                  `onHighlight`,
+                  <code>{`{Function}`}</code>,
+                  "Event of data highlight.",
+                  <code>{`null`}</code>,
+                ]}
+              </TableRow>
+              <TableRow>
+                {[
+                  `onDownplay`,
+                  <code>{`{Function}`}</code>,
+                  "Event of data downplay.",
+                  <code>{`null`}</code>,
+                ]}
+              </TableRow>
+              <TableRow>
+                {[
+                  `onSelectChanged`,
+                  <code>{`{Function}`}</code>,
+                  "Event emitted when data selection is changed.",
+                  <code>{`null`}</code>,
+                ]}
+              </TableRow>
+              <TableRow>
+                {[
+                  `onLegendSelectChanged`,
+                  <code>{`{Function}`}</code>,
+                  "Event emitted after legend selecting state changes",
+                  <code>{`null`}</code>,
+                ]}
+              </TableRow>
+              <TableRow>
+                {[
+                  `onLegendSelected`,
+                  <code>{`{Function}`}</code>,
+                  "Event emitted after legend is selected.",
+                  <code>{`null`}</code>,
+                ]}
+              </TableRow>
+              <TableRow>
+                {[
+                  `onLegendUnselected`,
+                  <code>{`{Function}`}</code>,
+                  "Event emitted after unselecting legend.",
+                  <code>{`null`}</code>,
+                ]}
+              </TableRow>
+              <TableRow>
+                {[
+                  `onLegendInverseSelect`,
+                  <code>{`{Function}`}</code>,
+                  "Event emitted after all legends are selected.",
+                  <code>{`null`}</code>,
+                ]}
+              </TableRow>
+              <TableRow>
+                {[
+                  `onLegendInverseSelect`,
+                  <code>{`{Function}`}</code>,
+                  "Event emitted after inversing all legends.",
+                  <code>{`null`}</code>,
+                ]}
+              </TableRow>
+              <TableRow>
+                {[
+                  `onLegendScroll`,
+                  <code>{`{Function}`}</code>,
+                  "Event when trigger legend scroll.",
+                  <code>{`null`}</code>,
+                ]}
+              </TableRow>
+              <TableRow>
+                {[
+                  `onDataZoom`,
+                  <code>{`{Function}`}</code>,
+                  "Event emitted after zooming data area.",
+                  <code>{`null`}</code>,
+                ]}
+              </TableRow>
+              <TableRow>
+                {[
+                  `onDataRangeSelected`,
+                  <code>{`{Function}`}</code>,
+                  "Event emitted after range is changed in visualMap.",
+                  <code>{`null`}</code>,
+                ]}
+              </TableRow>
+              <TableRow>
+                {[
+                  `onTimelineChanged`,
+                  <code>{`{Function}`}</code>,
+                  "Event emitted after time point in timeline is changed.",
+                  <code>{`null`}</code>,
+                ]}
+              </TableRow>
+              <TableRow>
+                {[
+                  `onRestore`,
+                  <code>{`{Function}`}</code>,
+                  "Resets option event",
+                  <code>{`null`}</code>,
+                ]}
+              </TableRow>
+              <TableRow>
+                {[
+                  `onDataViewChanged`,
+                  <code>{`{Function}`}</code>,
+                  "Changing event of data view tool in toolbox",
+                  <code>{`null`}</code>,
+                ]}
+              </TableRow>
+              <TableRow>
+                {[
+                  `onMagicTypeChanged`,
+                  <code>{`{Function}`}</code>,
+                  "Switching event of magic type tool in toolbox",
+                  <code>{`null`}</code>,
+                ]}
+              </TableRow>
+              <TableRow>
+                {[
+                  `onGeoSelectChanged`,
+                  <code>{`{Function}`}</code>,
+                  "Event emitted after selecting state changes",
+                  <code>{`null`}</code>,
+                ]}
+              </TableRow>
+              <TableRow>
+                {[
+                  `onGeoUnselected`,
+                  <code>{`{Function}`}</code>,
+                  "Cancels selected event.",
+                  <code>{`null`}</code>,
+                ]}
+              </TableRow>
+              <TableRow>
+                {[
+                  `onAxisAreaSelected`,
+                  <code>{`{Function}`}</code>,
+                  "Selecting event of range of parallel axis.",
+                  <code>{`null`}</code>,
+                ]}
+              </TableRow>
+              <TableRow>
+                {[
+                  `onFocusNodeadJacency`,
+                  <code>{`{Function}`}</code>,
+                  "Adjacent nodes highlight event in graph.",
+                  <code>{`null`}</code>,
+                ]}
+              </TableRow>
+              <TableRow>
+                {[
+                  `onUnfocusNodeAdjacency`,
+                  <code>{`{Function}`}</code>,
+                  "Adjacent nodes reverse-highlight event in graph.",
+                  <code>{`null`}</code>,
+                ]}
+              </TableRow>
+              <TableRow>
+                {[
+                  `onBrush`,
+                  <code>{`{Function}`}</code>,
+                  "Event triggered after action brush dispatched.",
+                  <code>{`null`}</code>,
+                ]}
+              </TableRow>
+              <TableRow>
+                {[
+                  `onBrushEnd`,
+                  <code>{`{Function}`}</code>,
+                  "Event triggered after action brushEnd dispatched",
+                  <code>{`null`}</code>,
+                ]}
+              </TableRow>
+              <TableRow>
+                {[
+                  `onBrushSelected`,
+                  <code>{`{Function}`}</code>,
+                  "Event triggered after action brushEnd dispatched.",
+                  <code>{`null`}</code>,
+                ]}
+              </TableRow>
+              <TableRow>
+                {[
+                  `onGlobalCursorTaken`,
+                  <code>{`{Function}`}</code>,
+                  "Event triggered after action global cursor taken dispatched.",
+                  <code>{`null`}</code>,
                 ]}
               </TableRow>
             </tbody>

@@ -61,3 +61,11 @@ body {
     --page-padding: 20px var(--padding);
   }
 }
+
+
+@media (min-width: 1400px) {
+  :root {
+    --padding: 400px;
+    --page-padding: 20px var(--padding);
+  }
+}
