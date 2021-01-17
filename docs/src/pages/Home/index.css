@@ -5,6 +5,7 @@
   position: relative;
   place-content: center;
   gap: 40px;
+  overflow: auto;
 }
 
 .react_echarts__home__description > span {
@@ -20,15 +21,13 @@
   display: grid;
   width: 100%;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 60px repeat(2, minmax(320px, 1fr));
+  grid-template-rows: repeat(2, minmax(320px, 1fr)) 60px;
   gap: 20px;
 }
 
-.react_echarts__home__cards > a {
+.react_echarts__home__cards > #react_echarts__home__cards_link{
     grid-column: span 2;
     font-size: 22px;
-    background-color: rgb(235, 235, 235);
-    border-radius: var(--border-radius);
     font-weight: 500;
     display: flex;
     align-items: center;

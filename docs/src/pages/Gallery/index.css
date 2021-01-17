@@ -1,11 +1,10 @@
 .react_echarts__gallery {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  grid-auto-rows: 320px;
+  grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+  grid-auto-rows: 400px;
   overflow: auto;
-  height: 100%;
   padding: var(--page-padding);
-  gap: 20px;
+  gap: 12px;
 }
 
 .react_echarts__gallery_item {
@@ -18,7 +17,8 @@
   color: white;
   overflow: hidden;
   cursor: pointer !important;
-  transition: all 0.17s ease
+  transition: all 0.17s ease;
+  /* border: 1px solid var(--border-color); */
 }
 
 .react_echarts__gallery_item:hover {
@@ -34,7 +34,7 @@
   height: 100%;
   width: 100%;
   background-color: rgba(255, 255, 255, 0.2);
-  font-weight: bolder;
+  font-weight: bold;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -50,7 +50,6 @@
 
 .react_echarts__gallery_detail {
   overflow: auto;
-  height: 100%;
   padding: var(--page-padding);
   overflow: auto;
 }
@@ -59,5 +58,4 @@
   background-color: rgb(40, 44, 52) !important;
   border-radius: var(--border-radius);
   margin-bottom: 40px;
-  font-size: 13px;
 }

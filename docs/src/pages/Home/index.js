@@ -1,6 +1,11 @@
 import "./index.css";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import background from "../../../../public/img/logo.png";
+import * as samples from "../Gallery/collection";
+import { LiveProvider, LivePreview } from "react-live";
+import * as ReactEcharts from "@hcorta/react-echarts";
+
+const scope = { ...ReactEcharts, Math };
 
 export const Home = {
   label: "Home",
@@ -8,6 +13,27 @@ export const Home = {
   order: 0,
   exact: true,
   component: (props) => {
+    const galleryItems = [];
+
+    for (let sample in samples) {
+      if (galleryItems.length === 4) break;
+      const { code, label, subLabel, style, id } = samples[sample];
+      const path = "/gallery/" + id;
+
+      galleryItems.push(
+        <Link
+          to={path}
+          id={id}
+          className={"react_echarts__gallery_item"}
+          style={style}
+        >
+          <LiveProvider code={code} scope={scope}>
+            <LivePreview className={"item_preview"} />
+          </LiveProvider>
+        </Link>
+      );
+    }
+
     return (
       <div className={"react_echarts__home"}>
         <div className={"react_echarts__home__description"}>
@@ -34,7 +60,7 @@ export const Home = {
           <p>
             react-echarts is an abstraction library built with React on top of
             ECharts. It exposes a set of components for developers that can be
-            combined to set up amazing charts in their web pages.
+            combined to set up amazing charts in their applications.
           </p>
 
           <p>Main principles of React ECharts are:</p>
@@ -57,11 +83,10 @@ export const Home = {
           </ol>
         </div>
         <div className={"react_echarts__home__cards"}>
-          <NavLink to={"/gallery"}>Gallery</NavLink>
-          <div>1</div>
-          <div>2</div>
-          <div>3</div>
-          <div>4</div>
+          {galleryItems}
+          <NavLink to={"/gallery"} id={"react_echarts__home__cards_link"}>
+            <button style={{ width: "100%", height: "100%" }}>Gallery</button>
+          </NavLink>
         </div>
       </div>
     );

@@ -8,7 +8,7 @@ import * as ReactEcharts from "@hcorta/react-echarts";
 import { LiveProvider, LiveEditor, LiveError, LivePreview } from "react-live";
 import theme from "prism-react-renderer/themes/shadesOfPurple";
 
-const scope = { ...ReactEcharts };
+const scope = { ...ReactEcharts, Math };
 
 export const Examples = {
   label: "Gallery",
@@ -57,7 +57,7 @@ export const Examples = {
   },
 };
 
-function GalleryDetail({ label, code }) {
+function GalleryDetail({ label, code, style = {} }) {
   return (
     <div className={"react_echarts__gallery_detail"}>
       <h2 id={label}>{label}</h2>
@@ -68,6 +68,7 @@ function GalleryDetail({ label, code }) {
             marginBottom: 20,
             borderRadius: "var(--border-radius)",
             overflow: "hidden",
+            ...style,
           }}
         />
         <LiveEditor theme={theme} className={"item_code"} />
