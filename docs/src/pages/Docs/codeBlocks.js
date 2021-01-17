@@ -57,6 +57,12 @@ export const commonPropsExample = `<AreaChart
   className={"chart-example"}
   height={260}
   width={'50%'}
+  lazyUpdate={true}
+  notMerge={true}
+  silent={true}
+  theme={'your-theme'}
+  group={'your-group'}
+  renderer={'canvas'}
   {...rest}
 />`;
 
@@ -72,3 +78,14 @@ export const statePropsExample = `function StateProps() {
     />
   );
 }`;
+
+export const customComponentsExample = `<AreaChart
+  loadingComponent={<YourCustomLoading />}
+  skeletonProps={{ style: { backgroundColor: 'green' }}}
+  {...rest}
+/>`;
+
+export const eventsPropsExample = `<AreaChart
+  onClick={params => console.log(params)}
+  {...rest}
+/>`;

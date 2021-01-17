@@ -41,11 +41,24 @@ export const Docs = {
             <li>
               <a href={"#hooks"}>Hooks</a>
               <ul>
-                <li>useEcharts</li>
+                <li>
+                  <a href={"#hooks__useEcharts"}>useEcharts</a>
+                </li>
               </ul>
             </li>
             <li>
               <a href={"#props"}>Props</a>
+              <ul>
+                <li>
+                  <a href={"#props__common"}>Common</a>
+                </li>
+                <li>
+                  <a href={"#props__state"}>State</a>
+                </li>
+                <li>
+                  <a href={"#props__events"}>Events</a>
+                </li>
+              </ul>
             </li>
           </ul>
         </div>
@@ -62,14 +75,12 @@ export const Docs = {
             , all you need to do is install the npm package:
           </p>
           <pre>yarn add @hcorta/react-echarts</pre>
-
           <h2 id={"usage"}>Usage</h2>
           <p>
             Import any of the exported elements and you'll be ready to go. A
             simple use case would look like this:
           </p>
           <CodeBlock code={codeBlocks.quickExample} />
-
           <p>
             While some props have been provided to facilitate specific use cases
             (single series mostly), most of them follow the {""}
@@ -80,10 +91,8 @@ export const Docs = {
             you may use any of the keys of this option object as props in your
             component.
           </p>
-
           <p>The following examples are equivalent:</p>
           <CodeBlock code={codeBlocks.comparison} />
-
           <blockquote>
             <h4>The "option" prop</h4>
             The option prop allows you to pass an ECharts option object directly
@@ -96,15 +105,12 @@ export const Docs = {
             In case it is passed down to the component, the rest of option-like
             props will be ommited.
           </blockquote>
-
           <p>
             For more examples, check out the <a href={"/gallery"}>gallery</a>
           </p>
-
           <h3 id={"components"}>Components</h3>
           <p>The library exports the following React components:</p>
           <pre>{codeBlocks.exportedComponents}</pre>
-
           <blockquote>
             <h4>
               Difference between <code>{"<Chart />"}</code> and the rest of
@@ -112,11 +118,11 @@ export const Docs = {
             </h4>
 
             <p>
-              As explained before, the <code>{`<Chart />`}</code> component does
-              not apply any conversion to the option object, while the rest of
-              exported components do (e.g: it injects the type in the series
-              object). Consider it a generic component. It is recommended to be
-              used for the following cases:
+              The <code>{`<Chart />`}</code> component does not apply any
+              conversion to the option object, while the rest of exported
+              components do (e.g: it injects the type in the series object).
+              Consider it a generic component. It is recommended to be used for
+              the following cases:
             </p>
 
             <ul>
@@ -130,21 +136,20 @@ export const Docs = {
               </li>
             </ul>
           </blockquote>
-
           <h3 id={"hooks"}>Hooks</h3>
-
-          <h4>
-            <li>
-              <code>useEcharts</code>
-            </li>
-          </h4>
-
+          <p>
+            <code>
+              <strong>react-echarts</strong>
+            </code>
+            provide a set of useful hooks to facilitate the interaction with the
+            ECharts core library.
+          </p>
+          <h4 id={"hooks__useEcharts"}>useEcharts</h4>
           <p>
             It exposes those methods provided by the ECharts core library. It
-            comes handful when you need, for example, to connect charts or
+            comes handy when you need, for example, to connect charts or
             register a new theme.
           </p>
-
           <table>
             <thead>
               <th>Method</th>
@@ -217,21 +222,15 @@ export const Docs = {
               </TableRow>
             </tbody>
           </table>
-
           <p>A simple use case would look like this:</p>
-
           <CodeBlock code={codeBlocks.useEchartsExample} />
-
           <h3 id={"props"}>Props</h3>
           <p>
-            The following props, grouped by category, are available for all
-            components exported by the library.
+            The following props are available for all components exported by the
+            library.
           </p>
-
-          <h3>Common</h3>
-
+          <h3 id={"props__common"}>Common</h3>
           <p>Common props of the component</p>
-
           <table>
             <thead>
               <th>Prop</th>
@@ -275,111 +274,7 @@ export const Docs = {
                   <code>{`100%`}</code>,
                 ]}
               </TableRow>
-            </tbody>
-          </table>
 
-          <CodeBlock code={codeBlocks.commonPropsExample} />
-
-          <h3>State</h3>
-          <p>State-related props</p>
-
-          <table>
-            <thead>
-              <th>Prop</th>
-              <th>Type</th>
-              <th>Description</th>
-              <th>Default</th>
-            </thead>
-            <tbody>
-              <TableRow>
-                {[
-                  `shouldUpdate`,
-                  <code>{`{Function}`}</code>,
-                  " Callback to control whether the component should update or not.",
-                  <code>{`() => true`}</code>,
-                ]}
-              </TableRow>
-
-              <TableRow>
-                {[
-                  `isLoading`,
-                  <code>{`{Boolean}`}</code>,
-                  "Whether the component is loading. When is set to true, the loading component is shown.",
-                  <code>{`false`}</code>,
-                ]}
-              </TableRow>
-
-              <TableRow>
-                {[
-                  `isMounting`,
-                  <code>{`{Boolean}`}</code>,
-                  "Whether the component is mounting. When is set to true, the skeleton component is shown.",
-                  <code>{`false`}</code>,
-                ]}
-              </TableRow>
-            </tbody>
-          </table>
-
-          <CodeBlock code={codeBlocks.statePropsExample} />
-
-          <h3>Custom components</h3>
-
-          <table>
-            <thead>
-              <th>Prop</th>
-              <th>Type</th>
-              <th>Description</th>
-              <th>Default</th>
-            </thead>
-            <tbody>
-              <TableRow>
-                {[
-                  `loadingComponent`,
-                  <code>{`{Component}`}</code>,
-                  " Custom loading component",
-                  <code>{`<Loading />`}</code>,
-                ]}
-              </TableRow>
-
-              <TableRow>
-                {[
-                  `loadingProps`,
-                  <code>{`{Object}`}</code>,
-                  "Props spreaded to the loading component, both default or custom if passed",
-                  <code>{`{}`}</code>,
-                ]}
-              </TableRow>
-
-              <TableRow>
-                {[
-                  `skeletonComponent`,
-                  <code>{`{Component}`}</code>,
-                  " Custom skeleton component",
-                  <code>{`<Skeleton />`}</code>,
-                ]}
-              </TableRow>
-
-              <TableRow>
-                {[
-                  `skeletonProps`,
-                  <code>{`{Object}`}</code>,
-                  "Props spreaded to the skeleton component, both default or custom if passed",
-                  <code>{`{}`}</code>,
-                ]}
-              </TableRow>
-            </tbody>
-          </table>
-
-          <h3>ECharts</h3>
-
-          <table>
-            <thead>
-              <th>Prop</th>
-              <th>Type</th>
-              <th>Description</th>
-              <th>Default</th>
-            </thead>
-            <tbody>
               <TableRow>
                 {[
                   `option`,
@@ -462,9 +357,84 @@ export const Docs = {
               </TableRow>
             </tbody>
           </table>
+          <CodeBlock code={codeBlocks.commonPropsExample} />
+          <h3 id={"props__state"}>State</h3>
+          <p>State-related props</p>
+          <table>
+            <thead>
+              <th>Prop</th>
+              <th>Type</th>
+              <th>Description</th>
+              <th>Default</th>
+            </thead>
+            <tbody>
+              <TableRow>
+                {[
+                  `shouldUpdate`,
+                  <code>{`{Function}`}</code>,
+                  " Callback to control whether the component should update or not.",
+                  <code>{`() => true`}</code>,
+                ]}
+              </TableRow>
 
-          <h3>Events</h3>
+              <TableRow>
+                {[
+                  `isLoading`,
+                  <code>{`{Boolean}`}</code>,
+                  "Whether the component is loading. When is set to true, the loading component is shown.",
+                  <code>{`false`}</code>,
+                ]}
+              </TableRow>
 
+              <TableRow>
+                {[
+                  `isMounting`,
+                  <code>{`{Boolean}`}</code>,
+                  "Whether the component is mounting. When is set to true, the skeleton component is shown.",
+                  <code>{`false`}</code>,
+                ]}
+              </TableRow>
+
+              <TableRow>
+                {[
+                  `loadingComponent`,
+                  <code>{`{Component}`}</code>,
+                  " Custom loading component",
+                  <code>{`<Loading />`}</code>,
+                ]}
+              </TableRow>
+
+              <TableRow>
+                {[
+                  `loadingProps`,
+                  <code>{`{Object}`}</code>,
+                  "Props spreaded to the loading component, both default or custom if passed",
+                  <code>{`{}`}</code>,
+                ]}
+              </TableRow>
+
+              <TableRow>
+                {[
+                  `skeletonComponent`,
+                  <code>{`{Component}`}</code>,
+                  " Custom skeleton component",
+                  <code>{`<Skeleton />`}</code>,
+                ]}
+              </TableRow>
+
+              <TableRow>
+                {[
+                  `skeletonProps`,
+                  <code>{`{Object}`}</code>,
+                  "Props spreaded to the skeleton component, both default or custom if passed",
+                  <code>{`{}`}</code>,
+                ]}
+              </TableRow>
+            </tbody>
+          </table>
+          <CodeBlock code={codeBlocks.statePropsExample} />
+          <h3 id={"props__events"}>Events</h3>
+          <p>Events-related props</p>
           <table>
             <thead>
               <th>Prop</th>
@@ -779,6 +749,28 @@ export const Docs = {
               </TableRow>
             </tbody>
           </table>
+          <CodeBlock code={codeBlocks.eventsPropsExample} />
+
+          <h2 id={"contributing"}>Contributing</h2>
+          <p>
+            No one’s perfect. If you’ve found any errors, want to suggest
+            enhancements, or expand on a topic, please feel free to open an
+            Issue or collaborate by PR.
+          </p>
+
+          <h2 id={"conduct"}>Code of Conduct</h2>
+
+          <p>
+            By participating in this project you agree to abide by its terms.
+          </p>
+
+          <h2 id={"license"}>License</h2>
+          <p>
+            <code>
+              <strong>react-echarts</strong>
+            </code>{" "}
+            is open source software licensed as MIT
+          </p>
         </div>
       </div>
     );

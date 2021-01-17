@@ -1,6 +1,6 @@
 .react_echarts__docs {
   padding: var(--page-padding);
-  grid-template-columns: 140px 1fr;
+  grid-template-columns: 160px 1fr;
   display: grid;
   overflow: auto;
   gap: 20px;
