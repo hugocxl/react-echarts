@@ -1,14 +1,12 @@
 "use strict";
 
-import "./index.css";
+import * as ReactEcharts from "@hcorta/react-echarts";
 import * as examples from "./collection";
 import { Switch, Route, Link } from "react-router-dom";
+import { CodeBlock } from "components";
+import { LiveProvider, LivePreview } from "react-live";
 
-import * as ReactEcharts from "@hcorta/react-echarts";
-import { LiveProvider, LiveEditor, LiveError, LivePreview } from "react-live";
-import theme from "prism-react-renderer/themes/shadesOfPurple";
-
-const scope = { ...ReactEcharts, Math };
+import "./index.css";
 
 export const Examples = {
   label: "Gallery",
@@ -35,7 +33,7 @@ export const Examples = {
           className={"react_echarts__gallery_item"}
           style={style}
         >
-          <LiveProvider code={code} scope={scope}>
+          <LiveProvider code={code} scope={{ ...ReactEcharts }}>
             <LivePreview className={"item_preview"} />
           </LiveProvider>
           <div className={"item_text"}>
@@ -47,32 +45,21 @@ export const Examples = {
     }
 
     return (
-      <>
-        <Switch>
-          {routerItems}
-          <div className="react_echarts__gallery">{galleryItems}</div>
-        </Switch>
-      </>
+      <Switch>
+        {routerItems}
+        <div className="react_echarts__gallery">{galleryItems}</div>
+      </Switch>
     );
   },
 };
 
-function GalleryDetail({ label, code, style = {} }) {
+function GalleryDetail({ label, ...rest }) {
   return (
     <div className={"react_echarts__gallery_detail"}>
-      <h2 id={label}>{label}</h2>
-      <LiveProvider code={code} scope={scope}>
-        <LivePreview
-          style={{
-            height: 300,
-            marginBottom: 20,
-            borderRadius: "var(--border-radius)",
-            overflow: "hidden",
-            ...style,
-          }}
-        />
-        <LiveEditor theme={theme} className={"item_code"} />
-      </LiveProvider>
+      <h2 id={label} style={{ margin: 0 }}>
+        {label}
+      </h2>
+      <CodeBlock preview={true} {...rest} />
     </div>
   );
 }

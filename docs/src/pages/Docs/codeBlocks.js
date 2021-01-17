@@ -74,16 +74,12 @@ export const statePropsExample = `function StateProps() {
       data={data}
       isLoading={isLoading}
       isMounting={isMounting}
+      loadingComponent={<YourCustomLoading />}
+      skeletonProps={{ style: { backgroundColor: 'green' }}}
       {...rest}
     />
   );
 }`;
-
-export const customComponentsExample = `<AreaChart
-  loadingComponent={<YourCustomLoading />}
-  skeletonProps={{ style: { backgroundColor: 'green' }}}
-  {...rest}
-/>`;
 
 export const eventsPropsExample = `<AreaChart
   onClick={params => console.log(params)}

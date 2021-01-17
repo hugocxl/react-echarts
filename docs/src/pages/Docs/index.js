@@ -61,6 +61,9 @@ export const Docs = {
               </ul>
             </li>
           </ul>
+          <a href={"#contributing"}>Contributing</a>
+          <a href={"#conduct"}>Code of Conduct</a>
+          <a href={"#license"}>License</a>
         </div>
 
         <div className={"react_echarts__docs__content"}>
