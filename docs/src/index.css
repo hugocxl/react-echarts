@@ -35,7 +35,7 @@ body {
   height: 100vh;
   width: 100%;
   display: grid;
-  grid-template-rows: var(--navbar-height) 1fr;
+  grid-template-rows: var(--navbar-height) 1fr var(--footer-height);
   overflow: hidden;
   background-color: var(--background-color);
   background-image: radial-gradient(
@@ -65,7 +65,7 @@ body {
 
 @media (min-width: 1400px) {
   :root {
-    --padding: 400px;
-    --page-padding: 20px var(--padding);
+    --padding: 260px;
+    --page-padding: 60px var(--padding);
   }
 }

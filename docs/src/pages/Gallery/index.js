@@ -56,7 +56,7 @@ export const Examples = {
 function GalleryDetail({ label, ...rest }) {
   return (
     <div className={"react_echarts__gallery_detail"}>
-      <h2 id={label} style={{ margin: 0 }}>
+      <h2 id={label} style={{ margin: 0, marginBottom: 20 }}>
         {label}
       </h2>
       <CodeBlock preview={true} {...rest} />

@@ -3,7 +3,6 @@
   grid-template-columns: 1fr 1fr;
   padding: var(--page-padding);
   position: relative;
-  place-content: center;
   gap: 40px;
   overflow: auto;
 }
@@ -21,7 +20,7 @@
   display: grid;
   width: 100%;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: repeat(2, minmax(320px, 1fr)) 60px;
+  grid-template-rows: repeat(2, minmax(200px, 1fr)) 60px;
   gap: 20px;
 }
 

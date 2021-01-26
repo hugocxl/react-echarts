@@ -20,6 +20,7 @@ function App() {
       <main className={"react_echarts__main"}>
         <Header />
         <Switch>{appPages}</Switch>
+        <Footer />
       </main>
     </Router>
   );

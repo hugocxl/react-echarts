@@ -2,7 +2,7 @@
   padding: var(--page-padding);
   grid-template-columns: 160px 1fr;
   display: grid;
-  overflow: auto;
+  overflow: hidden auto;
   gap: 20px;
   padding-bottom: 0;
   padding-top: 0;
@@ -14,7 +14,7 @@
 }
 
 .react_echarts__docs__content {
-  overflow: auto; 
+  overflow: hidden auto;
 }
 
 .react_echarts__docs__sidebar {

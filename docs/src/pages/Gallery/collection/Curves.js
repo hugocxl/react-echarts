@@ -14,7 +14,11 @@ export const Curves = {
       return (
         <AreaChart
           tooltip={{ show: true }}
-          xAxis={["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]}
+          yAxis={{ type: 'value' }}
+          xAxis={{
+            type: "Category",
+            data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+          }}
           series={[
             { data: [125, 464, 846, 253, 457, 556, 975] },
             { data: [24, 244, 233, 123, 312, 123, 123] },

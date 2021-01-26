@@ -28,7 +28,7 @@ export const Radar_example = {
     <RadarChart
       series={[
         {
-          name: "北京",
+          name: "Radar example",
           type: "radar",
           lineStyle: {
             width: 1,

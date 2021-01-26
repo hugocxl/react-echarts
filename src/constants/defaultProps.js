@@ -1,7 +1,7 @@
 export const defaultProps = {
   style: {},
   className: '',
-  height: '100%',
+  height: 280,
   width: '100%',
   notMerge: false,
   lazyUpdate: false,

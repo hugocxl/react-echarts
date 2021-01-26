@@ -4,17 +4,16 @@ import { getOptionFromProps } from 'utils'
 
 export function useOption ({
   series = [],
-  xAxis,
-  yAxis,
+  // xAxis,
+  // yAxis,
   data,
   type,
-  links,
+  // links,
   serieCustomization,
   stacked,
   ...rest
 }) {
   let finalSeries = series
-  let finalXaxis = xAxis
 
   // Single serie conversion
   if (data) {
@@ -35,30 +34,8 @@ export function useOption ({
     }))
   }
 
-  let finalYaxis = { type: 'value', ...yAxis }
-
-  if (xAxis) {
-    finalXaxis = {
-      type: 'category',
-      ...(type === 'line' && {
-        boundaryGap: false
-      })
-    }
-
-    if (Array.isArray(xAxis)) {
-      finalXaxis = {
-        ...finalXaxis,
-        data: xAxis
-      }
-    } else {
-      finalXaxis = { ...finalXaxis, ...xAxis }
-    }
-  }
-
   return getOptionFromProps({
     ...rest,
-    series: finalSeries,
-    xAxis: finalXaxis,
-    yAxis: finalYaxis
+    series: finalSeries
   })
 }

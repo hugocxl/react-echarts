@@ -86,30 +86,6 @@ export const Home = {
               modifications.
             </li>
           </ol>
-
-          <br />
-          <p
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            Made with ❤️ by
-            <a
-              href={"https://github.com/hcorta"}
-              style={{ marginRight: 20, marginLeft: 4 }}
-            >
-              <strong>Hugo Corta</strong>
-            </a>
-            <a href="https://www.buymeacoffee.com/hcorta" target="_blank">
-              <img
-                src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png"
-                alt="Buy Me A Coffee"
-                style={{ height: 30, width: 110 }}
-              />
-            </a>
-          </p>
         </div>
 
         <div className={"react_echarts__home__cards"}>
