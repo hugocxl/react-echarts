@@ -1,6 +1,0 @@
-.react_echarts__playground {
-  display: grid;
-  grid-template-rows: 1fr;
-  padding: var(--page-padding);
-  overflow: hidden;
-}
