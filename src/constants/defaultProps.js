@@ -10,6 +10,7 @@ export const defaultProps = {
   transition: null,
   theme: null,
   group: null,
+  renderer: 'svg',
   options: {},
   skeletonComponent: null,
   isMounting: false,

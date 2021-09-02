@@ -9,7 +9,7 @@
 [![ECharts Version](https://david-dm.org/hcorta/react-echarts/status.svg?style=flat-square&logo=appveyor)](https://david-dm.org/hcorta/react-echarts)
 [![NPM](https://img.shields.io/npm/dm/@hcorta/react-echarts.svg?style=flat-square&logo=appveyor)](https://www.npmjs.com/package/@hcorta/react-echarts)
 
-A React component for the **ECharts** library
+A React component for the **Apache ECharts** library
 
 </div>
 
@@ -38,16 +38,16 @@ yarn add @hcorta/react-echarts
 
 ## Introduction
 
-[ECharts](https://echarts.apache.org/en/index.html) is a free, powerful charting and visualization library offering intuitive, interactive, and highly customizable charts. It is written in pure **JavaScript** and based on **zrender**, a canvas library.
+[Apache ECharts](https://echarts.apache.org/en/index.html) is a free, powerful charting and visualization library offering intuitive, interactive, and highly customizable charts. It is written in pure **JavaScript** and based on **zrender**, a canvas library.
 
-**`react-echarts`** is an abstraction library built with [React](https://facebook.github.io/react/) on top of ECharts. Its main principles of are:
+**`react-echarts`** is an abstraction library built with [React](https://facebook.github.io/react/) on top of Apache ECharts. Its main principles of are:
 
 1. **Simplicty:** **`react-echarts`** makes it easy to generate ECharts components by wrapping the code required to interact with the core library.
 2. **Declarative**: components are purely presentational.
 
 ## Usage
 
-While some props have been provided to facilitate specific use cases (single series mostly), most of them follow the [ECharts option schema](https://echarts.apache.org/next/en/option.html#title), throught an option-key-like prop declaration.
+While some props have been provided to facilitate specific use cases (single series mostly), most of them follow the [Apache ECharts option schema](https://echarts.apache.org/next/en/option.html#title), throught an option-key-like prop declaration.
 
 - **Quick start example:** Check out the [live demo](https://codesandbox.io/s/react-echarts-simple-area-umnfw)
 
@@ -132,47 +132,47 @@ export default function App() {
 
 The following props, grouped by category, are available for all components exported by the library.
 
-### Common
+### Container
 
-| Prop              |          Type          | Description                                                                 | Default |
-| :---------------- | :--------------------: | --------------------------------------------------------------------------- | :-----: |
-| **`style`**       |       `{Object}`       | Styles object applied to the container                                      |  null   |
-| **`className`**   |       `{String}`       | Classname of the container                                                  |   ''    |
-| **`height`**      | `{Number} or {String}` | Height of the chart                                                         |   280   |
-| **`width`**       | `{Number} or {String}` | Width of the chart                                                          | '100%'  |
-| **`getInstance`** |      `{Function}`      | Callback called on mount that returns the ECharts instance of the component |  null   |
-| **`getRef`**      |      `{Function}`      | Get the div container ref after mount                                       |  null   |
+| Prop              |     Type     | Description                                                                 | Default |
+| :---------------- | :----------: | --------------------------------------------------------------------------- | :-----: |
+| **`style`**       |  `{Object}`  | Styles object applied to the container                                      |  null   |
+| **`className`**   |  `{String}`  | Classname of the container                                                  |   ''    |
+| **`getInstance`** | `{Function}` | Callback called on mount that returns the ECharts instance of the component |  null   |
+| **`getRef`**      | `{Function}` | Get the div container ref after mount                                       |  null   |
 
 ### State
 
-| Prop               |     Type     | Description                                                                                                          |   Default    |
-| :----------------- | :----------: | -------------------------------------------------------------------------------------------------------------------- | :----------: |
-| **`shouldUpdate`** | `{Function}` | Callback to control whether the component should update or not. Custom `shouldComponentUpdate` method.               | `() => true` |
-| **`isLoading`**    | `{Boolean}`  | Whether the component is loading. When is set to true, it will display the loading component.                        |    false     |
-| **`isMounting`**   | `{Boolean}`  | Whether the component is mounting. When is set to true, it will display the skeleton commponent instead of the chart |    false     |
-
-### Custom Components
-
-| Prop                    |     Type      | Description                                                                |    Default    |
-| :---------------------- | :-----------: | -------------------------------------------------------------------------- | :-----------: |
-| **`loadingComponent`**  | `{Component}` | Custom loading component                                                   | `<Loading/>`  |
-| **`loadingProps`**      |  `{Object}`   | Props spreaded to the loading component, both default or custom if passed  |      {}       |
-| **`skeletonComponent`** | `{Component}` | Custom skeleton component                                                  | `<Skeleton/>` |
-| **`skeletonProps`**     |  `{Object}`   | Props spreaded to the skeleton component, both default or custom if passed |      {}       |
+| Prop                        |     Type     | Description                                                                                            |   Default    |
+| :-------------------------- | :----------: | ------------------------------------------------------------------------------------------------------ | :----------: |
+| **`shouldComponentUpdate`** | `{Function}` | Callback to control whether the component should update or not. Custom `shouldComponentUpdate` method. | `() => true` |
 
 ### ECharts
 
 | Prop             |     Type      | Description                                                                                  | Default |
 | :--------------- | :-----------: | -------------------------------------------------------------------------------------------- | :-----: |
-| **`option`**     |  `{Object}`   | The ECharts option config, can see https://echarts.apache.org/option.html#title.             |  null   |
+| **`option`**     |  `{Object}`   | The EslCharts option config, can see https://echarts.apache.org/option.html#title.           |  null   |
 | **`notMerge`**   |  `{Boolean}`  | Whether or not to merge with previous option                                                 |  false  |
 | **`lazyUpdate`** | `{Component}` | Whether or not to update chart immediately;                                                  |  false  |
 | **`silent`**     | `{Component}` | states whether not to prevent triggering events when calling setOption                       |  false  |
 | **`theme`**      | `{Component}` | Theme to be applied. This can be a configuring object of a theme, or a theme name registered |  false  |
 | **`group`**      | `{Component}` | Group name to be used in chart connection.                                                   |  false  |
-| **`renderer`**   | `{Component}` | Supports 'canvas' or 'svg'                                                                   |  false  |
+| **`renderer`**   | `{Component}` | Supports 'canvas' or 'svg'                                                                   |   svg   |
 
-- Special note on `option`: In case it is passed down to the component, the rest of option-like props will be ommited (e.g: xAxis prop). This prop only works on the `<Chart/>` component.
+- Special note on `option`: In case it is passed down to the component, the rest of option-like props will be ommited (e.g: xAxis prop).
+
+### Option
+
+| Prop         |    Type    | Description                                             | Default |
+| :----------- | :--------: | ------------------------------------------------------- | :-----: |
+| **`title`**  | `{Object}` | Title component, including main title and subtitle.     |  null   |
+| **`legend`** | `{Object}` | Legend component.                                       |  null   |
+| **`grid`**   | `{Object}` | Drawing grid in rectangular coordinate.                 |  null   |
+| **`xAxis`**  | `{Object}` | The x axis in cartesian(rectangular) coordinate.        |  null   |
+| **`yAxis`**  | `{Object}` | The y axis in cartesian(rectangular) coordinate.        |  null   |
+| **`polar`**  | `{Object}` | Polar coordinate can be used in scatter and line chart. |  null   |
+
+- Special note on `option`: In case it is passed down to the component, the rest of option-like props will be ommited (e.g: xAxis prop).
 
 ### Events
 

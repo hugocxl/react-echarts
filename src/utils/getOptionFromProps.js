@@ -2,12 +2,7 @@
 
 import { optionPropsKeys } from 'constants'
 
-export function getOptionFromProps ({
-  option,
-  data = null,
-  type = null,
-  ...rest
-}) {
+export function getOptionFromProps ({ option, ...rest }) {
   const propsOption = {}
 
   optionPropsKeys.forEach((key) => {

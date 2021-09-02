@@ -10,7 +10,7 @@ import {
   registerTheme,
   registerAction,
   registerCoordinateSystem
-} from 'echarts/lib/echarts'
+} from 'echarts'
 
 export function useEcharts () {
   return {
