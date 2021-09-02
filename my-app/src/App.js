@@ -2,62 +2,122 @@ import logo from "./logo.svg";
 import "./App.css";
 import { Chart } from "@hcorta/react-echarts";
 
+const option = {
+  xAxis: {
+    type: "category",
+    boundaryGap: false,
+  },
+  yAxis: {
+    type: "value",
+    boundaryGap: [0, "30%"],
+  },
+  visualMap: {
+    type: "piecewise",
+    show: false,
+    dimension: 0,
+    seriesIndex: 0,
+    pieces: [
+      {
+        gt: 1,
+        lt: 3,
+        color: "rgba(0, 0, 180, 0.4)",
+      },
+      {
+        gt: 5,
+        lt: 7,
+        color: "rgba(0, 0, 180, 0.4)",
+      },
+    ],
+  },
+  series: [
+    {
+      type: "line",
+      smooth: 0.6,
+      symbol: "none",
+      lineStyle: {
+        color: "#5470C6",
+        width: 5,
+      },
+      markLine: {
+        symbol: ["none", "none"],
+        label: { show: false },
+        data: [{ xAxis: 1 }, { xAxis: 3 }, { xAxis: 5 }, { xAxis: 7 }],
+      },
+      areaStyle: {},
+      data: [
+        ["2019-10-10", 200],
+        ["2019-10-11", 560],
+        ["2019-10-12", 750],
+        ["2019-10-13", 580],
+        ["2019-10-14", 250],
+        ["2019-10-15", 300],
+        ["2019-10-16", 450],
+        ["2019-10-17", 300],
+        ["2019-10-18", 100],
+      ],
+    },
+  ],
+};
+
 function App() {
   return (
     <div className="App">
       <Chart
-        option={{
-          animation: false,
-          grid: {
-            top: 40,
-            left: 50,
-            right: 40,
-            bottom: 50,
+        className={"hugo"}
+        onMount={(props) => console.log("Mounted!", props)}
+        getInstance={(props) => console.log("Instance!", props)}
+        getRef={(props) => console.log("Ref!", props)}
+        xAxis={{
+          type: "category",
+          boundaryGap: false,
+        }}
+        yAxis={{
+          type: "value",
+          boundaryGap: [0, "30%"],
+        }}
+        series={[
+          {
+            type: "line",
+            smooth: 0.6,
+            symbol: "none",
+            lineStyle: {
+              color: "#5470C6",
+              width: 5,
+            },
+            markLine: {
+              symbol: ["none", "none"],
+              label: { show: false },
+              data: [{ xAxis: 1 }, { xAxis: 3 }, { xAxis: 5 }, { xAxis: 7 }],
+            },
+            areaStyle: {},
+            data: [
+              ["2019-10-10", 200],
+              ["2019-10-11", 560],
+              ["2019-10-12", 750],
+              ["2019-10-13", 580],
+              ["2019-10-14", 250],
+              ["2019-10-15", 300],
+              ["2019-10-16", 450],
+              ["2019-10-17", 300],
+              ["2019-10-18", 100],
+            ],
           },
-          xAxis: {
-            name: "x",
-            minorTick: {
-              show: true,
-            },
-            minorSplitLine: {
-              show: true,
-            },
-          },
-          yAxis: {
-            name: "y",
-            min: -100,
-            max: 100,
-            minorTick: {
-              show: true,
-            },
-            minorSplitLine: {
-              show: true,
-            },
-          },
-          dataZoom: [
+        ]}
+        visualMap={{
+          type: "piecewise",
+          show: false,
+          dimension: 0,
+          seriesIndex: 0,
+          pieces: [
             {
-              show: true,
-              type: "inside",
-              filterMode: "none",
-              xAxisIndex: [0],
-              startValue: -20,
-              endValue: 20,
+              gt: 1,
+              lt: 3,
+              color: "rgba(0, 0, 180, 0.4)",
             },
             {
-              show: true,
-              type: "inside",
-              filterMode: "none",
-              yAxisIndex: [0],
-              startValue: -20,
-              endValue: 20,
-            },
-          ],
-          series: [
-            {
-              type: "line",
-              showSymbol: false,
-              clip: true,
-              data: generateData(),
+              gt: 5,
+              lt: 7,
+              color: "rgba(0, 0, 180, 0.4)",
             },
           ],
         }}
@@ -67,16 +127,3 @@ function App() {
 }
 
 export default App;
-
-function func(x) {
-  x /= 10;
-  return Math.sin(x) * Math.cos(x * 2 + 1) * Math.sin(x * 3 + 2) * 50;
-}
-
-function generateData() {
-  let data = [];
-  for (let i = -200; i <= 200; i += 0.1) {
-    data.push([i, func(i)]);
-  }
-  return data;
-}

@@ -1,5 +1,3 @@
-'use strict'
-
 import { optionPropsKeys } from 'constants'
 
 export function getOptionFromProps ({ option, ...rest }) {

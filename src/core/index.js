@@ -1,14 +1,17 @@
 'use strict'
 
 // Dependencies
-import React, { Component, createRef, useMemo } from 'react'
 import * as echarts from 'echarts'
+import React, { Component, createRef } from 'react'
 
 // Utils
 import { isEqual, getOptionFromProps } from 'utils'
 
 // Constants
 import { defaultProps } from 'constants'
+
+// Styles
+import '../styles/index.css'
 
 class ReactEchartsCore extends Component {
   constructor (props) {
@@ -24,23 +27,21 @@ class ReactEchartsCore extends Component {
   }
 
   componentDidMount () {
-    const { onMount, getInstance, getRef } = this.props
-
     this.setEchartsInstance()
     this.setResizeObserver()
     this.setEchartsEvents()
     this.renderEchart()
 
-    if (onMount) {
-      onMount(this)
+    if (this.props.onMount) {
+      this.props.onMount(this)
     }
 
-    if (getInstance) {
-      getInstance(this.echartsInstance)
+    if (this.props.getRef) {
+      this.props.getRef(this.containerRef.current)
     }
 
-    if (getRef) {
-      getRef(this.containerRef.current)
+    if (this.props.getInstance) {
+      this.props.getInstance(this.echartsInstance)
     }
   }
 
@@ -50,7 +51,7 @@ class ReactEchartsCore extends Component {
       !isEqual(prevProps.notMerge, this.props.notMerge) ||
       !isEqual(prevProps.option, this.props.option) ||
       !isEqual(prevProps.theme, this.props.theme) ||
-      !isEqual(prevProps.options, this.props.options) ||
+      !isEqual(prevProps.option, this.props.option) ||
       !isEqual(prevProps.onEvents, this.props.onEvents)
     ) {
       return this.renderEchart()
@@ -84,16 +85,14 @@ class ReactEchartsCore extends Component {
   }
 
   setEchartsInstance = () => {
-    const { theme, group, renderer } = this.props
-
     this.echartsInstance = this.echartsLib.init(this.containerRef.current,
-      theme,
+      this.props.theme,
       {
-        renderer
+        renderer: this.props.renderer
       })
 
-    if (group) {
-      this.echartsInstance.group = group
+    if (this.props.group) {
+      this.echartsInstance.group = this.props.group
     }
   }
 
@@ -140,7 +139,7 @@ class ReactEchartsCore extends Component {
       this.props.onFocusNodeadJacency)
     this.echartsInstance.on('unfocusnodeadjacency',
       this.props.onUnfocusNodeAdjacency)
-    this.echartsInstance.on('brush', this.props.onBrush)
+    this.echartsInstance.on('brush', this.props.onBrus2h)
     this.echartsInstance.on('brushend', this.props.onBrushEnd)
     this.echartsInstance.on('brushselected', this.props.onBrushSelected)
     this.echartsInstance.on('globalcursortaken', this.props.onGlobalCursorTaken)
@@ -160,14 +159,12 @@ class ReactEchartsCore extends Component {
   }
 
   render () {
-    const { style, className, id, height, width } = this.props
-
     return (
       <div
         ref={this.containerRef}
-        style={{ height, width, ...style }}
-        id={id}
-        className={'react-echarts' + ` ${className}`}
+        style={this.props.style}
+        id={this.props.id}
+        className={'react-echarts' + ` ${this.props.className}`}
       />
     )
   }
