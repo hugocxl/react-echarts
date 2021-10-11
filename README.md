@@ -52,11 +52,11 @@ While some props have been provided to facilitate specific use cases (single ser
 - **Quick start example:** Check out the [live demo](https://codesandbox.io/s/react-echarts-simple-area-umnfw)
 
 ```js
-import { AreaChart } from '@hcorta/react-echarts'
+import { Chart } from '@hcorta/react-echarts'
 
 function App() {
   return (
-    <AreaChart
+    <Chart
       smooth
       data={[125, 464, 846, 253, 457, 556, 975]}
       xAxis={['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']}
@@ -64,8 +64,6 @@ function App() {
   )
 }
 ```
-
-For other examples and components, check out the [documentation](hcorta.github.io/react-echarts/).
 
 ## Hooks
 
@@ -104,7 +102,7 @@ A simple use case would look like this:
 
 ```js
 import { useEffect } from 'react'
-import { useEcharts, AreaChart } from '@hcorta/react-echarts'
+import { useEcharts, Chart } from '@hcorta/react-echarts'
 
 export default function App() {
   const { connect, registerTheme } = useEcharts()
@@ -121,8 +119,8 @@ export default function App() {
 
   return (
     <div className="App">
-      <AreaChart {...commonChartProps} theme={'andromeda'} data={[2, 5, 8]} />
-      <AreaChart {...commonChartProps} data={[5, 9, 1]} />
+      <Chart {...commonChartProps} theme={'andromeda'} data={[2, 5, 8]} />
+      <Chart {...commonChartProps} data={[5, 9, 1]} />
     </div>
   )
 }

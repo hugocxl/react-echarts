@@ -1,7 +1,7 @@
 'use strict'
 
 // Dependencies
-const pJson = require('../package.json')
+const packageJson = require('../package.json')
 const webpack = require('webpack')
 const path = require('path')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
@@ -17,7 +17,7 @@ module.exports = {
   output: {
     path: libPath,
     filename: 'index.js',
-    library: pJson.name,
+    library: packageJson.name,
     libraryTarget: 'umd',
     umdNamedDefine: true
   },
@@ -34,8 +34,7 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new webpack.ProvidePlugin({
-      React: 'react',
-      PropTypes: 'prop-types'
+      React: 'react'
     })
   ],
   module: {

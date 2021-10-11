@@ -1,52 +1,9 @@
 {
-  "name": "@hcorta/react-echarts",
-  "productName": "react-echarts",
-  "version": "0.9.0",
-  "description": "A simple and declarative set of React components built on top of ECharts",
-  "license": "MIT",
-  "private": false,
   "author": "hcorta (http://github.com/hcorta)",
-  "homepage": "https://hcorta.github.io/react-echarts/",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/hcorta/react-echarts"
-  },
   "bugs": {
     "url": "https://hcorta.github.io/react-echarts/issues"
   },
-  "keywords": [
-    "react",
-    "component",
-    "echarts-react",
-    "echarts",
-    "react-echarts",
-    "chart",
-    "charts",
-    "graph",
-    "react-component"
-  ],
-  "main": "lib/index.js",
-  "module": "lib/index.js",
-  "source": "src/index.js",
-  "engines": {
-    "node": ">=10"
-  },
-  "scripts": {
-    "start": "rm -rf lib  && webpack --progress --stats=minimal --config webpack/webpack.dev.js",
-    "build": "rm -rf lib && webpack --progress --stats=minimal --config webpack/webpack.prod.js",
-    "test": "yarn build",
-    "lint": "eslint . --cache --color",
-    "clean": "rm -rf dist && rm -rf node_modules",
-    "update:dependencies": "yarn upgrade-interactive",
-    "update:release": "yarn version --allow-same-version=false --git-tag-version=true --new-version $v",
-    "deploy:stage": "bash deploy.sh deploy -e stage -b develop -n stage",
-    "postversion": "git push && git push --tags"
-  },
-  "dependencies": {
-    "echarts": "^5.2.0",
-    "echarts-gl": "^2.0.8",
-    "react": "^17.0.2"
-  },
+  "description": "A simple and declarative set of React components built on top of ECharts",
   "devDependencies": {
     "@babel/cli": "^7.14.8",
     "@babel/core": "^7.15.0",
@@ -59,6 +16,8 @@
     "clean-webpack-plugin": "^3.0.0",
     "copy-webpack-plugin": "^7.0.0",
     "css-loader": "^6.2.0",
+    "echarts": "^5.2.0",
+    "echarts-gl": "^2.0.8",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^6.15.0",
     "eslint-config-standard": "^16.0.2",
@@ -69,6 +28,7 @@
     "eslint-plugin-react": "^7.25.1",
     "eslint-plugin-standard": "^5.0.0",
     "prettier": "^2.3.2",
+    "react": "^17.0.2",
     "style-loader": "^3.2.1",
     "terser-webpack-plugin": "^5.2.0",
     "uglifyjs-webpack-plugin": "^2.2.0",
@@ -77,9 +37,46 @@
     "webpack-dev-server": "^3.11.0",
     "webpack-merge": "^5.8.0"
   },
+  "engines": {
+    "node": ">=10"
+  },
+  "homepage": "https://hcorta.github.io/react-echarts/",
+  "keywords": [
+    "react",
+    "component",
+    "echarts-react",
+    "echarts",
+    "react-echarts",
+    "chart",
+    "charts",
+    "graph",
+    "react-component"
+  ],
+  "license": "MIT",
+  "main": "lib/index.js",
+  "module": "lib/index.js",
+  "name": "@hcorta/react-echarts",
   "peerDependencies": {
-    "echarts": "^5.0.0",
-    "echarts-gl": "^2.0.0",
-    "react": "^>=15.0.0"
-  }
+    "echarts": "^3.0.0 || ^4.0.0 || ^5.0.0",
+    "react": "^15.0.0 || >=16.0.0"
+  },
+  "private": false,
+  "productName": "react-echarts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hcorta/react-echarts"
+  },
+  "scripts": {
+    "build": "rm -rf lib && NODE_ENV=production webpack --progress --stats=minimal --config webpack/webpack.prod.js",
+    "clean": "rm -rf dist && rm -rf node_modules",
+    "deploy:stage": "bash deploy.sh deploy -e stage -b develop -n stage",
+    "lint": "eslint . --cache --color",
+    "postversion": "git push && git push --tags",
+    "start": "rm -rf lib  && webpack --progress --stats=minimal --config webpack/webpack.dev.js",
+    "test": "yarn build",
+    "update:dependencies": "yarn upgrade-interactive",
+    "update:release": "yarn version --allow-same-version=false --git-tag-version=true --new-version $v"
+  },
+  "source": "src/index.js",
+  "version": "1.0.0"
 }

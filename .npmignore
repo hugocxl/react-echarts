@@ -6,3 +6,6 @@ webpack
 .eslintrc
 .gitignore
 babel.config.js
+example
+yarn.lock
+README.md
