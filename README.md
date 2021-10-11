@@ -36,6 +36,8 @@ In order to use **`react-echarts`**, all you need to do is install the npm packa
 yarn add @hcorta/react-echarts
 ```
 
+`echarts` is the peerDependence of `echarts-for-react`, you can install echarts with your own version.
+
 ## Introduction
 
 [Apache ECharts](https://echarts.apache.org/en/index.html) is a free, powerful charting and visualization library offering intuitive, interactive, and highly customizable charts. It is written in pure **JavaScript** and based on **zrender**, a canvas library.
