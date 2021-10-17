@@ -16,7 +16,7 @@ A React component for the **ECharts** library
 
 ## Table of Contents 📚
 
-- [Installation](#installation)
+- [Installation](#Installation)
 - [Introducction](#Introducction)
 - [Usage](#Usage)
 - [Props](#Props)
@@ -24,7 +24,7 @@ A React component for the **ECharts** library
 - [Code of Conduct](#code-of-conduct)
 - [License](#License)
 
-## Installation
+## ⚡️ Installation
 
 In order to use **`react-echarts`**, all you need to do is install the npm package:
 
@@ -32,9 +32,9 @@ In order to use **`react-echarts`**, all you need to do is install the npm packa
 yarn add @hcorta/react-echarts
 ```
 
-> `echarts` and `react` are **peerDependencies** of `react-echarts`, you may **install your own versions**.
+> **`echarts`** and **`react`** are **peerDependencies** of **`react-echarts`**, you may **install your own versions**.
 
-## Introduction
+## 💡 Introduction
 
 [Apache ECharts](https://echarts.apache.org/en/index.html) is a free, powerful charting and visualization library offering intuitive, interactive, and highly customizable charts. It is written in pure **JavaScript** and based on **zrender**, a canvas library.
 
@@ -43,7 +43,7 @@ yarn add @hcorta/react-echarts
 1. **Simplicty:** **`react-echarts`** makes it easy to generate ECharts components by wrapping the code required to interact with the core library.
 2. **Declarative**: components are purely presentational.
 
-## Usage
+## ⚡️ Usage
 
 To start using `react-echarts`, you just need to import the **`<Chart />`** component from the root folder. Check the [props](#Props) section out for more info:
 
@@ -59,8 +59,7 @@ function App() {
       getInstance={(instance) => console.log('Instance!', instance)}
       getRef={(ref) => console.log('Ref!', ref)}
       xAxis={{
-        type: 'category',
-        boundaryGap: false
+        type: 'category'
       }}
       yAxis={{
         type: 'value',
@@ -69,15 +68,7 @@ function App() {
       series={[
         {
           type: 'line',
-          smooth: 0.6,
-          symbol: 'none',
-          lineStyle: {
-            color: '#5470C6',
-            width: 3
-          },
           data: [
-            ['2019-10-10', 200],
-            ['2019-10-11', 560],
             ['2019-10-12', 750],
             ['2019-10-17', 300],
             ['2019-10-18', 100]
@@ -99,12 +90,7 @@ import { Chart } from '@hcorta/react-echarts'
 function App() {
   return (
     <Chart
-      group={'echarts__example'}
-      className={'my__example'}
       option={{
-        tooltip: {
-          trigger: 'axis'
-        },
         legend: {
           data: ['Email', 'Union Ads', 'Video Ads', 'Direct', 'Search Engine']
         },
@@ -136,7 +122,7 @@ function App() {
 }
 ```
 
-## Props
+## 🎓 Props
 
 While some props have been provided to facilitate specific use cases, most of them follow the [Apache ECharts option schema](https://echarts.apache.org/next/en/option.html). The following props, grouped by category, are available:
 
@@ -251,14 +237,14 @@ While some props have been provided to facilitate specific use cases, most of th
 | **`onBrushSelected`**        | `{Function}` | Notice what are selected.                                                                                   |  null   |
 | **`onGlobalCursorTaken`**    | `{Function}` | -                                                                                                           |  null   |
 
-## Contributing
+## 🖇 Contributing
 
 No one’s perfect. If you’ve found any errors, want to suggest enhancements, or expand on a topic, please feel free to open an Issue or collaborate by PR.
 
-## Code of Conduct
+## 📐 Code of Conduct
 
 [Contributor Code of Conduct](public/docs/CODE_OF_CONDUCT.md). By participating in this project you agree to abide by its terms.
 
-## License
+## 📝 License
 
 **react-echarts** is open source software licensed as MIT ©[hcorta](https://github.com/hcorta).
