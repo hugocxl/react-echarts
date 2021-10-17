@@ -2,8 +2,8 @@
 
 // Dependencies
 const packageJson = require('../package.json')
-const webpack = require('webpack')
 const path = require('path')
+const webpack = require('webpack')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 // Paths setup
@@ -25,11 +25,13 @@ module.exports = {
     modules: [srcPath, 'node_modules'],
     extensions: ['.js', '.json', '.jsx'],
     alias: {
-      constants$: path.resolve(__dirname, '../src/constants'),
-      core$: path.resolve(__dirname, '../src/core'),
-      utils$: path.resolve(__dirname, '../src/utils'),
-      components$: path.resolve(__dirname, '../src/components')
+      react: path.resolve('./node_modules/react'),
+      echarts: path.resolve('./node_modules/echarts')
     }
+  },
+  externals: {
+    echarts: 'echarts',
+    react: 'react'
   },
   plugins: [
     new CleanWebpackPlugin(),
@@ -44,7 +46,7 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            cacheDirectory: false
+            cacheDirectory: true
           }
         }
       },

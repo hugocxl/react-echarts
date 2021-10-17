@@ -2,18 +2,12 @@
 
 // Dependencies
 import * as echarts from 'echarts'
-import React, { Component, createRef } from 'react'
+import { Component, createRef } from 'react'
 
 // Utils
-import { isEqual, getOptionFromProps } from 'utils'
+import { isEqual } from 'utils'
 
-// Constants
-import { defaultProps } from 'constants'
-
-// Styles
-import '../styles/index.css'
-
-class ReactEchartsCore extends Component {
+export class ReactEchartsCore extends Component {
   constructor (props) {
     super(props)
     this.echartsLib = echarts
@@ -47,12 +41,12 @@ class ReactEchartsCore extends Component {
 
   componentDidUpdate (prevProps) {
     if (
-      !isEqual(prevProps.lazyUpdate, this.props.lazyUpdate) ||
-      !isEqual(prevProps.notMerge, this.props.notMerge) ||
-      !isEqual(prevProps.option, this.props.option) ||
-      !isEqual(prevProps.theme, this.props.theme) ||
-      !isEqual(prevProps.option, this.props.option) ||
-      !isEqual(prevProps.onEvents, this.props.onEvents)
+      !prevProps.notMerge !== this.props.notMerge ||
+      !prevProps.replaceMerge !== this.props.replaceMerge ||
+      !prevProps.lazyUpdate !== this.props.lazyUpdate ||
+      !prevProps.theme !== this.props.theme ||
+      !prevProps.silent !== this.props.silent ||
+      !prevProps.transition !== this.props.transition
     ) {
       return this.renderEchart()
     }
@@ -169,11 +163,3 @@ class ReactEchartsCore extends Component {
     )
   }
 }
-
-export function Chart ({ option, ...rest }) {
-  return (
-    <ReactEchartsCore {...rest} option={option || getOptionFromProps(rest)} />
-  )
-}
-
-Chart.defaultProps = defaultProps

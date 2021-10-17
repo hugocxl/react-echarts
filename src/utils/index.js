@@ -1,2 +1,2 @@
 export * from './isEqual'
-export * from './getOptionFromProps'
+export * from './getOptionProps'

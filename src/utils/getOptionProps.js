@@ -1,10 +1,10 @@
 import { optionPropsKeys } from 'constants'
 
-export function getOptionFromProps ({ option, ...rest }) {
+export function getOptionProps (props) {
   const propsOption = {}
 
   optionPropsKeys.forEach((key) => {
-    if (rest[key]) propsOption[key] = rest[key]
+    if (props[key]) propsOption[key] = props[key]
   })
 
   return propsOption

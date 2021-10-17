@@ -5,11 +5,10 @@
 
 [![Version](https://img.shields.io/npm/v/@hcorta/react-echarts.svg?style=flat-square&logo=appveyor)](https://www.npmjs.com/package/@hcorta/react-echarts)
 [![Size](https://img.shields.io/bundlephobia/minzip/@hcorta/react-echarts?style=flat-square)](https://bundlephobia.com/result?p=@hcorta/react-echarts)
-[![dependencies Status](https://img.shields.io/npm/v/echarts?color=mediumorchid&label=echarts&style=flat-square)](https://github.com/apache/incubator-echarts)
-[![ECharts Version](https://david-dm.org/hcorta/react-echarts/status.svg?style=flat-square&logo=appveyor)](https://david-dm.org/hcorta/react-echarts)
 [![NPM](https://img.shields.io/npm/dm/@hcorta/react-echarts.svg?style=flat-square&logo=appveyor)](https://www.npmjs.com/package/@hcorta/react-echarts)
+[![Dependencies Status](https://img.shields.io/npm/v/echarts?color=mediumorchid&label=echarts&style=flat-square)](https://github.com/apache/incubator-echarts)
 
-A React component for the **Apache ECharts** library
+A React component for the **ECharts** library
 
 </div>
 
@@ -18,12 +17,9 @@ A React component for the **Apache ECharts** library
 ## Table of Contents 📚
 
 - [Installation](#installation)
-- [Sponsoring](#sponsoring)
 - [Introducction](#Introducction)
 - [Usage](#Usage)
-- [Charts](#Charts)
-- [Hooks](#Hooks)
-- [Components props](#Components-props)
+- [Props](#Props)
 - [Contributing](#Contributing)
 - [Code of Conduct](#code-of-conduct)
 - [License](#License)
@@ -36,22 +32,20 @@ In order to use **`react-echarts`**, all you need to do is install the npm packa
 yarn add @hcorta/react-echarts
 ```
 
-`echarts` is the peerDependence of `echarts-for-react`, you can install echarts with your own version.
+> `echarts` and `react` are **peerDependencies** of `react-echarts`, you may **install your own versions**.
 
 ## Introduction
 
 [Apache ECharts](https://echarts.apache.org/en/index.html) is a free, powerful charting and visualization library offering intuitive, interactive, and highly customizable charts. It is written in pure **JavaScript** and based on **zrender**, a canvas library.
 
-**`react-echarts`** is an abstraction library built with [React](https://facebook.github.io/react/) on top of Apache ECharts. Its main principles of are:
+**`react-echarts`** is an abstraction wrapper built with [React](https://facebook.github.io/react/) on top of Apache ECharts. Its main principles of are:
 
 1. **Simplicty:** **`react-echarts`** makes it easy to generate ECharts components by wrapping the code required to interact with the core library.
 2. **Declarative**: components are purely presentational.
 
 ## Usage
 
-While some props have been provided to facilitate specific use cases (single series mostly), most of them follow the [Apache ECharts option schema](https://echarts.apache.org/next/en/option.html#title), throught an option-key-like prop declaration.
-
-- **Quick start example:** Check out the [live demo](https://codesandbox.io/s/react-echarts-simple-area-umnfw)
+To start using `react-echarts`, you just need to import the **`<Chart />`** component from the root folder. Check the [props](#Props) section out for more info:
 
 ```js
 import { Chart } from '@hcorta/react-echarts'
@@ -59,120 +53,158 @@ import { Chart } from '@hcorta/react-echarts'
 function App() {
   return (
     <Chart
-      smooth
-      data={[125, 464, 846, 253, 457, 556, 975]}
-      xAxis={['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']}
+      group={'echarts__example'}
+      className={'my__example'}
+      onMount={(props) => console.log('Mounted!', props)}
+      getInstance={(instance) => console.log('Instance!', instance)}
+      getRef={(ref) => console.log('Ref!', ref)}
+      xAxis={{
+        type: 'category',
+        boundaryGap: false
+      }}
+      yAxis={{
+        type: 'value',
+        boundaryGap: [0, '30%']
+      }}
+      series={[
+        {
+          type: 'line',
+          smooth: 0.6,
+          symbol: 'none',
+          lineStyle: {
+            color: '#5470C6',
+            width: 3
+          },
+          data: [
+            ['2019-10-10', 200],
+            ['2019-10-11', 560],
+            ['2019-10-12', 750],
+            ['2019-10-17', 300],
+            ['2019-10-18', 100]
+          ]
+        }
+      ]}
     />
   )
 }
 ```
 
-## Hooks
+Or you may pass the [option](https://echarts.apache.org/next/en/option.html) object directly, as described below:
 
-### **`useEcharts`**
-
-Useful when you need, for example, to connect charts or register a new theme. It returns those methods provided by the ECharts core library:
+_**Note**: In case it is passed down to the component, the rest of option-like props will be ommited (e.g: xAxis prop)._
 
 ```js
-import { useEcharts } from '@hcorta/react-echarts'
+import { Chart } from '@hcorta/react-echarts'
 
-const {
-  connect,
-  disconnect,
-  registerMap,
-  registerTheme,
-  registerAction,
-  registerCoordinateSystem,
-  getInstanceByDom,
-  getInstanceById,
-  getMap
-} = useEcharts()
-```
-
-| Method                 | Description                                       | Parameters                                                       |
-| :--------------------- | ------------------------------------------------- | :--------------------------------------------------------------- |
-| **`connect`**          | Connects interaction of multiple chart series.    | `(group: string or Array)` Group id, or array of chart instance. |
-| **`disconnect`**       | Disconnects interaction of multiple chart series. | `(group: string)` Group id.                                      |
-| **`getInstanceByDom`** | Returns chart instance of dom container.          | `(target: HTMLDivElement or HTMLCanvasElement) => ECharts`       |
-| **`getInstanceById`**  | Returns chart instance of id passed.              | `(id: string) => ECharts`                                        |
-| **`getMap`**           | Get a registered map.                             | `(mapName: string) => {Object}`                                  |
-| **`registerMap`**      | Registers available maps.                         | `(mapName: string, geoJson: {Object}, specialAreas?: {Object}`   |
-| **`registerTheme`**    | Registers a theme.                                | `(themeName: string, theme: {Object})`                           |
-| **`registerAction`**   | Registers an action.                              | `(actionName: string, callback: {Function})`                     |
-
-A simple use case would look like this:
-
-```js
-import { useEffect } from 'react'
-import { useEcharts, Chart } from '@hcorta/react-echarts'
-
-export default function App() {
-  const { connect, registerTheme } = useEcharts()
-  const commonChartProps = {
-    xAxis: ['Big', 'Medium', 'Small'],
-    tooltip: { show: true },
-    group: 'clothes'
-  }
-
-  useEffect(() => {
-    connect('clothes')
-    registerTheme('andromeda', andromedaThemeObject)
-  }, [])
-
+function App() {
   return (
-    <div className="App">
-      <Chart {...commonChartProps} theme={'andromeda'} data={[2, 5, 8]} />
-      <Chart {...commonChartProps} data={[5, 9, 1]} />
-    </div>
+    <Chart
+      group={'echarts__example'}
+      className={'my__example'}
+      option={{
+        tooltip: {
+          trigger: 'axis'
+        },
+        legend: {
+          data: ['Email', 'Union Ads', 'Video Ads', 'Direct', 'Search Engine']
+        },
+        xAxis: {
+          type: 'category',
+          boundaryGap: false,
+          data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+        },
+        yAxis: {
+          type: 'value'
+        },
+        series: [
+          {
+            name: 'Union Ads',
+            type: 'line',
+            stack: 'Total',
+            data: [220, 182, 191, 234, 290, 330, 310]
+          },
+          {
+            name: 'Video Ads',
+            type: 'line',
+            stack: 'Total',
+            data: [150, 232, 201, 154, 190, 330, 410]
+          }
+        ]
+      }}
+    />
   )
 }
 ```
 
-## Components Props
+## Props
 
-The following props, grouped by category, are available for all components exported by the library.
+While some props have been provided to facilitate specific use cases, most of them follow the [Apache ECharts option schema](https://echarts.apache.org/next/en/option.html). The following props, grouped by category, are available:
 
-### Container
+### General
 
-| Prop              |     Type     | Description                                                                 | Default |
-| :---------------- | :----------: | --------------------------------------------------------------------------- | :-----: |
-| **`style`**       |  `{Object}`  | Styles object applied to the container                                      |  null   |
-| **`className`**   |  `{String}`  | Classname of the container                                                  |   ''    |
-| **`getInstance`** | `{Function}` | Callback called on mount that returns the ECharts instance of the component |  null   |
-| **`getRef`**      | `{Function}` | Get the div container ref after mount                                       |  null   |
-
-### State
-
-| Prop                        |     Type     | Description                                                                                            |   Default    |
-| :-------------------------- | :----------: | ------------------------------------------------------------------------------------------------------ | :----------: |
-| **`shouldComponentUpdate`** | `{Function}` | Callback to control whether the component should update or not. Custom `shouldComponentUpdate` method. | `() => true` |
+| Prop                        |     Type     | Description                                                                 |             Default              |
+| :-------------------------- | :----------: | --------------------------------------------------------------------------- | :------------------------------: |
+| **`id`**                    |  `{String}`  | id of the container                                                         |                ''                |
+| **`className`**             |  `{String}`  | Classname of the container                                                  |                ''                |
+| **`style`**                 |  `{Object}`  | Style object applied to the container                                       |               null               |
+| **`getInstance`**           | `{Function}` | Callback called on mount that returns the ECharts instance of the component |               null               |
+| **`getRef`**                | `{Function}` | Get the div container ref after mount                                       |               null               |
+| **`shouldComponentUpdate`** | `{Function}` | Callback to control whether the component should update or not.             | `(nextProps, prevProps) => true` |
 
 ### ECharts
 
-| Prop             |     Type      | Description                                                                                  | Default |
-| :--------------- | :-----------: | -------------------------------------------------------------------------------------------- | :-----: |
-| **`option`**     |  `{Object}`   | The EslCharts option config, can see https://echarts.apache.org/option.html#title.           |  null   |
-| **`notMerge`**   |  `{Boolean}`  | Whether or not to merge with previous option                                                 |  false  |
-| **`lazyUpdate`** | `{Component}` | Whether or not to update chart immediately;                                                  |  false  |
-| **`silent`**     | `{Component}` | states whether not to prevent triggering events when calling setOption                       |  false  |
-| **`theme`**      | `{Component}` | Theme to be applied. This can be a configuring object of a theme, or a theme name registered |  false  |
-| **`group`**      | `{Component}` | Group name to be used in chart connection.                                                   |  false  |
-| **`renderer`**   | `{Component}` | Supports 'canvas' or 'svg'                                                                   |   svg   |
+| Prop             |    Type     | Description                                                                                  | Default |
+| :--------------- | :---------: | -------------------------------------------------------------------------------------------- | :-----: |
+| **`option`**     | `{Object}`  | The ECharts option config, can see <https://echarts.apache.org/option.html>.                 |  null   |
+| **`notMerge`**   | `{Boolean}` | Whether or not to merge with previous option                                                 |  false  |
+| **`lazyUpdate`** | `{Boolean}` | Whether or not to update chart immediately;                                                  |  false  |
+| **`silent`**     | `{Boolean}` | states whether not to prevent triggering events when calling setOption                       |  false  |
+| **`theme`**      | `{String}`  | Theme to be applied. This can be a configuring object of a theme, or a theme name registered |   ''    |
+| **`group`**      | `{String}`  | Group name to be used in chart connection.                                                   |   ''    |
+| **`renderer`**   | `{String}`  | Supports 'canvas' or 'svg'                                                                   |  'svg'  |
 
-- Special note on `option`: In case it is passed down to the component, the rest of option-like props will be ommited (e.g: xAxis prop).
+### Option keys props
 
-### Option
+| Prop                          |    Type    | Description                                                      | Default |
+| :---------------------------- | :--------: | ---------------------------------------------------------------- | :-----: |
+| **`title`**                   | `{Object}` | <https://echarts.apache.org/option.html#title>                   |  null   |
+| **`legend`**                  | `{Object}` | <https://echarts.apache.org/option.html#legend>                  |  null   |
+| **`grid`**                    | `{Object}` | <https://echarts.apache.org/option.html#grid>                    |  null   |
+| **`xAxis`**                   | `{Object}` | <https://echarts.apache.org/option.html#xAxis>                   |  null   |
+| **`yAxis`**                   | `{Object}` | <https://echarts.apache.org/option.html#yAxis>                   |  null   |
+| **`polar`**                   | `{Object}` | <https://echarts.apache.org/option.html#polar>                   |  null   |
+| **`radiusAxis`**              | `{Object}` | <https://echarts.apache.org/option.html#radiusAxis>              |  null   |
+| **`angleAxis`**               | `{Object}` | <https://echarts.apache.org/option.html#angleAxis>               |  null   |
+| **`radar`**                   | `{Object}` | <https://echarts.apache.org/option.html#radar>                   |  null   |
+| **`dataZoom`**                | `{Object}` | <https://echarts.apache.org/option.html#dataZoom>                |  null   |
+| **`visualMap`**               | `{Object}` | <https://echarts.apache.org/option.html#visualMap>               |  null   |
+| **`tooltip`**                 | `{Object}` | <https://echarts.apache.org/option.html#tooltip>                 |  null   |
+| **`brush`**                   | `{Object}` | <https://echarts.apache.org/option.html#brush>                   |  null   |
+| **`geo`**                     | `{Object}` | <https://echarts.apache.org/option.html#geo>                     |  null   |
+| **`parallel`**                | `{Object}` | <https://echarts.apache.org/option.html#parallel>                |  null   |
+| **`parallelAxis`**            | `{Object}` | <https://echarts.apache.org/option.html#parallelAxis>            |  null   |
+| **`singleAxis`**              | `{Object}` | <https://echarts.apache.org/option.html#singleAxis>              |  null   |
+| **`timeline`**                | `{Object}` | <https://echarts.apache.org/option.html#timeline>                |  null   |
+| **`graphic`**                 | `{Object}` | <https://echarts.apache.org/option.html#graphic>                 |  null   |
+| **`calendar`**                | `{Object}` | <https://echarts.apache.org/option.html#calendar>                |  null   |
+| **`dataset`**                 | `{Object}` | <https://echarts.apache.org/option.html#dataset>                 |  null   |
+| **`aria`**                    | `{Object}` | <https://echarts.apache.org/option.html#aria>                    |  null   |
+| **`series`**                  | `{Object}` | <https://echarts.apache.org/option.html#series>                  |  null   |
+| **`color`**                   | `{Object}` | <https://echarts.apache.org/option.html#color>                   |  null   |
+| **`backgroundColor`**         | `{Object}` | <https://echarts.apache.org/option.html#backgroundColor>         |  null   |
+| **`textStyle`**               | `{Object}` | <https://echarts.apache.org/option.html#textStyle>               |  null   |
+| **`animation`**               | `{Object}` | <https://echarts.apache.org/option.html#animation>               |  null   |
+| **`animationThreshold`**      | `{Object}` | <https://echarts.apache.org/option.html#animationThreshold>      |  null   |
+| **`animationDuration`**       | `{Object}` | <https://echarts.apache.org/option.html#animationDuration>       |  null   |
+| **`animationEasing`**         | `{Object}` | <https://echarts.apache.org/option.html#animationEasing>         |  null   |
+| **`animationDelay`**          | `{Object}` | <https://echarts.apache.org/option.html#animationDelay>          |  null   |
+| **`animationDurationUpdate`** | `{Object}` | <https://echarts.apache.org/option.html#animationDurationUpdate> |  null   |
+| **`blendMode`**               | `{Object}` | <https://echarts.apache.org/option.html#blendMode>               |  null   |
+| **`hoverLayerThreshold`**     | `{Object}` | <https://echarts.apache.org/option.html#hoverLayerThreshold>     |  null   |
+| **`useUTC`**                  | `{Object}` | <https://echarts.apache.org/option.html#useUTC>                  |  null   |
+| **`media`**                   | `{Object}` | <https://echarts.apache.org/option.html#media>                   |  null   |
 
-| Prop         |    Type    | Description                                             | Default |
-| :----------- | :--------: | ------------------------------------------------------- | :-----: |
-| **`title`**  | `{Object}` | Title component, including main title and subtitle.     |  null   |
-| **`legend`** | `{Object}` | Legend component.                                       |  null   |
-| **`grid`**   | `{Object}` | Drawing grid in rectangular coordinate.                 |  null   |
-| **`xAxis`**  | `{Object}` | The x axis in cartesian(rectangular) coordinate.        |  null   |
-| **`yAxis`**  | `{Object}` | The y axis in cartesian(rectangular) coordinate.        |  null   |
-| **`polar`**  | `{Object}` | Polar coordinate can be used in scatter and line chart. |  null   |
-
-- Special note on `option`: In case it is passed down to the component, the rest of option-like props will be ommited (e.g: xAxis prop).
+> For more detailed info, check the [ECharts docs](https://echarts.apache.org/option.html)
 
 ### Events
 
@@ -229,4 +261,4 @@ No one’s perfect. If you’ve found any errors, want to suggest enhancements, 
 
 ## License
 
-**react-echarts** is open source software licensed as MIT © [Hugo Corta](https://github.com/hcorta).
+**react-echarts** is open source software licensed as MIT ©[hcorta](https://github.com/hcorta).

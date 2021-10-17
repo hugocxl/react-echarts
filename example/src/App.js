@@ -1,72 +1,58 @@
-import logo from "./logo.svg";
 import "./App.css";
 import { Chart } from "@hcorta/react-echarts";
+import { useEffect, useState } from "react";
 
-const option = {
-  xAxis: {
-    type: "category",
-    boundaryGap: false,
-  },
-  yAxis: {
-    type: "value",
-    boundaryGap: [0, "30%"],
-  },
-  visualMap: {
-    type: "piecewise",
-    show: false,
-    dimension: 0,
-    seriesIndex: 0,
-    pieces: [
-      {
-        gt: 1,
-        lt: 3,
-        color: "rgba(0, 0, 180, 0.4)",
-      },
-      {
-        gt: 5,
-        lt: 7,
-        color: "rgba(0, 0, 180, 0.4)",
-      },
-    ],
-  },
-  series: [
+function App() {
+  const [series, setSeries] = useState([
     {
       type: "line",
       smooth: 0.6,
       symbol: "none",
       lineStyle: {
         color: "#5470C6",
-        width: 5,
+        width: 3,
       },
-      markLine: {
-        symbol: ["none", "none"],
-        label: { show: false },
-        data: [{ xAxis: 1 }, { xAxis: 3 }, { xAxis: 5 }, { xAxis: 7 }],
-      },
-      areaStyle: {},
       data: [
         ["2019-10-10", 200],
         ["2019-10-11", 560],
         ["2019-10-12", 750],
-        ["2019-10-13", 580],
-        ["2019-10-14", 250],
-        ["2019-10-15", 300],
-        ["2019-10-16", 450],
         ["2019-10-17", 300],
         ["2019-10-18", 100],
       ],
     },
-  ],
-};
+  ]);
 
-function App() {
+  useEffect(() => {
+    setTimeout(() => {
+      setSeries([
+        {
+          type: "bar",
+          smooth: 0.6,
+          symbol: "none",
+          lineStyle: {
+            color: "#5470C6",
+            width: 3,
+          },
+          data: [
+            ["2019-10-10", 200],
+            ["2019-10-11", 560],
+            ["2019-10-12", 750],
+            ["2019-10-17", 300],
+            ["2019-10-18", 100],
+          ],
+        },
+      ]);
+    }, 5000);
+  }, []);
+
   return (
     <div className="App">
       <Chart
-        className={"hugo"}
+        group={"echarts__example"}
+        className={"my__example"}
         onMount={(props) => console.log("Mounted!", props)}
-        getInstance={(props) => console.log("Instance!", props)}
-        getRef={(props) => console.log("Ref!", props)}
+        getInstance={(instance) => console.log("Instance!", instance)}
+        getRef={(ref) => console.log("Ref!", ref)}
         xAxis={{
           type: "category",
           boundaryGap: false,
@@ -75,52 +61,7 @@ function App() {
           type: "value",
           boundaryGap: [0, "30%"],
         }}
-        series={[
-          {
-            type: "line",
-            smooth: 0.6,
-            symbol: "none",
-            lineStyle: {
-              color: "#5470C6",
-              width: 5,
-            },
-            markLine: {
-              symbol: ["none", "none"],
-              label: { show: false },
-              data: [{ xAxis: 1 }, { xAxis: 3 }, { xAxis: 5 }, { xAxis: 7 }],
-            },
-            areaStyle: {},
-            data: [
-              ["2019-10-10", 200],
-              ["2019-10-11", 560],
-              ["2019-10-12", 750],
-              ["2019-10-13", 580],
-              ["2019-10-14", 250],
-              ["2019-10-15", 300],
-              ["2019-10-16", 450],
-              ["2019-10-17", 300],
-              ["2019-10-18", 100],
-            ],
-          },
-        ]}
-        visualMap={{
-          type: "piecewise",
-          show: false,
-          dimension: 0,
-          seriesIndex: 0,
-          pieces: [
-            {
-              gt: 1,
-              lt: 3,
-              color: "rgba(0, 0, 180, 0.4)",
-            },
-            {
-              gt: 5,
-              lt: 7,
-              color: "rgba(0, 0, 180, 0.4)",
-            },
-          ],
-        }}
+        series={series}
       />
     </div>
   );
