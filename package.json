@@ -1,7 +1,7 @@
 {
   "name": "@hcorta/react-echarts",
   "productName": "react-echarts",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "description": "A React component for the ECharts library",
   "license": "MIT",
   "private": false,
