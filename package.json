@@ -1,7 +1,7 @@
 {
   "name": "@hcorta/react-echarts",
   "productName": "react-echarts",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A React component for the ECharts library",
   "license": "MIT",
   "private": false,
@@ -32,7 +32,7 @@
     "node": ">=10"
   },
   "scripts": {
-    "start": "rm -rf lib  && webpack --progress --stats=minimal --config webpack/webpack.dev.js",
+    "start": "yarn link && rm -rf lib  && webpack --progress --stats=minimal --config webpack/webpack.dev.js",
     "build": "NODE_ENV=production rm -rf lib && webpack --progress --stats=minimal --config webpack/webpack.prod.js",
     "test": "yarn build",
     "lint": "eslint . --cache --color",
@@ -77,6 +77,6 @@
   },
   "peerDependencies": {
     "echarts": "^5.0.0",
-    "react": "^>=15.0.0"
+    "react": ">=15.0.0"
   }
 }
