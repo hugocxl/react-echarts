@@ -82,7 +82,7 @@ function App() {
 
 Or you may pass the [option](https://echarts.apache.org/next/en/option.html) object directly, as described below:
 
-_**Note**: In case it is passed down to the component, the rest of option-like props will be ommited (e.g: xAxis prop)._
+> _**Note**: In case it is passed down to the component, the rest of option-like props will be ommited (e.g: xAxis prop)._
 
 ```js
 import { Chart } from '@hcorta/react-echarts'
