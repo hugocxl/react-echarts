@@ -36,7 +36,7 @@
     "build": "NODE_ENV=production rm -rf lib && webpack --progress --stats=minimal --config webpack/webpack.prod.js",
     "test": "yarn build",
     "lint": "eslint . --cache --color",
-    "clean": "rm -rf dist && rm -rf node_modules",
+    "clean": "rm -rf lib && rm -rf node_modules",
     "update:dependencies": "yarn upgrade-interactive",
     "update:release": "yarn version --allow-same-version=false --git-tag-version=true --new-version $v",
     "postversion": "git push && git push --tags"
