@@ -1,9 +1,9 @@
-import { optionPropsKeys } from 'constants'
+import { optionKeys } from 'constants'
 
 export function getOptionProps (props) {
   const propsOption = {}
 
-  optionPropsKeys.forEach((key) => {
+  optionKeys.forEach((key) => {
     if (props[key]) propsOption[key] = props[key]
   })
 

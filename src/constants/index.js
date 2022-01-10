@@ -1,2 +1,3 @@
-export * from './optionPropsKeys'
+export * from './optionKeys'
+export * from './eventsKeys'
 export * from './defaultProps'

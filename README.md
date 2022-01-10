@@ -85,43 +85,41 @@ function App() {
 
 Or you may pass the [option](https://echarts.apache.org/next/en/option.html) object directly, as described below:
 
-_**Note**: In case it is passed down to the component, the rest of option-like props will be ommited (e.g: xAxis prop)._
+> _**Note**: In case it is passed down to the component, the rest of option-like props will be ommited (e.g: xAxis prop)._
 
 ```js
 import { Chart } from '@hcorta/react-echarts'
 
 function App() {
-  return (
-    <Chart
-      option={{
-        legend: {
-          data: ['Email', 'Union Ads', 'Video Ads', 'Direct', 'Search Engine']
-        },
-        xAxis: {
-          type: 'category',
-          boundaryGap: false,
-          data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-        },
-        yAxis: {
-          type: 'value'
-        },
-        series: [
-          {
-            name: 'Union Ads',
-            type: 'line',
-            stack: 'Total',
-            data: [220, 182, 191, 234, 290, 330, 310]
-          },
-          {
-            name: 'Video Ads',
-            type: 'line',
-            stack: 'Total',
-            data: [150, 232, 201, 154, 190, 330, 410]
-          }
-        ]
-      }}
-    />
-  )
+  const option = {
+    legend: {
+      data: ['Email', 'Union Ads', 'Video Ads', 'Direct', 'Search Engine']
+    },
+    xAxis: {
+      type: 'category',
+      boundaryGap: false,
+      data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+    },
+    yAxis: {
+      type: 'value'
+    },
+    series: [
+      {
+        name: 'Union Ads',
+        type: 'line',
+        stack: 'Total',
+        data: [220, 182, 191, 234, 290, 330, 310]
+      },
+      {
+        name: 'Video Ads',
+        type: 'line',
+        stack: 'Total',
+        data: [150, 232, 201, 154, 190, 330, 410]
+      }
+    ]
+  }
+
+  return <Chart option={option} />
 }
 ```
 

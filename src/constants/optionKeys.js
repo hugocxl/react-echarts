@@ -1,4 +1,4 @@
-export const optionPropsKeys = [
+export const optionKeys = [
   'title',
   'legend',
   'grid',
