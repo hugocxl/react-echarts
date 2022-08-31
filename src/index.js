@@ -1,17 +1,12 @@
-'use strict'
-
 // Dependencies
 import * as echarts from 'echarts'
-import { Component, createRef } from 'react'
+import React, { Component, createRef } from 'react'
 
 // Constants
-import { optionKeys, defaultProps, eventsKeys } from 'constants'
-
-// Styles
-import './styles/index.css'
+import { optionKeys, defaultProps, eventsKeys } from './constants'
 
 export class Chart extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.echartsLib = echarts
     this.echartsInstance = null
@@ -19,11 +14,11 @@ export class Chart extends Component {
     this.resizeObserver = null
   }
 
-  shouldComponentUpdate (prevProps) {
+  shouldComponentUpdate(prevProps) {
     return this.props.shouldComponentUpdate(prevProps, this.props)
   }
 
-  componentDidMount () {
+  componentDidMount() {
     this.setEchartsInstance()
     this.setResizeObserver()
     this.setEchartsEvents()
@@ -42,7 +37,7 @@ export class Chart extends Component {
     }
   }
 
-  componentDidUpdate (prevProps) {
+  componentDidUpdate(prevProps) {
     if (
       !prevProps.notMerge !== this.props.notMerge ||
       !prevProps.replaceMerge !== this.props.replaceMerge ||
@@ -66,7 +61,7 @@ export class Chart extends Component {
     }
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     this.disposeEchartsInstance()
     this.resizeObserver.unobserve(this.containerRef.current)
     this.resizeObserver.disconnect()
@@ -92,11 +87,13 @@ export class Chart extends Component {
   }
 
   setEchartsInstance = () => {
-    this.echartsInstance = this.echartsLib.init(this.containerRef.current,
+    this.echartsInstance = this.echartsLib.init(
+      this.containerRef.current,
       this.props.theme,
       {
-        renderer: this.props.renderer
-      })
+        renderer: this.props.renderer,
+      }
+    )
 
     if (this.props.group) {
       this.echartsInstance.group = this.props.group
@@ -126,17 +123,21 @@ export class Chart extends Component {
       replaceMerge: this.props.replaceMerge,
       lazyUpdate: this.props.lazyUpdate,
       silent: this.props.silent,
-      transition: this.props.transition
+      transition: this.props.transition,
     })
   }
 
-  render () {
+  render() {
     return (
       <div
         ref={this.containerRef}
         id={this.props.id}
         className={'react_echarts' + ` ${this.props.className}`}
-        style={this.props.style}
+        style={{
+          height: '200px',
+          width: '100%',
+          ...this.props.style,
+        }}
       />
     )
   }

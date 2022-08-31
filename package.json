@@ -2,10 +2,13 @@
   "name": "@hcorta/react-echarts",
   "productName": "react-echarts",
   "version": "1.0.4",
-  "description": "A React component for the ECharts library",
+  "description": "A React component for the ECharts distrary",
   "license": "MIT",
   "private": false,
   "author": "hcorta (http://github.com/hcorta)",
+  "source": "src/index.js",
+  "main": "dist/main.js",
+  "module": "dist/module.js",
   "homepage": "https://hcorta.github.io/react-echarts/",
   "repository": {
     "type": "git",
@@ -25,58 +28,21 @@
     "graph",
     "react-component"
   ],
-  "main": "lib/index.js",
-  "module": "lib/index.js",
-  "source": "src/index.js",
-  "engines": {
-    "node": ">=10"
-  },
   "scripts": {
-    "start": "yarn link && rm -rf lib  && webpack --progress --stats=minimal --config webpack/webpack.dev.js",
-    "build": "NODE_ENV=production rm -rf lib && webpack --progress --stats=minimal --config webpack/webpack.prod.js",
+    "watch": "parcel watch",
+    "build": "parcel build",
     "test": "yarn build",
     "lint": "eslint . --cache --color",
-    "clean": "rm -rf lib && rm -rf node_modules",
+    "clean": "rm -rf dist && rm -rf node_modules",
     "update:dependencies": "yarn upgrade-interactive",
     "update:release": "yarn version --allow-same-version=false --git-tag-version=true --new-version $v",
     "postversion": "git push && git push --tags"
   },
   "devDependencies": {
-    "@babel/cli": "^7.14.8",
-    "@babel/core": "^7.15.0",
-    "@babel/plugin-proposal-class-properties": "^7.14.5",
-    "@babel/preset-env": "^7.15.0",
-    "@babel/preset-react": "^7.14.5",
-    "@babel/register": "^7.15.3",
-    "babel-eslint": "^10.1.0",
-    "babel-loader": "^8.2.2",
-    "brotli-webpack-plugin": "^1.1.0",
-    "clean-webpack-plugin": "^3.0.0",
-    "copy-webpack-plugin": "^7.0.0",
-    "css-loader": "^6.2.0",
-    "echarts": "^5.2.0",
-    "eslint": "^7.32.0",
-    "eslint-config-prettier": "^6.15.0",
-    "eslint-config-standard": "^16.0.2",
-    "eslint-plugin-babel": "^5.3.0",
-    "eslint-plugin-import": "^2.17.2",
-    "eslint-plugin-node": "^11.0.0",
-    "eslint-plugin-promise": "^4.1.1",
-    "eslint-plugin-react": "^7.25.1",
-    "eslint-plugin-standard": "^5.0.0",
-    "prettier": "^2.3.2",
-    "react": "^17.0.2",
-    "style-loader": "^3.2.1",
-    "terser-webpack-plugin": "^5.2.0",
-    "uglifyjs-webpack-plugin": "^2.2.0",
-    "webpack": "^5.51.1",
-    "webpack-bundle-analyzer": "^4.4.2",
-    "webpack-cli": "^4.8.0",
-    "webpack-dev-server": "^3.11.0",
-    "webpack-merge": "^5.8.0"
+    "parcel": "latest"
   },
   "peerDependencies": {
-    "echarts": "^5.0.0",
-    "react": ">=15.0.0"
+    "echarts": ">=5.0.0",
+    "react": ">=16.0.0"
   }
 }

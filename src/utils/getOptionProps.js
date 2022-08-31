@@ -1,4 +1,4 @@
-import { optionKeys } from 'constants'
+import { optionKeys } from '../constants'
 
 export function getOptionProps (props) {
   const propsOption = {}

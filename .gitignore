@@ -61,3 +61,5 @@ node_modules/
 
 # Idea runtime files
 .idea/workspace.xml
+
+.parcel-cache
