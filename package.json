@@ -6,7 +6,7 @@
   "license": "MIT",
   "private": false,
   "author": "hcorta (http://github.com/hcorta)",
-  "source": "src/index.js",
+  "source": "src/index.ts",
   "main": "dist/main.js",
   "module": "dist/module.js",
   "homepage": "https://hcorta.github.io/react-echarts/",

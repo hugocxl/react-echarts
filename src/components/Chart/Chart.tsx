@@ -3,7 +3,7 @@ import * as echarts from 'echarts'
 import React, { Component, createRef } from 'react'
 
 // Constants
-import { optionKeys, defaultProps, eventsKeys } from 'src/constants'
+import { optionKeys, defaultProps, eventsKeys } from '../../constants'
 
 export class Chart extends Component {
   constructor(props) {
