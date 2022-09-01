@@ -40,7 +40,7 @@ export enum EChartEvents {
 }
 
 type EChartEventsProps = {
-  [event in keyof EChartEvents]: () => void
+  [key in EChartEvents]?: () => void
 }
 
 export interface EChartInstanceOptions {
@@ -54,7 +54,6 @@ export interface EChartInstanceOptions {
   renderer?: 'svg' | 'canvas'
 }
 
-export interface EChartLibProps
-  extends EChartInstanceOptions,
-    EChartOption,
-    EChartEventsProps {}
+export type EChartLibProps = EChartInstanceOptions &
+  EChartOption &
+  EChartEventsProps
