@@ -39,7 +39,8 @@
     "postversion": "git push && git push --tags"
   },
   "devDependencies": {
-    "parcel": "latest"
+    "parcel": "latest",
+    "@types/react": "latest"
   },
   "peerDependencies": {
     "echarts": ">=5.0.0",
