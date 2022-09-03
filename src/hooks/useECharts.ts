@@ -1,78 +1,85 @@
 // Dependencies
-import { ECharts, init } from 'echarts'
-import { useEffect, useRef } from 'react'
+import { ECharts, init, dispose } from "echarts";
+import { useEffect, useRef } from "react";
 
 // Types
-import { RefObject } from 'react'
-import { EChartEvents, EChartLibProps } from '../types'
+import { RefObject } from "react";
+import { EChartEvents, EChartLibProps } from "../types";
 
 interface UseEChartsProps extends EChartLibProps {
-  containerRef: RefObject<HTMLDivElement>
+  containerRef: RefObject<HTMLDivElement>;
 }
 
 export const useECharts = (props: UseEChartsProps): ECharts | null => {
-  const echartsRef = useRef<ECharts | null>(null)
-  const resizeObserverRef = useRef<ResizeObserver | null>(null)
+  const echartsRef = useRef<ECharts | null>(null);
+  const resizeObserverRef = useRef<ResizeObserver | null>(null);
   const {
     containerRef,
     theme,
-    renderer = 'svg',
+    renderer = "svg",
     group,
     notMerge,
-    replaceMerge,
     lazyUpdate,
-    silent,
-    transition,
     ...restProps
-  } = props
+  } = props;
 
   useEffect(() => {
-    const shouldInitECharts = containerRef.current && !echartsRef.current
+    const shouldInitECharts = containerRef.current && !echartsRef.current;
 
     if (shouldInitECharts) {
-      echartsRef.current = startECharts()
-      resizeObserverRef.current = startResizeObserver()
+      echartsRef.current = startECharts();
+      resizeObserverRef.current = startResizeObserver();
     }
 
     return () => {
       // TODO: Review cleanup logic
-      // resizeObserverRef.current.unobserve(containerRef.current)
-      // resizeObserverRef.current.disconnect()
-      // dispose(containerRef.current)
-    }
-  }, [containerRef.current])
+      // resizeObserverRef.current.unobserve(containerRef.current);
+      // resizeObserverRef.current.disconnect();
+      // dispose(containerRef.current);
+    };
+  }, [containerRef.current]);
 
-  useEffect(renderECharts)
+  useEffect(renderECharts, [
+    theme,
+    renderer,
+    group,
+    notMerge,
+    lazyUpdate,
+    ...Object.values(restProps).map((el) => JSON.stringify(el)),
+  ]);
 
   function startECharts() {
     const echartsInstance = init(containerRef.current, theme, {
       renderer,
-    })
+    });
 
     // Set group
-    echartsInstance.group = group
+    echartsInstance.group = group;
 
     // Set events
     Object.keys(EChartEvents).forEach((eventProp) => {
-      echartsInstance.on(EChartEvents[eventProp], restProps[eventProp])
-    })
+      const echartEvent = EChartEvents[eventProp];
+      const eventHandler = restProps[eventProp];
 
-    return echartsInstance
+      if (eventHandler) echartsInstance.on(echartEvent, eventHandler);
+    });
+
+    return echartsInstance;
   }
 
   function renderECharts() {
-    echartsRef.current?.clear()
-    echartsRef.current?.setOption(restProps, notMerge, lazyUpdate)
+    echartsRef.current?.clear();
+    echartsRef.current?.setOption(restProps, notMerge, lazyUpdate);
   }
 
   function startResizeObserver() {
     const resizeObserver = new ResizeObserver(() =>
       echartsRef.current?.resize()
-    )
+    );
 
-    resizeObserver.observe(containerRef.current)
-    return resizeObserver
+    resizeObserver.observe(containerRef.current);
+    return resizeObserver;
   }
 
-  return echartsRef.current
-}
+  return echartsRef.current;
+};
