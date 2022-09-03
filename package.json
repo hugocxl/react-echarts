@@ -4,7 +4,6 @@
   "version": "1.0.4",
   "description": "A React component for the ECharts distrary",
   "license": "MIT",
-  "private": false,
   "author": "hcorta (http://github.com/hcorta)",
   "packageManager": "yarn@3.2.3",
   "source": "src/index.ts",
