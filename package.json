@@ -1,7 +1,7 @@
 {
   "name": "@hcorta/react-echarts",
   "productName": "react-echarts",
-  "version": "1.0.4",
+  "version": "2.0.0",
   "description": "A React component for the ECharts distrary",
   "license": "MIT",
   "author": "hcorta (http://github.com/hcorta)",
@@ -34,8 +34,6 @@
     "test": "yarn build",
     "lint": "eslint . --cache --color",
     "clean": "rm -rf dist && rm -rf node_modules",
-    "update:dependencies": "yarn upgrade-interactive",
-    "update:release": "yarn version --allow-same-version=false --git-tag-version=true --new-version $v",
     "postversion": "git push && git push --tags"
   },
   "devDependencies": {
