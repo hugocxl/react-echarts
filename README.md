@@ -1,33 +1,29 @@
-# react-echarts
+![React ECharts Header](https://raw.githubusercontent.com/hcorta/react-echarts/master/public/cover.png)
 
 <div align="center">
-  <img style="border-radius: 8px" src="public/cover.png" width="100%" align="center" />
-</div>
 
-<div align="center" style="margin-top: 8px">
+A React component for the **ECharts** library
 
 [![Version](https://img.shields.io/npm/v/@hcorta/react-echarts.svg?style=flat-square&logo=appveyor)](https://www.npmjs.com/package/@hcorta/react-echarts)
 [![Size](https://img.shields.io/bundlephobia/minzip/@hcorta/react-echarts?style=flat-square)](https://bundlephobia.com/result?p=@hcorta/react-echarts)
 [![NPM](https://img.shields.io/npm/dm/@hcorta/react-echarts.svg?style=flat-square&logo=appveyor)](https://www.npmjs.com/package/@hcorta/react-echarts)
 [![Dependencies Status](https://img.shields.io/npm/v/echarts?color=mediumorchid&label=echarts&style=flat-square)](https://github.com/apache/incubator-echarts)
 
-A React component for the **ECharts** library
-
 </div>
 
 ---
 
-## Table of Contents 📚
+## Table of Contents
 
-- [Installation](#Installation)
-- [Introducction](#Introducction)
-- [Usage](#Usage)
-- [Props](#Props)
-- [Contributing](#Contributing)
+- [Installation](#installation)
+- [Introducction](#introduction)
+- [Usage](#usage)
+- [Props](#props)
+- [Contributing](#contributing)
 - [Code of Conduct](#code-of-conduct)
-- [License](#License)
+- [License](#license)
 
-## ⚡️ Installation
+## Installation
 
 In order to use **`react-echarts`**, all you need to do is install the npm package:
 
@@ -37,7 +33,7 @@ yarn add @hcorta/react-echarts
 
 > **`echarts`** and **`react`** are **peerDependencies** of **`react-echarts`**, you may **install your own versions**.
 
-## 💡 Introduction
+## Introduction
 
 [Apache ECharts](https://echarts.apache.org/en/index.html) is a free, powerful charting and visualization library offering intuitive, interactive, and highly customizable charts. It is written in pure **JavaScript** and based on **zrender**, a canvas library.
 
@@ -46,21 +42,19 @@ yarn add @hcorta/react-echarts
 1. **Simplicty:** **`react-echarts`** makes it easy to generate ECharts components by wrapping the code required to interact with the core library.
 2. **Declarative**: components are purely presentational.
 
-## ⚡️ Usage
+## Usage
 
-To start using `react-echarts`, you just need to import the **`<Chart />`** component from the root folder. Check the [props](#Props) section out for more info:
+### `<EChart />`
+
+To start using `react-echarts`, you just need to import the **`<EChart />`** component from the root folder. Check the [props](#props) section out for more info:
 
 ```js
-import { Chart } from '@hcorta/react-echarts'
+import { EChart } from '@hcorta/react-echarts'
 
-function App() {
+function MyChart() {
   return (
-    <Chart
-      group={'echarts__example'}
-      className={'my__example'}
-      onMount={(props) => console.log('Mounted!', props)}
-      getInstance={(instance) => console.log('Instance!', instance)}
-      getRef={(ref) => console.log('Ref!', ref)}
+    <EChart
+      className={'my-classname'}
       xAxis={{
         type: 'category'
       }}
@@ -72,9 +66,9 @@ function App() {
         {
           type: 'line',
           data: [
-            ['2019-10-12', 750],
-            ['2019-10-17', 300],
-            ['2019-10-18', 100]
+            ['2022-10-12', 750],
+            ['2022-10-17', 300],
+            ['2022-10-18', 100]
           ]
         }
       ]}
@@ -83,47 +77,26 @@ function App() {
 }
 ```
 
-Or you may pass the [option](https://echarts.apache.org/next/en/option.html) object directly, as described below:
+### `useEcharts`
 
-> _**Note**: In case it is passed down to the component, the rest of option-like props will be ommited (e.g: xAxis prop)._
+In case you need to have more control over the container being used by the library to render ECharts, a special hook ```useECharts``` is provided.
 
 ```js
-import { Chart } from '@hcorta/react-echarts'
+export const EChart: FC<EChartProps> = (props) => {
+  const containerRef: Ref<HTMLDivElement> = useRef()
 
-function App() {
-  const option = {
-    legend: {
-      data: ['Email', 'Union Ads', 'Video Ads', 'Direct', 'Search Engine']
-    },
-    xAxis: {
-      type: 'category',
-      boundaryGap: false,
-      data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-    },
-    yAxis: {
-      type: 'value'
-    },
-    series: [
-      {
-        name: 'Union Ads',
-        type: 'line',
-        stack: 'Total',
-        data: [220, 182, 191, 234, 290, 330, 310]
-      },
-      {
-        name: 'Video Ads',
-        type: 'line',
-        stack: 'Total',
-        data: [150, 232, 201, 154, 190, 330, 410]
-      }
-    ]
-  }
+  useECharts({ containerRef, ...props })
 
-  return <Chart option={option} />
+  return (
+    <div
+      ref={containerRef}
+      id={id}
+    />
+  )
 }
 ```
 
-## 🎓 Props
+## Props
 
 While some props have been provided to facilitate specific use cases, most of them follow the [Apache ECharts option schema](https://echarts.apache.org/next/en/option.html). The following props, grouped by category, are available:
 
@@ -134,18 +107,13 @@ While some props have been provided to facilitate specific use cases, most of th
 | **`id`**                    |  `{String}`  | id of the container                                                         |                ''                |
 | **`className`**             |  `{String}`  | Classname of the container                                                  |                ''                |
 | **`style`**                 |  `{Object}`  | Style object applied to the container                                       |               null               |
-| **`getInstance`**           | `{Function}` | Callback called on mount that returns the ECharts instance of the component |               null               |
-| **`getRef`**                | `{Function}` | Get the div container ref after mount                                       |               null               |
-| **`shouldComponentUpdate`** | `{Function}` | Callback to control whether the component should update or not.             | `(nextProps, prevProps) => true` |
 
 ### ECharts
 
 | Prop             |    Type     | Description                                                                                  | Default |
 | :--------------- | :---------: | -------------------------------------------------------------------------------------------- | :-----: |
-| **`option`**     | `{Object}`  | The ECharts option config, can see <https://echarts.apache.org/option.html>.                 |  null   |
 | **`notMerge`**   | `{Boolean}` | Whether or not to merge with previous option                                                 |  false  |
 | **`lazyUpdate`** | `{Boolean}` | Whether or not to update chart immediately;                                                  |  false  |
-| **`silent`**     | `{Boolean}` | states whether not to prevent triggering events when calling setOption                       |  false  |
 | **`theme`**      | `{String}`  | Theme to be applied. This can be a configuring object of a theme, or a theme name registered |   ''    |
 | **`group`**      | `{String}`  | Group name to be used in chart connection.                                                   |   ''    |
 | **`renderer`**   | `{String}`  | Supports 'canvas' or 'svg'                                                                   |  'svg'  |
@@ -238,14 +206,14 @@ While some props have been provided to facilitate specific use cases, most of th
 | **`onBrushSelected`**        | `{Function}` | Notice what are selected.                                                                                   |  null   |
 | **`onGlobalCursorTaken`**    | `{Function}` | -                                                                                                           |  null   |
 
-## 🖇 Contributing
+## Contributing
 
 No one’s perfect. If you’ve found any errors, want to suggest enhancements, or expand on a topic, please feel free to open an Issue or collaborate by PR.
 
-## 📐 Code of Conduct
+## Code of Conduct
 
 [Contributor Code of Conduct](public/docs/CODE_OF_CONDUCT.md). By participating in this project you agree to abide by its terms.
 
-## 📝 License
+## License
 
 **react-echarts** is open source software licensed as MIT ©[hcorta](https://github.com/hcorta).
