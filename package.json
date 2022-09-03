@@ -6,6 +6,7 @@
   "license": "MIT",
   "private": false,
   "author": "hcorta (http://github.com/hcorta)",
+  "packageManager": "yarn@3.2.3",
   "source": "src/index.ts",
   "main": "dist/main.js",
   "module": "dist/module.js",
