@@ -1,4 +1,4 @@
-![React ECharts Header](https://raw.githubusercontent.com/hcorta/react-echarts/master/public/cover.png)
+<img src="public/cover.png" width="100%" align="center" />
 
 <div align="center">
 
