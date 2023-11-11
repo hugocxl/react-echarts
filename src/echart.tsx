@@ -2,11 +2,11 @@
 import React, { useRef, useEffect } from 'react'
 
 // Hooks
-import { useECharts } from '../../hooks'
+import { useECharts } from './use-echarts'
 
 // Types
-import { FC, Ref } from 'react'
-import { EChartLibProps } from '../../types'
+import type { FC } from 'react'
+import type { EChartLibProps } from './types'
 
 export interface EChartProps extends EChartLibProps {
   style?: React.CSSProperties
@@ -26,7 +26,7 @@ export const EChart: FC<EChartProps> = ({
   onUpdate,
   ...restProps
 }) => {
-  const containerRef: Ref<HTMLDivElement> = useRef()
+  const containerRef = useRef<HTMLDivElement>(null)
 
   useECharts({ containerRef, ...restProps })
 
@@ -50,7 +50,7 @@ export const EChart: FC<EChartProps> = ({
       style={{
         height: '240px',
         width: '100%',
-        ...style,
+        ...style
       }}
     />
   )

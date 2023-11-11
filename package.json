@@ -1,48 +1,47 @@
 {
-  "name": "@hcorta/react-echarts",
-  "productName": "react-echarts",
+  "name": "@kbox-labs/react-echarts",
   "version": "2.0.0",
-  "description": "A React component for the ECharts distrary",
+  "description": "A React component for the ECharts library",
+  "productName": "React ECharts",
+  "author": "Hugo Corta <corta.hugo@gmail.com>",
   "license": "MIT",
-  "author": "hcorta (http://github.com/hcorta)",
-  "packageManager": "yarn@3.2.3",
-  "source": "src/index.ts",
-  "main": "dist/main.js",
-  "module": "dist/module.js",
-  "homepage": "https://hcorta.github.io/react-echarts/",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "require": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "private": false,
   "repository": {
     "type": "git",
-    "url": "https://github.com/hcorta/react-echarts"
+    "url": "https://github.com/kbox-labs/react-echarts"
   },
   "bugs": {
-    "url": "https://hcorta.github.io/react-echarts/issues"
+    "url": "https://github.com/kbox-labs/react-echarts/issues"
   },
-  "keywords": [
-    "react",
-    "component",
-    "echarts-react",
-    "echarts",
-    "react-echarts",
-    "chart",
-    "charts",
-    "graph",
-    "react-component"
+  "files": [
+    "dist"
   ],
+  "sideEffects": false,
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
-    "watch": "parcel watch",
-    "build": "parcel build",
-    "test": "yarn build",
+    "dev": "tsup --format=esm,cjs --no-dts --watch",
+    "build": "tsup",
     "lint": "eslint . --cache --color",
     "clean": "rm -rf dist && rm -rf node_modules",
     "postversion": "git push && git push --tags"
   },
   "devDependencies": {
-    "@types/echarts": "latest",
-    "@types/react": "latest",
-    "parcel": "latest"
+    "@types/echarts": "^4",
+    "@types/react": "^18",
+    "prettier": "^3",
+    "@typescript-eslint/eslint-plugin": "^6",
+    "@typescript-eslint/parser": "^6",
+    "typescript": "^5",
+    "tsup": "^7"
   },
   "peerDependencies": {
-    "echarts": ">=5.0.0",
-    "react": ">=16.0.0"
+    "echarts": "^5",
+    "react": "^18"
   }
 }
