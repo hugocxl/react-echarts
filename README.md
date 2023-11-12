@@ -1,8 +1,8 @@
 <img src="public/cover.png" width="100%" align="center" />
 
-<div align="center">
+<br />
 
-A React component for the **ECharts** library
+<div align="center">
 
 [![NPM](https://img.shields.io/npm/dm/@kbox-labs/react-echarts.svg?&logo=npm)](https://www.npmjs.com/package/@kbox-labs/react-echarts)
 [![Version](https://img.shields.io/npm/v/@kbox-labs/react-echarts.svg?logo=npm)](https://www.npmjs.com/package/@kbox-labs/react-echarts)
@@ -14,17 +14,15 @@ A React component for the **ECharts** library
 
 </div>
 
----
+<div align="center">
+  <b>ECharts for React</b>
+</div>
 
-## Table of Contents
+## Introduction
 
-- [Installation](#installation)
-- [Introducction](#introduction)
-- [Usage](#usage)
-- [Props](#props)
-- [Contributing](#contributing)
-- [Code of Conduct](#code-of-conduct)
-- [License](#license)
+[ECharts](https://echarts.apache.org/en/index.html) is is an incredible open-source library that empowers users with robust charting and visualization capabilities. It provides a seamless experience with its intuitive, interactive, and highly customizable charts.
+
+While there are existing wrappers for ECharts in the React ecosystem, we noticed a lack of implementations that truly embraced the core concepts of React. Hence, our primary goal was to create a user-friendly React component that effortlessly exposes the vast range of ECharts functionalities through props. By doing so, we aimed to simplify the process of utilizing ECharts within a React project while ensuring flexibility and ease of use.
 
 ## Installation
 
@@ -35,15 +33,6 @@ yarn add @kbox-labs/react-echarts
 ```
 
 > **`echarts`** and **`react`** are **peerDependencies** of **`react-echarts`**, you may **install your own versions**.
-
-## Introduction
-
-[Apache ECharts](https://echarts.apache.org/en/index.html) is a free, powerful charting and visualization library offering intuitive, interactive, and highly customizable charts. It is written in pure **JavaScript** and based on **zrender**, a canvas library.
-
-**`react-echarts`** is an abstraction wrapper built with [React](https://facebook.github.io/react/) on top of Apache ECharts. Its main principles of are:
-
-1. **Simplicty:** **`react-echarts`** makes it easy to generate ECharts components by wrapping the code required to interact with the core library.
-2. **Declarative**: components are purely presentational.
 
 ## Usage
 
@@ -209,14 +198,24 @@ While some props have been provided to facilitate specific use cases, most of th
 | **`onBrushSelected`**        | `{Function}` | Notice what are selected.                                                                                   |  null   |
 | **`onGlobalCursorTaken`**    | `{Function}` | -                                                                                                           |  null   |
 
+## Community
+
+The **Kbox Labs** community can be found on [GitHub Discussions](https://github.com/orgs/kbox-labs/discussions), where you can ask questions, voice ideas, and share your projects.
+
+Our [Code of Conduct](https://github.com/kbox-labs/react-echarts/blob/master/CODE_OF_CONDUCT.md) applies to all **Kbox Labs** community channels.
+
 ## Contributing
 
-No one’s perfect. If you’ve found any errors, want to suggest enhancements, or expand on a topic, please feel free to open an Issue or collaborate by PR.
+Please see our [contributing.md](/contributing.md).
 
-## Code of Conduct
+### Good First Issues
 
-[Contributor Code of Conduct](public/docs/CODE_OF_CONDUCT.md). By participating in this project you agree to abide by its terms.
+We have a list of [good first issues](https://github.com/koi18n/koi18n/labels/good%20first%20issue) that contain bugs that have a relatively limited scope. This is a great place to get started, gain experience, and get familiar with our contribution process.
+
+## Authors
+
+- Hugo Corta ([@hugocxl](https://github.com/hugocxl))
 
 ## License
 
-**react-echarts** is open source software licensed as MIT ©[kbox-labs](https://github.com/kbox-labs).
+MIT License © 2023-Present [Hugo Corta](https://github.com/hugocxl)
