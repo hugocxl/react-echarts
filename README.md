@@ -29,10 +29,8 @@ While there are existing wrappers for ECharts in the React ecosystem, we noticed
 In order to use **`react-echarts`**, all you need to do is install the npm package:
 
 ```sh
-yarn add @kbox-labs/react-echarts
+pnpm add @kbox-labs/react-echarts
 ```
-
-> **`echarts`** and **`react`** are **peerDependencies** of **`react-echarts`**, you may **install your own versions**.
 
 ## Usage
 
