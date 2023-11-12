@@ -2,6 +2,9 @@ name: Publish
 
 on:
   push:
+    paths:
+      - '.changeset/**'
+      - 'src/**'
     branches:
       - master
 
