@@ -4,9 +4,9 @@
 
 A React component for the **ECharts** library
 
-[![Version](https://img.shields.io/npm/v/@hcorta/react-echarts.svg?style=flat-square&logo=appveyor)](https://www.npmjs.com/package/@hcorta/react-echarts)
-[![Size](https://img.shields.io/bundlephobia/minzip/@hcorta/react-echarts?style=flat-square)](https://bundlephobia.com/result?p=@hcorta/react-echarts)
-[![NPM](https://img.shields.io/npm/dm/@hcorta/react-echarts.svg?style=flat-square&logo=appveyor)](https://www.npmjs.com/package/@hcorta/react-echarts)
+[![Version](https://img.shields.io/npm/v/@kbox-labs/react-echarts.svg?style=flat-square&logo=appveyor)](https://www.npmjs.com/package/@kbox-labs/react-echarts)
+[![Size](https://img.shields.io/bundlephobia/minzip/@kbox-labs/react-echarts?style=flat-square)](https://bundlephobia.com/result?p=@kbox-labs/react-echarts)
+[![NPM](https://img.shields.io/npm/dm/@kbox-labs/react-echarts.svg?style=flat-square&logo=appveyor)](https://www.npmjs.com/package/@kbox-labs/react-echarts)
 [![Dependencies Status](https://img.shields.io/npm/v/echarts?color=mediumorchid&label=echarts&style=flat-square)](https://github.com/apache/incubator-echarts)
 
 </div>
@@ -28,7 +28,7 @@ A React component for the **ECharts** library
 In order to use **`react-echarts`**, all you need to do is install the npm package:
 
 ```sh
-yarn add @hcorta/react-echarts
+yarn add @kbox-labs/react-echarts
 ```
 
 > **`echarts`** and **`react`** are **peerDependencies** of **`react-echarts`**, you may **install your own versions**.
@@ -49,7 +49,7 @@ yarn add @hcorta/react-echarts
 To start using `react-echarts`, you just need to import the **`<EChart />`** component from the root folder. Check the [props](#props) section out for more info:
 
 ```js
-import { EChart } from '@hcorta/react-echarts'
+import { EChart } from '@kbox-labs/react-echarts'
 
 function MyChart() {
   return (
@@ -216,4 +216,4 @@ No one’s perfect. If you’ve found any errors, want to suggest enhancements, 
 
 ## License
 
-**react-echarts** is open source software licensed as MIT ©[hcorta](https://github.com/hcorta).
+**react-echarts** is open source software licensed as MIT ©[kbox-labs](https://github.com/kbox-labs).
