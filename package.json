@@ -4,6 +4,7 @@
   "description": "A React component for ECharts",
   "productName": "React ECharts",
   "author": "Hugo Corta <corta.hugo@gmail.com>",
+  "homepage": "https://kbox-labs.github.io/react-echarts/",
   "license": "MIT",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
