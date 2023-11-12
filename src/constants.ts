@@ -10,7 +10,7 @@ export const eChartEvents = {
   onHighlight: 'highlight',
   onDownplay: 'downplay',
   onSelectChanged: 'selectchanged',
-  onLegendSelectChanged: 'legendsselectchanged',
+  onLegendSelectChanged: 'legendselectchanged',
   onLegendSelected: 'legendselected',
   onLegendUnselected: 'legendunselected',
   onLegendInverseSelect: 'legendinverseselect',
