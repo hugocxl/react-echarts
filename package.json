@@ -27,6 +27,9 @@
   "scripts": {
     "dev": "tsup --format=esm,cjs --no-dts --watch",
     "build": "tsup",
+    "test": "vitest run",
+    "test:dev": "vitest dev -u",
+    "test:coverage": "vitest run --coverage",
     "clean": "rm -rf dist && rm -rf node_modules",
     "fix": "pnpm lint:fix . && pnpm format:fix .",
     "lint": "eslint --cache",
@@ -45,6 +48,10 @@
     "release-dev": "changeset version --snapshot dev && changeset publish --tag dev",
     "postversion": "git push && git push --tags"
   },
+  "peerDependencies": {
+    "echarts": "^5",
+    "react": "^18"
+  },
   "devDependencies": {
     "@changesets/changelog-github": "^0",
     "@changesets/cli": "^2",
@@ -59,10 +66,7 @@
     "lint-staged": "^14",
     "eslint": "^8",
     "eslint-config-next": "^13",
-    "eslint-config-prettier": "^9"
-  },
-  "peerDependencies": {
-    "echarts": "^5",
-    "react": "^18"
+    "eslint-config-prettier": "^9",
+    "vitest": "^0"
   }
 }
