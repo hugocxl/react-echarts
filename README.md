@@ -4,10 +4,13 @@
 
 A React component for the **ECharts** library
 
-[![Version](https://img.shields.io/npm/v/@kbox-labs/react-echarts.svg?style=flat-square&logo=appveyor)](https://www.npmjs.com/package/@kbox-labs/react-echarts)
-[![Size](https://img.shields.io/bundlephobia/minzip/@kbox-labs/react-echarts?style=flat-square)](https://bundlephobia.com/result?p=@kbox-labs/react-echarts)
-[![NPM](https://img.shields.io/npm/dm/@kbox-labs/react-echarts.svg?style=flat-square&logo=appveyor)](https://www.npmjs.com/package/@kbox-labs/react-echarts)
-[![Dependencies Status](https://img.shields.io/npm/v/echarts?color=mediumorchid&label=echarts&style=flat-square)](https://github.com/apache/incubator-echarts)
+[![NPM](https://img.shields.io/npm/dm/@kbox-labs/react-echarts.svg?&logo=npm)](https://www.npmjs.com/package/@kbox-labs/react-echarts)
+[![Version](https://img.shields.io/npm/v/@kbox-labs/react-echarts.svg?logo=npm)](https://www.npmjs.com/package/@kbox-labs/react-echarts)
+[![Size](https://img.shields.io/bundlephobia/minzip/@kbox-labs/react-echarts)](https://bundlephobia.com/result?p=@kbox-labs/react-echarts)
+[![Build](https://img.shields.io/github/actions/workflow/status/kbox-labs/react-echarts/release.yml?branch=master)](https://github.com/kbox-labs/react-echarts/actions/workflows/release.yml)
+[![Tests Coverage](https://img.shields.io/coverallsCoverage/github/kbox-labs/react-echarts)](https://coveralls.io/github/kbox-labs/react-echarts)
+[![Language](https://img.shields.io/badge/language-TypeScript-blue.svg)](https://www.typescriptlang.org)
+[![License](https://img.shields.io/github/license/kbox-labs/react-echarts)](https://www.npmjs.com/package/@kbox-labs/react-echarts)
 
 </div>
 
