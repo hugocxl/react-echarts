@@ -1,57 +1,116 @@
-// Dependencies
-import React, { useRef, useEffect } from 'react'
-
 // Hooks
-import { useECharts } from './use-echarts'
+import { UseEChartsOptions, useECharts } from './use-echarts'
+import { useEChartsInstance } from './use-echarts-instance'
 
 // Types
-import type { FC } from 'react'
-import type { EChartLibProps } from './types'
+import type { FC, HTMLAttributes } from 'react'
+import type { UseEChartsInstanceOptions } from './use-echarts-instance'
 
-export interface EChartProps extends EChartLibProps {
-  style?: React.CSSProperties
-  id?: string
-  className?: string
-  onMount?: () => unknown
-  onUnmount?: () => unknown
-  onUpdate?: () => unknown
-}
+export type EChartProps = UseEChartsOptions &
+  UseEChartsInstanceOptions &
+  HTMLAttributes<HTMLDivElement>
 
 export const EChart: FC<EChartProps> = ({
-  id,
-  className,
-  style,
-  onMount,
-  onUnmount,
-  onUpdate,
-  ...restProps
+  // useECharts
+  devicePixelRatio,
+  renderer,
+  width,
+  height,
+  theme,
+
+  // useEChartsInstance
+  group,
+  option,
+  lazyUpdate,
+  notMerge,
+  silent,
+  onAxisAreaSelected,
+  onBrush,
+  onBrushEnd,
+  onBrushSelected,
+  onClick,
+  onContextMenu,
+  onDataRangeSelected,
+  onDataViewChanged,
+  onDataZoom,
+  onDoubleClick,
+  onDownplay,
+  onFinished,
+  onGeoSelectChanged,
+  onGeoSelected,
+  onGeoUnselected,
+  onGlobalCursorTaken,
+  onGlobalOut,
+  onHighlight,
+  onLegendInverseSelect,
+  onLegendScroll,
+  onLegendSelectChanged,
+  onLegendSelected,
+  onLegendUnselected,
+  onMagicTypeChanged,
+  onMouseDown,
+  onMouseMove,
+  onMouseOut,
+  onMouseOver,
+  onRendered,
+  onRestore,
+  onSelectChanged,
+  onTimelineChanged,
+  onTimelinePlayChanged,
+  ...props
 }) => {
-  const containerRef = useRef<HTMLDivElement>(null)
-
-  useECharts({ containerRef, ...restProps })
-
-  useEffect(() => {
-    if (onMount) onMount()
-
-    return () => {
-      if (onUnmount) onUnmount()
-    }
-  }, [])
-
-  useEffect(() => {
-    if (onUpdate) onUpdate()
+  const [ref, echartsInstance] = useECharts({
+    devicePixelRatio,
+    renderer,
+    width,
+    height,
+    theme
   })
 
-  return (
-    <div
-      ref={containerRef}
-      id={id}
-      className={'react-echarts' + ` ${className || ''}`}
-      style={{
-        height: '240px',
-        width: '100%',
-        ...style
-      }}
-    />
+  useEChartsInstance(
+    echartsInstance,
+    {
+      group,
+      option,
+      lazyUpdate,
+      notMerge,
+      silent,
+      onAxisAreaSelected,
+      onBrush,
+      onBrushEnd,
+      onBrushSelected,
+      onClick,
+      onContextMenu,
+      onDataRangeSelected,
+      onDataViewChanged,
+      onDataZoom,
+      onDoubleClick,
+      onDownplay,
+      onFinished,
+      onGeoSelectChanged,
+      onGeoSelected,
+      onGeoUnselected,
+      onGlobalCursorTaken,
+      onGlobalOut,
+      onHighlight,
+      onLegendInverseSelect,
+      onLegendScroll,
+      onLegendSelectChanged,
+      onLegendSelected,
+      onLegendUnselected,
+      onMagicTypeChanged,
+      onMouseDown,
+      onMouseMove,
+      onMouseOut,
+      onMouseOver,
+      onRendered,
+      onRestore,
+      onSelectChanged,
+      onTimelineChanged,
+      onTimelinePlayChanged
+    },
+    []
   )
+
+  return <div {...props} ref={ref} />
 }

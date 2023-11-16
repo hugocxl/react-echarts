@@ -1,87 +1,45 @@
 // Dependencies
-import { ECharts, init } from 'echarts'
-import { useEffect, useRef } from 'react'
+import { init, use } from 'echarts'
+import { useRef } from 'react'
 
 // Types
-import type { UseEChartsProps } from './types'
+import type { EChartsType } from 'echarts'
 
-// Constants
-import { eChartEvents } from './constants'
+export type UseEChartsOptions = Parameters<typeof init>[2] & {
+  theme?: Parameters<typeof init>[1]
+  use?: Parameters<typeof use>
+}
 
-export const useECharts = (props: UseEChartsProps): ECharts | null => {
-  const echartsRef = useRef<ECharts | null>(null)
-  const resizeObserverRef = useRef<ResizeObserver | null>(null)
-  const {
-    containerRef,
-    theme,
-    renderer = 'svg',
-    group,
-    notMerge,
-    lazyUpdate,
-    ...restProps
-  } = props
+export type UseECharts = (options?: UseEChartsOptions) => [
+  /**
+   * Function to set the ref for the hook
+   */
+  (node: HTMLDivElement) => void,
+  /**
+   * ECharts instance created by the hook
+   */
+  EChartsType | undefined
+]
 
-  useEffect(() => {
-    const shouldInitECharts = containerRef.current && !echartsRef.current
+/**
+ * Hook to initialize ECharts and get an ECharts instance
+ * @returns A tuple with the function to set the ref and the ECharts instance
+ */
+export const useECharts: UseECharts = opts => {
+  const containerRef = useRef<HTMLDivElement>()
+  const echartsRef = useRef<EChartsType>()
 
-    if (shouldInitECharts) {
-      echartsRef.current = startECharts()
-      resizeObserverRef.current = startResizeObserver()
-    }
+  function setContainerRef(node: HTMLDivElement): void {
+    if (containerRef.current) return
 
-    return () => {
-      // TODO: Review cleanup logic
-      // resizeObserverRef.current.unobserve(containerRef.current);
-      // resizeObserverRef.current.disconnect();
-      // dispose(containerRef.current);
-    }
-  }, [containerRef.current])
-
-  useEffect(renderECharts, [
-    theme,
-    renderer,
-    group,
-    notMerge,
-    lazyUpdate,
-    ...Object.values(restProps).map(el => JSON.stringify(el))
-  ])
-
-  function startECharts() {
-    const echartsInstance = init(containerRef.current, theme, {
-      renderer
-    })
-
-    // Set group
-    if (group) echartsInstance.group = group
-
-    // Set events
-    Object.keys(eChartEvents).forEach(eventProp => {
+    const { theme, use: useOptions, ...initOptions } = opts || {}
+    if (useOptions) {
       // @ts-ignore
-      const eventHandler = restProps?.[eventProp]
-
-      if (eventHandler) {
-        // @ts-ignore
-        const echartEvent = eChartEvents[eventProp]
-        echartsInstance.on(echartEvent, eventHandler)
-      }
-    })
-
-    return echartsInstance
+      use(useOptions)
+    }
+    containerRef.current = node
+    echartsRef.current = init(node, theme, initOptions)
   }
 
-  function renderECharts() {
-    echartsRef.current?.clear()
-    echartsRef.current?.setOption(restProps, notMerge, lazyUpdate)
-  }
-
-  function startResizeObserver() {
-    const resizeObserver = new ResizeObserver(
-      () => echartsRef.current?.resize()
-    )
-
-    if (containerRef.current) resizeObserver.observe(containerRef.current)
-    return resizeObserver
-  }
-
-  return echartsRef.current
+  return [setContainerRef, echartsRef.current]
 }
