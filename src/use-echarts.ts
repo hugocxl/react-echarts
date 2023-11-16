@@ -1,6 +1,6 @@
 // Dependencies
 import { init, use } from 'echarts'
-import { useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 // Types
 import type { EChartsType } from 'echarts'
@@ -18,7 +18,8 @@ export type UseECharts = (options?: UseEChartsOptions) => [
   /**
    * ECharts instance created by the hook
    */
-  EChartsType | undefined
+  EChartsType | undefined,
+  HTMLDivElement | undefined
 ]
 
 /**
@@ -28,18 +29,43 @@ export type UseECharts = (options?: UseEChartsOptions) => [
 export const useECharts: UseECharts = opts => {
   const containerRef = useRef<HTMLDivElement>()
   const echartsRef = useRef<EChartsType>()
+  const resizeObserverRef = useRef<ResizeObserver | null>(null)
+  const [started, setStarted] = useState(false)
+
+  useEffect(() => {
+    if (containerRef.current && !echartsRef.current) {
+      const { theme, use: useOptions, ...initOptions } = opts || {}
+      if (useOptions) {
+        // @ts-ignore
+        use(useOptions)
+      }
+      echartsRef.current = init(containerRef.current, theme, initOptions)
+      resizeObserverRef.current = startResizeObserver()
+    }
+
+    return () => {
+      // TODO: Review cleanup logic
+      // resizeObserverRef.current.unobserve(containerRef.current);
+      // resizeObserverRef.current.disconnect();
+      // dispose(containerRef.current);
+    }
+  }, [started])
 
   function setContainerRef(node: HTMLDivElement): void {
     if (containerRef.current) return
 
-    const { theme, use: useOptions, ...initOptions } = opts || {}
-    if (useOptions) {
-      // @ts-ignore
-      use(useOptions)
-    }
     containerRef.current = node
-    echartsRef.current = init(node, theme, initOptions)
+    setStarted(true)
   }
 
-  return [setContainerRef, echartsRef.current]
+  function startResizeObserver() {
+    const resizeObserver = new ResizeObserver(() => {
+      echartsRef.current?.resize()
+    })
+
+    if (containerRef.current) resizeObserver.observe(containerRef.current)
+    return resizeObserver
+  }
+
+  return [setContainerRef, echartsRef.current, containerRef.current]
 }

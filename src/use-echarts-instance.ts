@@ -7,6 +7,47 @@ import type { EChartOption, EChartsType, SetOptionOpts } from 'echarts'
 
 export type UseEChartsInstanceOptions = EChartEventsProps &
   SetOptionOpts & {
+    angleAxis?: EChartOption['angleAxis']
+    animation?: EChartOption['animation']
+    animationDelay?: EChartOption['animationDelay']
+    animationDelayUpdate?: EChartOption['animationDelayUpdate']
+    animationDuration?: EChartOption['animationDuration']
+    animationDurationUpdate?: EChartOption['animationDurationUpdate']
+    animationEasing?: EChartOption['animationEasing']
+    animationEasingUpdate?: EChartOption['animationEasingUpdate']
+    animationThreshold?: EChartOption['animationThreshold']
+    aria?: EChartOption['aria']
+    axisPointer?: EChartOption['axisPointer']
+    backgroundColor?: EChartOption['backgroundColor']
+    blendMode?: EChartOption['blendMode']
+    brush?: EChartOption['brush']
+    calendar?: EChartOption['calendar']
+    color?: EChartOption['color']
+    dataZoom?: EChartOption['dataZoom']
+    dataset?: EChartOption['dataset']
+    geo?: EChartOption['geo']
+    graphic?: EChartOption['graphic']
+    grid?: EChartOption['grid']
+    hoverLayerThreshold?: EChartOption['hoverLayerThreshold']
+    legend?: EChartOption['legend']
+    parallel?: EChartOption['parallel']
+    parallelAxis?: EChartOption['parallelAxis']
+    polar?: EChartOption['polar']
+    progressive?: EChartOption['progressive']
+    progressiveThreshold?: EChartOption['progressiveThreshold']
+    radar?: EChartOption['radar']
+    radiusAxis?: EChartOption['radiusAxis']
+    series?: EChartOption['series']
+    singleAxis?: EChartOption['singleAxis']
+    textStyle?: EChartOption['textStyle']
+    timeline?: EChartOption['timeline']
+    title?: EChartOption['title']
+    toolbox?: EChartOption['toolbox']
+    tooltip?: EChartOption['tooltip']
+    useUTC?: EChartOption['useUTC']
+    visualMap?: EChartOption['visualMap']
+    xAxis?: EChartOption['xAxis']
+    yAxis?: EChartOption['yAxis']
     group?: EChartsType['group']
     getWidth?: EChartsType['getWidth']
     getHeight?: EChartsType['getHeight']
@@ -26,7 +67,6 @@ export type UseEChartsInstanceOptions = EChartEventsProps &
     clear?: EChartsType['clear']
     isDisposed?: EChartsType['isDisposed']
     dispose?: EChartsType['dispose']
-    option: EChartOption
   }
 
 export type UseEChartsInstance = (
@@ -39,14 +79,56 @@ export const useEChartsInstance: UseEChartsInstance = (
   echarts,
   {
     // Option
-    option,
     lazyUpdate,
     notMerge,
     silent,
 
+    // Series
+    angleAxis,
+    animation,
+    animationDelay,
+    animationDelayUpdate,
+    animationDuration,
+    animationDurationUpdate,
+    animationEasing,
+    animationEasingUpdate,
+    animationThreshold,
+    aria,
+    axisPointer,
+    backgroundColor,
+    blendMode,
+    brush,
+    calendar,
+    color,
+    dataZoom,
+    dataset,
+    geo,
+    graphic,
+    grid,
+    hoverLayerThreshold,
+    legend,
+    parallel,
+    parallelAxis,
+    polar,
+    progressive,
+    progressiveThreshold,
+    radar,
+    radiusAxis,
+    series,
+    singleAxis,
+    textStyle,
+    timeline,
+    title,
+    toolbox,
+    tooltip,
+    useUTC,
+    visualMap,
+    xAxis,
+    yAxis,
+
     // Others
     group,
-    getWidth,
+    // getWidth,
     // getHeight,
     // getDom,
     // getOption,
@@ -98,23 +180,117 @@ export const useEChartsInstance: UseEChartsInstance = (
 ) => {
   useEffect(() => {
     if (!echarts) return
+
     if (group) echarts.group = group
   }, [group, ...deps])
 
-  useEffect(() => {
-    if (!echarts) return
-    if (getWidth) echarts.getWidth = getWidth
-  }, [getWidth, ...deps])
+  // useEffect(() => {
+  //   if (!echarts) return
+  //   if (getWidth) echarts.getWidth = getWidth
+  // }, [getWidth, ...deps])
 
   useEffect(() => {
+    console.log('set option', echarts?.id)
+
     if (!echarts) return
-    if (option)
-      echarts.setOption(option, {
+
+    echarts.setOption(
+      {
+        angleAxis,
+        animation,
+        animationDelay,
+        animationDelayUpdate,
+        animationDuration,
+        animationDurationUpdate,
+        animationEasing,
+        animationEasingUpdate,
+        animationThreshold,
+        aria,
+        axisPointer,
+        backgroundColor,
+        blendMode,
+        brush,
+        calendar,
+        color,
+        dataZoom,
+        dataset,
+        geo,
+        graphic,
+        grid,
+        hoverLayerThreshold,
+        legend,
+        parallel,
+        parallelAxis,
+        polar,
+        progressive,
+        progressiveThreshold,
+        radar,
+        radiusAxis,
+        series,
+        singleAxis,
+        textStyle,
+        timeline,
+        title,
+        toolbox,
+        tooltip,
+        useUTC,
+        visualMap,
+        xAxis,
+        yAxis
+      },
+      {
         lazyUpdate,
         notMerge,
         silent
-      })
-  }, [option, lazyUpdate, notMerge, silent, ...deps])
+      }
+    )
+  }, [
+    angleAxis,
+    animation,
+    animationDelay,
+    animationDelayUpdate,
+    animationDuration,
+    animationDurationUpdate,
+    animationEasing,
+    animationEasingUpdate,
+    animationThreshold,
+    aria,
+    axisPointer,
+    backgroundColor,
+    blendMode,
+    brush,
+    calendar,
+    color,
+    dataZoom,
+    dataset,
+    geo,
+    graphic,
+    grid,
+    hoverLayerThreshold,
+    legend,
+    parallel,
+    parallelAxis,
+    polar,
+    progressive,
+    progressiveThreshold,
+    radar,
+    radiusAxis,
+    series,
+    singleAxis,
+    textStyle,
+    timeline,
+    title,
+    toolbox,
+    tooltip,
+    useUTC,
+    visualMap,
+    xAxis,
+    yAxis,
+    lazyUpdate,
+    notMerge,
+    silent,
+    ...deps
+  ])
 
   useEffect(() => {
     if (!echarts) return

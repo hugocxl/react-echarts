@@ -20,10 +20,56 @@ export const EChart: FC<EChartProps> = ({
 
   // useEChartsInstance
   group,
-  option,
+
+  // Option
   lazyUpdate,
   notMerge,
   silent,
+
+  // Series
+  angleAxis,
+  animation,
+  animationDelay,
+  animationDelayUpdate,
+  animationDuration,
+  animationDurationUpdate,
+  animationEasing,
+  animationEasingUpdate,
+  animationThreshold,
+  aria,
+  axisPointer,
+  backgroundColor,
+  blendMode,
+  brush,
+  calendar,
+  color,
+  dataZoom,
+  dataset,
+  geo,
+  graphic,
+  grid,
+  hoverLayerThreshold,
+  legend,
+  parallel,
+  parallelAxis,
+  polar,
+  progressive,
+  progressiveThreshold,
+  radar,
+  radiusAxis,
+  series,
+  singleAxis,
+  textStyle,
+  timeline,
+  title,
+  toolbox,
+  tooltip,
+  useUTC,
+  visualMap,
+  xAxis,
+  yAxis,
+
+  // Events
   onAxisAreaSelected,
   onBrush,
   onBrushEnd,
@@ -70,11 +116,58 @@ export const EChart: FC<EChartProps> = ({
   useEChartsInstance(
     echartsInstance,
     {
+      // useEChartsInstance
       group,
-      option,
+
+      // Option
       lazyUpdate,
       notMerge,
       silent,
+
+      // Series
+      angleAxis,
+      animation,
+      animationDelay,
+      animationDelayUpdate,
+      animationDuration,
+      animationDurationUpdate,
+      animationEasing,
+      animationEasingUpdate,
+      animationThreshold,
+      aria,
+      axisPointer,
+      backgroundColor,
+      blendMode,
+      brush,
+      calendar,
+      color,
+      dataZoom,
+      dataset,
+      geo,
+      graphic,
+      grid,
+      hoverLayerThreshold,
+      legend,
+      parallel,
+      parallelAxis,
+      polar,
+      progressive,
+      progressiveThreshold,
+      radar,
+      radiusAxis,
+      series,
+      singleAxis,
+      textStyle,
+      timeline,
+      title,
+      toolbox,
+      tooltip,
+      useUTC,
+      visualMap,
+      xAxis,
+      yAxis,
+
+      // Events
       onAxisAreaSelected,
       onBrush,
       onBrushEnd,
@@ -109,7 +202,7 @@ export const EChart: FC<EChartProps> = ({
       onTimelineChanged,
       onTimelinePlayChanged
     },
-    []
+    [echartsInstance?.id]
   )
 
   return <div {...props} ref={ref} />
