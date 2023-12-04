@@ -1,0 +1,32 @@
+# EChart
+
+EChart is the main component exported by the lib. It offers a declarative way to interact with the ECharts API.
+
+```tsx
+import { EChart } from '@kbox-labs/react-echarts'
+
+function MyChart() {
+  return (
+    <EChart
+      className={'my-classname'}
+      xAxis={{
+        type: 'category'
+      }}
+      yAxis={{
+        type: 'value',
+        boundaryGap: [0, '30%']
+      }}
+      series={[
+        {
+          type: 'line',
+          data: [
+            ['2022-10-12', 750],
+            ['2022-10-17', 300],
+            ['2022-10-18', 100]
+          ]
+        }
+      ]}
+    />
+  )
+}
+```
