@@ -1,8 +1,4 @@
 {
-  "index": "Overview",
-  "installation": "Installation",
-  "components": "Components",
-  "hooks": "Hooks",
-  "guides": "Guides",
-  "examples": "Examples"
+  "use-connect": "useConnect",
+  "use-disconnect": "useDisconnect"
 }

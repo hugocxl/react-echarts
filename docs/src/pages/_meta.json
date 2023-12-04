@@ -3,6 +3,7 @@
   "installation": "Installation",
   "components": "Components",
   "hooks": "Hooks",
+  "props": "Props",
   "guides": "Guides",
   "examples": "Examples"
 }
