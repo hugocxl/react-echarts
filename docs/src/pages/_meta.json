@@ -1,9 +1,7 @@
 {
-  "index": "Overview",
-  "installation": "Installation",
-  "components": "Components",
+  "overview": "Overview",
+  "echart": "<EChart />",
   "hooks": "Hooks",
-  "props": "Props",
   "guides": "Guides",
   "examples": "Examples"
 }

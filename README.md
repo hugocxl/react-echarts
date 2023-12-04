@@ -67,25 +67,6 @@ function MyChart() {
 }
 ```
 
-### `useEcharts`
-
-In case you need to have more control over the container being used by the library to render ECharts, a special hook ```useECharts``` is provided.
-
-```js
-export const EChart: FC<EChartProps> = (props) => {
-  const containerRef: Ref<HTMLDivElement> = useRef()
-
-  useECharts({ containerRef, ...props })
-
-  return (
-    <div
-      ref={containerRef}
-      id={id}
-    />
-  )
-}
-```
-
 ## Props
 
 While some props have been provided to facilitate specific use cases, most of them follow the [Apache ECharts option schema](https://echarts.apache.org/next/en/option.html). The following props, grouped by category, are available:

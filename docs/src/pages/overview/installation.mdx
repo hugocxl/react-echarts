@@ -1,26 +1,31 @@
-# EChart
+# Installation
 
-EChart is the main component exported by the lib. It offers a declarative way to interact with the ECharts API.
+In order to use `@kbox-labs/react-echarts`, all you need to do is install the npm package:
 
-```tsx
+```sh
+pnpm add @kbox-labs/react-echarts
+```
+
+## Usage
+
+To start using `@kbox-labs/react-echarts`, you just need to import the **`<EChart />`** component from the root folder.
+
+```js
 import { EChart } from '@kbox-labs/react-echarts'
 
 function MyChart() {
   return (
     <EChart
-      className={'my-classname'}
       xAxis={{
         type: 'category'
       }}
       yAxis={{
         type: 'value',
-        boundaryGap: [0, '30%']
       }}
       series={[
         {
           type: 'line',
           data: [
-            ['2022-10-12', 750],
             ['2022-10-17', 300],
             ['2022-10-18', 100]
           ]
@@ -29,4 +34,3 @@ function MyChart() {
     />
   )
 }
-```

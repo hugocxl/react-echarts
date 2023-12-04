@@ -1,9 +1,42 @@
+## EChart
 
-# Props
+EChart is the main component exported by the lib. It offers a declarative way to interact with the ECharts API.
+
+```tsx
+import { EChart } from '@kbox-labs/react-echarts'
+
+function MyChart() {
+  return (
+    <EChart
+      className={'my-classname'}
+      xAxis={{
+        type: 'category'
+      }}
+      yAxis={{
+        type: 'value',
+        boundaryGap: [0, '30%']
+      }}
+      series={[
+        {
+          type: 'line',
+          data: [
+            ['2022-10-12', 750],
+            ['2022-10-17', 300],
+            ['2022-10-18', 100]
+          ]
+        }
+      ]}
+    />
+  )
+}
+```
+
+
+## Props
 
 While some props have been provided to facilitate specific use cases, most of them follow the [Apache ECharts option schema](https://echarts.apache.org/next/en/option.html). The following props, grouped by category, are available:
 
-## General
+### General
 
 | Prop                        |     Type     | Description                                                                 |             Default              |
 | :-------------------------- | :----------: | --------------------------------------------------------------------------- | :------------------------------: |
@@ -11,7 +44,7 @@ While some props have been provided to facilitate specific use cases, most of th
 | **`className`**             |  `{String}`  | Classname of the container                                                  |                ''                |
 | **`style`**                 |  `{Object}`  | Style object applied to the container                                       |               null               |
 
-## ECharts
+### ECharts
 
 | Prop             |    Type     | Description                                                                                  | Default |
 | :--------------- | :---------: | -------------------------------------------------------------------------------------------- | :-----: |
@@ -21,7 +54,7 @@ While some props have been provided to facilitate specific use cases, most of th
 | **`group`**      | `{String}`  | Group name to be used in chart connection.                                                   |   ''    |
 | **`renderer`**   | `{String}`  | Supports 'canvas' or 'svg'                                                                   |  'svg'  |
 
-## Option keys props
+### Option keys props
 
 | Prop                          |    Type    | Description                                                      | Default |
 | :---------------------------- | :--------: | ---------------------------------------------------------------- | :-----: |
@@ -64,7 +97,7 @@ While some props have been provided to facilitate specific use cases, most of th
 
 > For more detailed info, check the [ECharts docs](https://echarts.apache.org/option.html)
 
-## Events
+### Events
 
 | Prop                         |     Type     | Description                                                                                                 | Default |
 | :--------------------------- | :----------: | ----------------------------------------------------------------------------------------------------------- | :-----: |
