@@ -1,8 +1,8 @@
-name: Deploy Next.js site to Pages
+name: Deploy Docs
 
 on:
   push:
-    branches: ['v1']
+    branches: ['master']
   workflow_dispatch:
 
 permissions:
