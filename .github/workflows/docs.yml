@@ -40,10 +40,10 @@ jobs:
           static_site_generator: next
 
       - name: Build with Next.js
-        run: pnpm next build
+        run: pnpm build
 
       - name: Static HTML export with Next.js
-        run: pnpm next export
+        run: pnpm export
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
