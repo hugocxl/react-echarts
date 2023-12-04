@@ -1,16 +1,23 @@
 // Hooks
 import { UseEChartsOptions, useECharts } from './use-echarts'
 import { useEChartsInstance } from './use-echarts-instance'
+import { useEffect } from 'react'
 
 // Types
 import type { FC, HTMLAttributes } from 'react'
 import type { UseEChartsInstanceOptions } from './use-echarts-instance'
+import type { EChartsType } from 'echarts'
 
 export type EChartProps = UseEChartsOptions &
-  UseEChartsInstanceOptions &
-  HTMLAttributes<HTMLDivElement>
+  UseEChartsInstanceOptions & {
+    containerProps?: HTMLAttributes<HTMLDivElement>
+    getEchartsInstance?: (echarts: EChartsType | undefined) => unknown
+  }
 
 export const EChart: FC<EChartProps> = ({
+  containerProps = {},
+  getEchartsInstance,
+
   // useECharts
   devicePixelRatio,
   renderer,
@@ -102,10 +109,9 @@ export const EChart: FC<EChartProps> = ({
   onRestore,
   onSelectChanged,
   onTimelineChanged,
-  onTimelinePlayChanged,
-  ...props
+  onTimelinePlayChanged
 }) => {
-  const [ref, echartsInstance] = useECharts({
+  const [ref, echartsInstance, isMounted] = useECharts({
     devicePixelRatio,
     renderer,
     width,
@@ -116,9 +122,6 @@ export const EChart: FC<EChartProps> = ({
   useEChartsInstance(
     echartsInstance,
     {
-      // useEChartsInstance
-      group,
-
       // Option
       lazyUpdate,
       notMerge,
@@ -167,6 +170,9 @@ export const EChart: FC<EChartProps> = ({
       xAxis,
       yAxis,
 
+      // Others
+      group,
+
       // Events
       onAxisAreaSelected,
       onBrush,
@@ -202,8 +208,14 @@ export const EChart: FC<EChartProps> = ({
       onTimelineChanged,
       onTimelinePlayChanged
     },
-    [echartsInstance?.id]
+    [isMounted]
   )
 
-  return <div {...props} ref={ref} />
+  useEffect(() => {
+    if (getEchartsInstance) {
+      getEchartsInstance(echartsInstance)
+    }
+  }, [isMounted])
+
+  return <div {...containerProps} ref={ref} />
 }

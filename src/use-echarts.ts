@@ -1,61 +1,49 @@
 // Dependencies
-import { init, use } from 'echarts'
-import { useEffect, useRef, useState } from 'react'
+import * as echarts from 'echarts'
+import { useRef, useState } from 'react'
 
 // Types
-import type { EChartsType } from 'echarts'
+import { type EChartsType } from 'echarts'
 
-export type UseEChartsOptions = Parameters<typeof init>[2] & {
-  theme?: Parameters<typeof init>[1]
-  use?: Parameters<typeof use>
-}
+export type UseEChartsOptions = {
+  theme?: Parameters<typeof echarts.init>[1]
+} & Parameters<typeof echarts.init>[2]
 
-export type UseECharts = (options?: UseEChartsOptions) => [
-  /**
-   * Function to set the ref for the hook
-   */
-  (node: HTMLDivElement) => void,
-  /**
-   * ECharts instance created by the hook
-   */
-  EChartsType | undefined,
-  HTMLDivElement | undefined
-]
+export type UseECharts = (
+  options: UseEChartsOptions
+) => [(node: HTMLDivElement) => void, EChartsType | undefined, boolean]
 
-/**
- * Hook to initialize ECharts and get an ECharts instance
- * @returns A tuple with the function to set the ref and the ECharts instance
- */
-export const useECharts: UseECharts = opts => {
+export const useECharts: UseECharts = ({
+  theme,
+  devicePixelRatio,
+  height,
+  renderer,
+  width
+}) => {
   const containerRef = useRef<HTMLDivElement>()
   const echartsRef = useRef<EChartsType>()
-  const resizeObserverRef = useRef<ResizeObserver | null>(null)
+  const resizeObserverRef = useRef<ResizeObserver>()
   const [started, setStarted] = useState(false)
 
-  useEffect(() => {
-    if (containerRef.current && !echartsRef.current) {
-      const { theme, use: useOptions, ...initOptions } = opts || {}
-      if (useOptions) {
-        // @ts-ignore
-        use(useOptions)
-      }
-      echartsRef.current = init(containerRef.current, theme, initOptions)
-      resizeObserverRef.current = startResizeObserver()
-    }
-
-    return () => {
-      // TODO: Review cleanup logic
-      // resizeObserverRef.current.unobserve(containerRef.current);
-      // resizeObserverRef.current.disconnect();
-      // dispose(containerRef.current);
-    }
-  }, [started])
-
   function setContainerRef(node: HTMLDivElement): void {
-    if (containerRef.current) return
+    if (containerRef.current && echartsRef.current) return
 
     containerRef.current = node
+    echartsRef.current = startEcharts()
+    resizeObserverRef.current = startResizeObserver()
+
     setStarted(true)
+  }
+
+  function startEcharts() {
+    if (!containerRef.current) return
+
+    return echarts.init(containerRef.current, theme, {
+      devicePixelRatio,
+      height,
+      renderer,
+      width
+    })
   }
 
   function startResizeObserver() {
@@ -67,5 +55,5 @@ export const useECharts: UseECharts = opts => {
     return resizeObserver
   }
 
-  return [setContainerRef, echartsRef.current, containerRef.current]
+  return [setContainerRef, echartsRef.current, started]
 }

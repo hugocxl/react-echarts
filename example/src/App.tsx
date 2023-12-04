@@ -1,33 +1,30 @@
-import { useMemo, useState } from 'react'
-import './App.css'
-import { EChart, EChartProps } from '@kbox-labs/react-echarts'
+import { useState } from 'react'
+import { EChart, useConnect } from '@kbox-labs/react-echarts'
 
-const staticProps: EChartProps = {
-  xAxis: {
-    type: 'category'
-  },
-  yAxis: {
-    type: 'value',
-    boundaryGap: [0, '30%']
-  }
-}
-
-function MyChart() {
+function MyChart2() {
   return (
     <EChart
-      {...staticProps}
-      style={{
-        height: '600px',
-        width: '100%'
+      group='group1'
+      // animation={false}
+      containerProps={{
+        style: {
+          height: '600px',
+          width: '100%'
+        }
+      }}
+      xAxis={{
+        type: 'category',
+        boundaryGap: false,
+        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+      }}
+      yAxis={{
+        type: 'value'
       }}
       series={[
         {
+          data: [150, 230, 224, 218, 135, 147, 260],
           type: 'line',
-          data: [
-            ['2022-10-12', 750],
-            ['2022-10-17', 300],
-            ['2022-10-18', 100]
-          ]
+          areaStyle: {}
         }
       ]}
     />
@@ -37,10 +34,12 @@ function MyChart() {
 function App() {
   const [count, setCount] = useState(0)
 
+  useConnect({ group: 'group1' }, [])
+
   return (
     <>
       <div style={{ width: '100dvw', height: '100dvh' }}>
-        <MyChart />
+        <MyChart2 />
 
         <span>{count}</span>
 
