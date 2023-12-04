@@ -9,9 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "next": "14.0.3",
-    "nextra": "^2.13.2",
-    "nextra-theme-docs": "^2.13.2",
+    "next": "^14",
+    "nextra": "^2",
+    "nextra-theme-docs": "^2",
     "react": "^18",
     "react-dom": "^18"
   },
@@ -20,7 +20,7 @@
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "eslint": "^8",
-    "eslint-config-next": "14.0.3",
+    "eslint-config-next": "^14",
     "typescript": "^5"
   }
 }
