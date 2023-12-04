@@ -1,7 +1,8 @@
 /** @type {import('next').NextConfig} */
 
 const nextConfig = {
-  output: 'export'
+  output: 'export',
+  basePath: '/react-echarts'
 }
 
 module.exports = nextConfig
