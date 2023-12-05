@@ -1,0 +1,44 @@
+# useRegisterTheme
+
+Registers a theme.
+
+## Usage
+
+```js copy
+import { useRegisterTheme } from '@kbox-labs/react-echarts';
+
+function App() {
+  useRegisterTheme({ target: 'group1' }, [...deps]);
+
+  return (
+    ...
+  )
+}
+```
+
+## API
+
+```typescript
+type UseRegisterTheme = (
+  options: {
+    themeName: string
+    theme: Object
+    enabled?: boolean
+  },
+  deps: unknown[]
+) => void
+```
+
+### Parameters
+
+- **`themeName`**: Name for the theme.
+- **`theme`**: Echarts theme object. See
+  [Overview of Style Customization](https://arc.net/l/quote/vcaskbid) for more
+  details.
+- **`enabled`**: Whether the hook should call the `registerTheme` function or
+  not. Defaults to `true`.
+- **`deps`**: Array of reactive values that trigger the hook.
+
+### Reference
+
+- [ECharts API](https://echarts.apache.org/en/api.html#echarts.registerTheme)

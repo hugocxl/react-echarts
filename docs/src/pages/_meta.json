@@ -1,7 +1,7 @@
 {
-  "overview": "Overview",
-  "echart": "<EChart />",
-  "hooks": "Hooks",
+  "introduction": "Introduction",
+  "installation": "Installation",
+  "usage": "Usage",
   "guides": "Guides",
   "examples": "Examples"
 }

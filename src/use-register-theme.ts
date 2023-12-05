@@ -16,5 +16,5 @@ export const useRegisterTheme: UseRegisterTheme = (
 ) => {
   useEffect(() => {
     if (enabled) registerTheme(themeName, theme)
-  }, [...deps, enabled])
+  }, [...deps])
 }
