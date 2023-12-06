@@ -1,46 +1,48 @@
-# EChart
+# useECharts
 
-The `<EChart />` component offers a declarative way to interact with the ECharts
-API.
+For scenarios demanding finer control over the rendering container or direct
+access to the echartsInstance, the useECharts hook is at your disposal.
+
+This specialized hook empowers developers with a more granular level of control,
+offering the flexibility needed for advanced customization.
 
 ## Usage
 
 ```tsx copy
-import { EChart } from '@kbox-labs/react-echarts'
+export const EChart: FC<UseEChartsOptions> = props => {
+  const [ref, echartsInstance] = useECharts({
+    xAxis: {
+      type: 'category',
+      boundaryGap: false,
+      data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+    },
+    yAxis: {
+      type: 'value'
+    },
+    series: [
+      {
+        data: [150, 230, 224, 218, 135, 147, 260],
+        type: 'line',
+        areaStyle: {}
+      }
+    ]
+  })
 
-function App() {
-  return (
-    <EChart
-      xAxis={{
-        type: 'category'
-      }}
-      yAxis={{
-        type: 'value',
-        boundaryGap: [0, '30%']
-      }}
-      series={[
-        {
-          type: 'line',
-          data: [
-            ['2022-10-17', 300],
-            ['2022-10-18', 100]
-          ]
-        }
-      ]}
-    />
-  )
+  return <div ref={ref} />
 }
 ```
 
 ## API
 
-```ts
-const EChart: FC<EChartProps>
+```typescript
+type UseECharts = (
+  options: UseEChartsOptions
+) => [(node: HTMLDivElement) => void, ECharts | undefined]
 ```
 
-### `EChartProps`
+### `UseEChartsOptions`
 
-The following props can be passed down to the component:
+The following options can be passed down to the component:
 
 #### [init](https://echarts.apache.org/en/api.html#echarts.init)
 

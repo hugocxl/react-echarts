@@ -1,46 +1,69 @@
-# useECharts
+import { Callout } from 'nextra/components'
 
-In case you need to a more granular control over the container being used to
-render ECharts, or access directly to the `echartsInstance`, a special hook
-`useECharts` is provided.
+# EChart
+
+The `<EChart />` component provides a declarative and streamlined approach for
+interacting with the ECharts API.
+
+This abstraction allows developers to express the desired chart configurations
+and behaviors in a clear and concise manner, fostering a more intuitive and
+maintainable development experience. With this component, you can harness the
+power of ECharts while benefiting from the simplicity and expressiveness of a
+declarative interface.
 
 ## Usage
 
 ```tsx copy
-export const EChart: FC<UseEChartsOptions> = props => {
-  const [ref, echartsInstance] = useECharts({
-    xAxis: {
-      type: 'category',
-      boundaryGap: false,
-      data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-    },
-    yAxis: {
-      type: 'value'
-    },
-    series: [
-      {
-        data: [150, 230, 224, 218, 135, 147, 260],
-        type: 'line',
-        areaStyle: {}
-      }
-    ]
-  })
+import { EChart } from '@kbox-labs/react-echarts'
 
-  return <div ref={containerRef} />
+function App() {
+  return (
+    <EChart
+      renderer={'svg'}
+      onClick={() => console.log('clicked!')}
+      xAxis={{
+        type: 'category'
+      }}
+      yAxis={{
+        type: 'value',
+        boundaryGap: [0, '30%']
+      }}
+      series={[
+        {
+          type: 'line',
+          data: [
+            ['2022-10-17', 300],
+            ['2022-10-18', 100]
+          ]
+        }
+      ]}
+    />
+  )
 }
 ```
 
 ## API
 
-```typescript
-type UseECharts = (
-  options: UseEChartsOptions
-) => [(node: HTMLDivElement) => void, ECharts | undefined]
+```ts
+const EChart: FC<EChartProps & HTMLAttributes<HTMLDivElement>>
 ```
 
-### `UseEChartsOptions`
+### `HTMLDivAttributes`
 
-The following options can be passed down to the component:
+Apart from the specific EChart props, all props of the `<div>` container element
+can be passed down to it.
+
+<Callout type='warning' emoji='⚠️'>
+  In scenarios where a conflict arises between container and EChart props,
+  particularly with shared names such as `onClick`, it's important to note that
+  EChart props take precedence. Consequently, these props won't be directly
+  passed to the underlying div element but will instead be applied to the
+  ECharts instance.
+</Callout>
+
+### `EChartProps`
+
+The following props can be passed down to the component:
 
 #### [init](https://echarts.apache.org/en/api.html#echarts.init)
 
@@ -138,7 +161,6 @@ The following options can be passed down to the component:
 | [`onLegendSelected`](https://echarts.apache.org/en/api.html#events.legendSelected)             | Event emitted after legend is selected.                                                                     | `function` | `undefined` |
 | [`onLegendUnselected`](https://echarts.apache.org/en/api.html#events.legendUnselected)         | Event emitted after unselecting legend.                                                                     | `function` | `undefined` |
 | [`onMagicTypeChanged`](https://echarts.apache.org/en/api.html#events.magicTypeChanged)         | Switching event of magic type tool in toolbox.                                                              | `function` | `undefined` |
-| [`onMount`](https://echarts.apache.org/en/api.html#events.mount)                               | Callback to be called on first component mount.                                                             | `function` | `undefined` |
 | [`onMouseDown`](https://echarts.apache.org/en/api.html#events.mouseDown)                       | Event of mouse down chart                                                                                   | `function` | `undefined` |
 | [`onMouseMove`](https://echarts.apache.org/en/api.html#events.mouseMove)                       | Event of mouse mouse chart                                                                                  | `function` | `undefined` |
 | [`onMouseOut`](https://echarts.apache.org/en/api.html#events.mouseOut)                         | Event of global out chart                                                                                   | `function` | `undefined` |

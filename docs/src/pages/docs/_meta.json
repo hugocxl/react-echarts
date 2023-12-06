@@ -1,6 +1,14 @@
 {
   "introduction": "Introduction",
   "installation": "Installation",
-  "usage": "Usage",
-  "guides": "Guides"
+  "usage": {
+    "title": "Usage",
+    "type": "separator"
+  },
+  "components": "Components",
+  "hooks": "Hooks",
+  "guides": {
+    "title": "Guides",
+    "type": "separator"
+  }
 }

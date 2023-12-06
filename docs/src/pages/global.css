@@ -1,4 +1,5 @@
-html {
+html,
+article.nextra-body-typesetting-article {
   font-size: 14px !important;
 }
 

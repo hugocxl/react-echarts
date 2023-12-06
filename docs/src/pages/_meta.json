@@ -1,10 +1,7 @@
 {
   "index": {
     "display": "hidden",
-    "type": "page",
-    "theme": {
-      "layout": "full"
-    }
+    "type": "page"
   },
   "docs": {
     "title": "Docs",
@@ -15,11 +12,14 @@
     "title": "Examples",
     "type": "page",
     "theme": {
-      "layout": "full"
+      "typesetting": "article"
     }
   },
   "about": {
     "title": "About",
-    "type": "page"
+    "type": "page",
+    "theme": {
+      "typesetting": "article"
+    }
   }
 }
