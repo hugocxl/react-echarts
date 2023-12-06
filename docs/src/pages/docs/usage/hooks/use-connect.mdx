@@ -5,29 +5,31 @@ Connects interaction of multiple chart series.
 ## Usage
 
 ```js
-import { useConnect } from '@kbox-labs/react-echarts';
+import { useConnect } from '@kbox-labs/react-echarts'
 
 function App() {
-  useConnect({ group: 'group1', enabled: true }, []);
+  const [isConnected, setIsConnected] = useConnect('group1')
 
-  return (
-    ...
-  )
+  return <div onClick={() => setIsConnected(true)}>{/* ... */}</div>
 }
+
+/* 
+  To disconnect the group, 
+  just call "setIsConnected(false)" 
+  */
 ```
 
 ## API
 
 ```typescript
-type UseConnect = (
-  options: { group: string | Array; enabled?: boolean },
-  deps: unknown[]
-) => void
+const useConnect: (
+  group: string
+) => (boolean | ((connected: boolean) => void))[]
 ```
 
 ### Parameters
 
-- **`group`**: Group id, or array of chart instance.
-- **`enabled`**: Whether the hook should call the `connect` function or not.
-  Defaults to `true`.
-- **`deps`**: Array of reactive values that trigger the hook.
+| Prop              | Description                                   |   Type    |     Default |
+| :---------------- | :-------------------------------------------- | :-------: | ----------: |
+| **`group`**       | Group name to be used in chart connection.    | `string`  | `undefined` |
+| **`isConnected`** | Control whether the group is connected or not | `boolean` |     `false` |

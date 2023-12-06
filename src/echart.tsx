@@ -26,7 +26,6 @@ export const EChart: FC<EChartProps> = ({
   locale,
   pointerSize,
   renderer,
-  ssr,
   theme,
   use,
   useCoarsePointer,
@@ -129,18 +128,11 @@ export const EChart: FC<EChartProps> = ({
     locale,
     pointerSize,
     renderer,
-    ssr,
     theme,
     use,
     useCoarsePointer,
     useDirtyRect,
     width
-  })
-
-  useEffect(() => {
-    if (getEchartsInstance) {
-      getEchartsInstance(echartsInstance)
-    }
   })
 
   useEChartsInstance(

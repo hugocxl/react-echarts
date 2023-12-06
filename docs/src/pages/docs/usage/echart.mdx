@@ -1,11 +1,11 @@
 # EChart
 
-EChart is the main component exported by the lib. It offers a declarative way to
-interact with the ECharts API.
+The `<EChart />` component offers a declarative way to interact with the ECharts
+API.
 
 ## Usage
 
-```tsx
+```tsx copy
 import { EChart } from '@kbox-labs/react-echarts'
 
 function App() {
@@ -36,15 +36,34 @@ function App() {
 
 The following props, grouped by category, are available:
 
-### ECharts
+### Init
 
-| Prop             | Description                                                                                  |   Type    |     Default |
-| :--------------- | :------------------------------------------------------------------------------------------- | :-------: | ----------: |
-| **`group`**      | Group name to be used in chart connection.                                                   | `string`  | `undefined` |
-| **`lazyUpdate`** | Whether or not to update chart immediately;                                                  | `boolean` |     `false` |
-| **`notMerge`**   | Whether or not to merge with previous option                                                 | `boolean` |     `false` |
-| **`renderer`**   | Supports 'canvas' or 'svg'                                                                   | `string`  |       `svg` |
-| **`theme`**      | Theme to be applied. This can be a configuring object of a theme, or a theme name registered | `string`  | `undefined` |
+https://echarts.apache.org/en/api.html#echarts.init
+
+| Prop                   | Description                                                                                                                       |         Type         |     Default |
+| :--------------------- | :-------------------------------------------------------------------------------------------------------------------------------- | :------------------: | ----------: |
+| **`devicePixelRatio`** | Ratio of one physical pixel to the size of one device independent pixels                                                          |       `number`       | `undefined` |
+| **`height`**           | Specify height explicitly, in pixel. If setting to `null`/`undefined`/`'auto'`, height of `dom` (instance container) will be used | `number` or `string` | `undefined` |
+| **`width`**            | Specify width explicitly, in pixel. If setting to `null`/`undefined`/`'auto'`, width of `dom` (instance container) will be used   | `number` or `string` | `undefined` |
+| **`group`**            | Group name to be used in chart connection.                                                                                        |       `string`       | `undefined` |
+| **`locale`**           | Specify the locale                                                                                                                |       `string`       | `undefined` |
+| **`pointerSize`**      | Size of expanded interaction size in pixels                                                                                       |       `number`       | `undefined` |
+| **`renderer`**         | Supports 'canvas' or 'svg'                                                                                                        |       `string`       |       `svg` |
+| **`theme`**            | Theme to be applied. This can be a configuring object of a theme, or a theme name registered                                      |       `string`       | `undefined` |
+| **`useCoarsePointer`** | Whether to expand the response area when interacting with elements                                                                |      `boolean`       | `undefined` |
+| **`useDirtyRect`**     | Enable dirty rectangle rendering or not                                                                                           |      `boolean`       |     `false` |
+
+### setOption
+
+https://echarts.apache.org/en/api.html#echartsInstance.setOption
+
+| Prop               | Description                                                     |              Type              |     Default |
+| :----------------- | :-------------------------------------------------------------- | :----------------------------: | ----------: |
+| **`lazyUpdate`**   | Whether or not to update chart immediately;                     |           `boolean`            |     `false` |
+| **`notMerge`**     | Whether or not to merge with previous option                    |           `boolean`            |     `false` |
+| **`replaceMerge`** | Whether or not to merge with previous option                    |     `string` or `string[]`     |     `false` |
+| **`silent`**       | Whether not to prevent triggering events when calling setOption |           `boolean`            |     `false` |
+| **`transition`**   | UpdateLifecycleTransitionOpt                                    | `UpdateLifecycleTransitionOpt` | `undefined` |
 
 ### Option
 

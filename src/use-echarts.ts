@@ -19,7 +19,6 @@ export const useECharts: UseECharts = ({
   locale,
   pointerSize,
   renderer,
-  ssr,
   useCoarsePointer,
   useDirtyRect,
   width,
@@ -53,7 +52,6 @@ export const useECharts: UseECharts = ({
       locale,
       pointerSize,
       renderer,
-      ssr,
       useCoarsePointer,
       useDirtyRect,
       width

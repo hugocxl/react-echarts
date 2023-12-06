@@ -1,4 +1,5 @@
 {
-  "echart": "EChart ",
+  "echart": "EChart",
+  "ssr-echart": "EChart Server",
   "hooks": "Hooks"
 }
