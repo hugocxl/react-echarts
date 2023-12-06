@@ -1,7 +1,6 @@
 // Hooks
 import { UseEChartsOptions, useECharts } from './use-echarts'
 import { useEChartsInstance } from './use-echarts-instance'
-import { useEffect } from 'react'
 
 // Types
 import type { FC, HTMLAttributes } from 'react'
@@ -18,10 +17,16 @@ export const EChart: FC<EChartProps> = ({
 
   // Init
   devicePixelRatio,
-  renderer,
-  width,
   height,
+  locale,
+  pointerSize,
+  renderer,
+  ssr,
   theme,
+  use,
+  useCoarsePointer,
+  useDirtyRect,
+  width,
 
   // eChartsInstance
   group,
@@ -29,7 +34,9 @@ export const EChart: FC<EChartProps> = ({
   // SetOption
   lazyUpdate,
   notMerge,
+  replaceMerge,
   silent,
+  transition,
 
   // Option
   angleAxis,
@@ -113,21 +120,32 @@ export const EChart: FC<EChartProps> = ({
 }) => {
   const [ref, echartsInstance, isMounted] = useECharts({
     devicePixelRatio,
-    renderer,
-    width,
     height,
-    theme
+    locale,
+    pointerSize,
+    renderer,
+    ssr,
+    theme,
+    use,
+    useCoarsePointer,
+    useDirtyRect,
+    width
   })
 
   useEChartsInstance(
     echartsInstance,
     {
-      // Option
+      // SetOption
       lazyUpdate,
       notMerge,
+      replaceMerge,
       silent,
+      transition,
 
-      // Series
+      // Instance
+      group,
+
+      // Option
       angleAxis,
       animation,
       animationDelay,
@@ -170,9 +188,6 @@ export const EChart: FC<EChartProps> = ({
       xAxis,
       yAxis,
 
-      // Others
-      group,
-
       // Events
       onAxisAreaSelected,
       onBrush,
@@ -210,12 +225,6 @@ export const EChart: FC<EChartProps> = ({
     },
     [isMounted]
   )
-
-  useEffect(() => {
-    if (getEchartsInstance) {
-      getEchartsInstance(echartsInstance)
-    }
-  }, [isMounted])
 
   return <div {...rest} ref={ref} />
 }

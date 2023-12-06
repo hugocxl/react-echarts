@@ -1,19 +1,17 @@
-import { connect } from 'echarts'
-import { useEffect } from 'react'
+import { connect, disconnect } from 'echarts/core'
+import { useState } from 'react'
 
-type UseConnect = (
-  options: {
-    group: Parameters<typeof connect>[0]
-    enabled?: boolean
-  },
-  deps: unknown[]
-) => void
+export const useConnect = (group: string) => {
+  const [isConnected, setIsConnected] = useState(false)
 
-export const useConnect: UseConnect = (
-  { group, enabled = true },
-  deps = []
-) => {
-  useEffect(() => {
-    if (enabled) connect(group)
-  }, [...deps, enabled])
+  function onChange(connected: boolean) {
+    if (connected) {
+      connect(group)
+    } else {
+      disconnect(group)
+    }
+    setIsConnected(connected)
+  }
+
+  return [isConnected, onChange]
 }

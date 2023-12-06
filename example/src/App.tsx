@@ -1,17 +1,17 @@
 import { useState } from 'react'
-import { EChart, useConnect } from '@kbox-labs/react-echarts'
+import { EChart } from '@kbox-labs/react-echarts'
 
 function MyChart2() {
   return (
     <EChart
       group='group1'
-      // animation={false}
-      containerProps={{
-        style: {
-          height: '600px',
-          width: '100%'
-        }
+      animation={false}
+      style={{
+        height: '600px',
+        width: '100%'
       }}
+      ssr={true}
+      // use={[]}
       xAxis={{
         type: 'category',
         boundaryGap: false,
@@ -34,7 +34,7 @@ function MyChart2() {
 function App() {
   const [count, setCount] = useState(0)
 
-  useConnect({ group: 'group1' }, [])
+  // useConnect({ group: 'group1' }, [])
 
   return (
     <>

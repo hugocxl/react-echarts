@@ -69,10 +69,10 @@ export type EChartsEventProp =
   | 'onTimelinePlayChanged'
 
 export type EChartEventsProps = {
-  [K in EChartsEventProp]?: () => unknown
+  [K in EChartsEventProp]?: () => any
 }
 
-export const echartsEventsMapping: Record<EChartsEventProp, EChartsEvent> = {
+export const echartsEvents: Record<EChartsEventProp, EChartsEvent> = {
   onClick: 'click',
   onDoubleClick: 'dblclick',
   onMouseDown: 'mousedown',

@@ -1,71 +1,37 @@
 // Dependencies
+import { ECharts } from 'echarts/core'
 import { useEffect } from 'react'
 
+// Constants
+import { echartsEvents as ev } from './events'
+
 // Types
-import { echartsEventsMapping as ev, type EChartEventsProps } from './events'
-import type { EChartOption, EChartsType, SetOptionOpts } from 'echarts'
+import type { EChartEventsProps } from './events'
+import type { EChartOption, SetOptionOpts } from 'echarts'
+import type { ECBasicOption } from 'echarts/types/dist/shared'
 
 export type UseEChartsInstanceOptions = EChartEventsProps &
-  SetOptionOpts & {
-    angleAxis?: EChartOption['angleAxis']
-    animation?: EChartOption['animation']
-    animationDelay?: EChartOption['animationDelay']
-    animationDelayUpdate?: EChartOption['animationDelayUpdate']
-    animationDuration?: EChartOption['animationDuration']
-    animationDurationUpdate?: EChartOption['animationDurationUpdate']
-    animationEasing?: EChartOption['animationEasing']
-    animationEasingUpdate?: EChartOption['animationEasingUpdate']
-    animationThreshold?: EChartOption['animationThreshold']
-    aria?: EChartOption['aria']
-    axisPointer?: EChartOption['axisPointer']
-    backgroundColor?: EChartOption['backgroundColor']
-    blendMode?: EChartOption['blendMode']
-    brush?: EChartOption['brush']
-    calendar?: EChartOption['calendar']
-    color?: EChartOption['color']
-    dataZoom?: EChartOption['dataZoom']
-    dataset?: EChartOption['dataset']
-    geo?: EChartOption['geo']
-    graphic?: EChartOption['graphic']
-    grid?: EChartOption['grid']
-    hoverLayerThreshold?: EChartOption['hoverLayerThreshold']
-    legend?: EChartOption['legend']
-    parallel?: EChartOption['parallel']
-    parallelAxis?: EChartOption['parallelAxis']
-    polar?: EChartOption['polar']
-    progressive?: EChartOption['progressive']
-    progressiveThreshold?: EChartOption['progressiveThreshold']
-    radar?: EChartOption['radar']
-    radiusAxis?: EChartOption['radiusAxis']
-    series?: EChartOption['series']
-    singleAxis?: EChartOption['singleAxis']
-    textStyle?: EChartOption['textStyle']
-    timeline?: EChartOption['timeline']
-    title?: EChartOption['title']
-    toolbox?: EChartOption['toolbox']
-    tooltip?: EChartOption['tooltip']
-    useUTC?: EChartOption['useUTC']
-    visualMap?: EChartOption['visualMap']
-    xAxis?: EChartOption['xAxis']
-    yAxis?: EChartOption['yAxis']
-
-    // Instance
-    group?: EChartsType['group']
+  SetOptionOpts &
+  EChartOption &
+  ECBasicOption & {
+    group?: ECharts['group']
   }
 
 export type UseEChartsInstance = (
-  echarts: EChartsType | undefined,
+  echartsInstance: ECharts | undefined,
   opts: UseEChartsInstanceOptions,
   deps: unknown[]
 ) => void
 
 export const useEChartsInstance: UseEChartsInstance = (
-  echarts,
+  echartsInstance,
   {
     // Option
     lazyUpdate,
     notMerge,
+    replaceMerge,
     silent,
+    transition,
 
     // Series
     angleAxis,
@@ -84,13 +50,16 @@ export const useEChartsInstance: UseEChartsInstance = (
     brush,
     calendar,
     color,
-    dataZoom,
+    darkMode,
     dataset,
+    dataZoom,
     geo,
     graphic,
     grid,
     hoverLayerThreshold,
     legend,
+    media,
+    options,
     parallel,
     parallelAxis,
     polar,
@@ -100,6 +69,7 @@ export const useEChartsInstance: UseEChartsInstance = (
     radiusAxis,
     series,
     singleAxis,
+    stateAnimation,
     textStyle,
     timeline,
     title,
@@ -151,16 +121,16 @@ export const useEChartsInstance: UseEChartsInstance = (
   deps = []
 ) => {
   useEffect(() => {
-    if (!echarts) return
+    if (!echartsInstance) return
 
-    if (group) echarts.group = group
+    if (group) echartsInstance.group = group
   }, [group, ...deps])
 
   useEffect(() => {
-    if (!echarts) return
+    if (!echartsInstance) return
 
-    echarts.clear()
-    echarts.setOption(
+    echartsInstance.clear()
+    echartsInstance.setOption(
       {
         angleAxis,
         animation,
@@ -178,13 +148,16 @@ export const useEChartsInstance: UseEChartsInstance = (
         brush,
         calendar,
         color,
-        dataZoom,
+        darkMode,
         dataset,
+        dataZoom,
         geo,
         graphic,
         grid,
         hoverLayerThreshold,
         legend,
+        media,
+        options,
         parallel,
         parallelAxis,
         polar,
@@ -194,6 +167,7 @@ export const useEChartsInstance: UseEChartsInstance = (
         radiusAxis,
         series,
         singleAxis,
+        stateAnimation,
         textStyle,
         timeline,
         title,
@@ -207,7 +181,9 @@ export const useEChartsInstance: UseEChartsInstance = (
       {
         lazyUpdate,
         notMerge,
-        silent
+        replaceMerge,
+        silent,
+        transition
       }
     )
   }, [
@@ -227,13 +203,16 @@ export const useEChartsInstance: UseEChartsInstance = (
     brush,
     calendar,
     color,
-    dataZoom,
+    darkMode,
     dataset,
+    dataZoom,
     geo,
     graphic,
     grid,
     hoverLayerThreshold,
     legend,
+    media,
+    options,
     parallel,
     parallelAxis,
     polar,
@@ -243,6 +222,7 @@ export const useEChartsInstance: UseEChartsInstance = (
     radiusAxis,
     series,
     singleAxis,
+    stateAnimation,
     textStyle,
     timeline,
     title,
@@ -252,116 +232,122 @@ export const useEChartsInstance: UseEChartsInstance = (
     visualMap,
     xAxis,
     yAxis,
+
+    //
     lazyUpdate,
     notMerge,
+    replaceMerge,
     silent,
+    transition,
+
+    //
     ...deps
   ])
 
   useEffect(() => {
-    if (!echarts) return
+    if (!echartsInstance) return
 
     if (onAxisAreaSelected) {
-      echarts.on(ev.onAxisAreaSelected, onAxisAreaSelected)
+      echartsInstance.on(ev.onAxisAreaSelected, onAxisAreaSelected)
     }
     if (onBrush) {
-      echarts.on(ev.onBrush, onBrush)
+      echartsInstance.on(ev.onBrush, onBrush)
     }
     if (onBrushEnd) {
-      echarts.on(ev.onBrushEnd, onBrushEnd)
+      echartsInstance.on(ev.onBrushEnd, onBrushEnd)
     }
     if (onBrushSelected) {
-      echarts.on(ev.onBrushSelected, onBrushSelected)
+      echartsInstance.on(ev.onBrushSelected, onBrushSelected)
     }
     if (onClick) {
-      echarts.on(ev.onClick, onClick)
+      echartsInstance.on(ev.onClick, onClick)
     }
     if (onContextMenu) {
-      echarts.on(ev.onContextMenu, onContextMenu)
+      echartsInstance.on(ev.onContextMenu, onContextMenu)
     }
     if (onDataRangeSelected) {
-      echarts.on(ev.onDataRangeSelected, onDataRangeSelected)
+      echartsInstance.on(ev.onDataRangeSelected, onDataRangeSelected)
     }
     if (onDataViewChanged) {
-      echarts.on(ev.onDataViewChanged, onDataViewChanged)
+      echartsInstance.on(ev.onDataViewChanged, onDataViewChanged)
     }
     if (onDataZoom) {
-      echarts.on(ev.onDataZoom, onDataZoom)
+      echartsInstance.on(ev.onDataZoom, onDataZoom)
     }
     if (onDoubleClick) {
-      echarts.on(ev.onDoubleClick, onDoubleClick)
+      echartsInstance.on(ev.onDoubleClick, onDoubleClick)
     }
     if (onDownplay) {
-      echarts.on(ev.onDownplay, onDownplay)
+      echartsInstance.on(ev.onDownplay, onDownplay)
     }
     if (onFinished) {
-      echarts.on(ev.onFinished, onFinished)
+      echartsInstance.on(ev.onFinished, onFinished)
     }
     if (onGeoSelectChanged) {
-      echarts.on(ev.onGeoSelectChanged, onGeoSelectChanged)
+      echartsInstance.on(ev.onGeoSelectChanged, onGeoSelectChanged)
     }
     if (onGeoSelected) {
-      echarts.on(ev.onGeoSelected, onGeoSelected)
+      echartsInstance.on(ev.onGeoSelected, onGeoSelected)
     }
     if (onGeoUnselected) {
-      echarts.on(ev.onGeoUnselected, onGeoUnselected)
+      echartsInstance.on(ev.onGeoUnselected, onGeoUnselected)
     }
     if (onGlobalCursorTaken) {
-      echarts.on(ev.onGlobalCursorTaken, onGlobalCursorTaken)
+      echartsInstance.on(ev.onGlobalCursorTaken, onGlobalCursorTaken)
     }
     if (onGlobalOut) {
-      echarts.on(ev.onGlobalOut, onGlobalOut)
+      echartsInstance.on(ev.onGlobalOut, onGlobalOut)
     }
     if (onHighlight) {
-      echarts.on(ev.onHighlight, onHighlight)
+      echartsInstance.on(ev.onHighlight, onHighlight)
     }
     if (onLegendInverseSelect) {
-      echarts.on(ev.onLegendInverseSelect, onLegendInverseSelect)
+      echartsInstance.on(ev.onLegendInverseSelect, onLegendInverseSelect)
     }
     if (onLegendScroll) {
-      echarts.on(ev.onLegendScroll, onLegendScroll)
+      echartsInstance.on(ev.onLegendScroll, onLegendScroll)
     }
     if (onLegendScroll) {
-      echarts.on(ev.onLegendScroll, onLegendScroll)
+      echartsInstance.on(ev.onLegendScroll, onLegendScroll)
     }
     if (onLegendSelectChanged) {
-      echarts.on(ev.onLegendSelectChanged, onLegendSelectChanged)
+      echartsInstance.on(ev.onLegendSelectChanged, onLegendSelectChanged)
     }
     if (onLegendSelected) {
-      echarts.on(ev.onLegendSelected, onLegendSelected)
+      echartsInstance.on(ev.onLegendSelected, onLegendSelected)
     }
     if (onLegendUnselected) {
-      echarts.on(ev.onLegendUnselected, onLegendUnselected)
+      echartsInstance.on(ev.onLegendUnselected, onLegendUnselected)
     }
     if (onMagicTypeChanged) {
-      echarts.on(ev.onMagicTypeChanged, onMagicTypeChanged)
+      echartsInstance.on(ev.onMagicTypeChanged, onMagicTypeChanged)
     }
     if (onMouseDown) {
-      echarts.on(ev.onMouseDown, onMouseDown)
+      echartsInstance.on(ev.onMouseDown, onMouseDown)
     }
     if (onMouseMove) {
-      echarts.on(ev.onMouseMove, onMouseMove)
+      echartsInstance.on(ev.onMouseMove, onMouseMove)
     }
     if (onMouseOut) {
-      echarts.on(ev.onMouseOut, onMouseOut)
+      echartsInstance.on(ev.onMouseOut, onMouseOut)
     }
     if (onMouseOver) {
-      echarts.on(ev.onMouseOver, onMouseOver)
+      echartsInstance.on(ev.onMouseOver, onMouseOver)
     }
     if (onRendered) {
-      echarts.on(ev.onRendered, onRendered)
+      echartsInstance.on(ev.onRendered, onRendered)
     }
     if (onRestore) {
-      echarts.on(ev.onRestore, onRestore)
+      echartsInstance.on(ev.onRestore, onRestore)
     }
     if (onSelectChanged) {
-      echarts.on(ev.onSelectChanged, onSelectChanged)
+      echartsInstance.on(ev.onSelectChanged, onSelectChanged)
     }
     if (onTimelineChanged) {
-      echarts.on(ev.onTimelineChanged, onTimelineChanged)
+      echartsInstance.on(ev.onTimelineChanged, onTimelineChanged)
     }
     if (onTimelinePlayChanged) {
-      echarts.on(ev.onTimelinePlayChanged, onTimelinePlayChanged)
+      echartsInstance.on(ev.onTimelinePlayChanged, onTimelinePlayChanged)
     }
   }, [
     onAxisAreaSelected,

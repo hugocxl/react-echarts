@@ -1,47 +1,61 @@
 // Dependencies
-import * as echarts from 'echarts'
+import { init, ECharts, use } from 'echarts/core'
 import { useRef, useState } from 'react'
-
-// Types
-import { type EChartsType } from 'echarts'
-
-export type UseEChartsOptions = {
-  theme?: Parameters<typeof echarts.init>[1]
-} & Parameters<typeof echarts.init>[2]
 
 export type UseECharts = (
   options: UseEChartsOptions
-) => [(node: HTMLDivElement) => void, EChartsType | undefined, boolean]
+) => [(node: HTMLDivElement) => void, ECharts | undefined, boolean]
+
+export type UseEChartsOptions = {
+  theme?: Parameters<typeof init>[1]
+} & Parameters<typeof init>[2] & {
+    use?: Parameters<typeof use>[0]
+  }
 
 export const useECharts: UseECharts = ({
   theme,
   devicePixelRatio,
   height,
+  locale,
+  pointerSize,
   renderer,
-  width
-}) => {
+  ssr,
+  useCoarsePointer,
+  useDirtyRect,
+  width,
+  use: useProps
+}: UseEChartsOptions) => {
   const containerRef = useRef<HTMLDivElement>()
-  const echartsRef = useRef<EChartsType>()
+  const echartsRef = useRef<ECharts>()
   const resizeObserverRef = useRef<ResizeObserver>()
   const [started, setStarted] = useState(false)
 
-  function setContainerRef(node: HTMLDivElement): void {
+  async function setContainerRef(node: HTMLDivElement) {
     if (containerRef.current && echartsRef.current) return
 
     containerRef.current = node
-    echartsRef.current = startEcharts()
+    echartsRef.current = await startEcharts()
     resizeObserverRef.current = startResizeObserver()
 
     setStarted(true)
   }
 
-  function startEcharts() {
+  async function startEcharts() {
     if (!containerRef.current) return
 
-    return echarts.init(containerRef.current, theme, {
+    const useArgs = useProps || (await getGlobalUse())
+
+    use(useArgs)
+
+    return init(containerRef.current, theme, {
       devicePixelRatio,
       height,
+      locale,
+      pointerSize,
       renderer,
+      ssr,
+      useCoarsePointer,
+      useDirtyRect,
       width
     })
   }
@@ -56,4 +70,17 @@ export const useECharts: UseECharts = ({
   }
 
   return [setContainerRef, echartsRef.current, started]
+}
+
+async function getGlobalUse() {
+  const all = [
+    import('echarts/features'),
+    import('echarts/charts'),
+    import('echarts/components'),
+    import('echarts/renderers')
+  ]
+
+  const promise = await Promise.all(all.map(m => m.then(m => Object.values(m))))
+
+  return promise.flat()
 }
