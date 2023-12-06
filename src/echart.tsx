@@ -1,16 +1,21 @@
+// Dependencies
+import { ECharts } from 'echarts/core'
+
 // Hooks
-import { UseEChartsOptions, useECharts } from './use-echarts'
+import { useEffect } from 'react'
+import { useECharts } from './use-echarts'
 import { useEChartsInstance } from './use-echarts-instance'
 
 // Types
+import type { UseEChartsOptions } from './use-echarts'
 import type { FC, HTMLAttributes } from 'react'
 import type { UseEChartsInstanceOptions } from './use-echarts-instance'
-import type { EChartsType } from 'echarts'
 
-export type EChartProps = UseEChartsOptions &
+export type EChartProps = HTMLAttributes<HTMLDivElement> &
+  UseEChartsOptions &
   UseEChartsInstanceOptions & {
-    getEchartsInstance?: (echarts: EChartsType | undefined) => unknown
-  } & HTMLAttributes<HTMLDivElement>
+    getEchartsInstance?: (echarts?: ECharts) => unknown
+  }
 
 export const EChart: FC<EChartProps> = ({
   getEchartsInstance,
@@ -130,6 +135,12 @@ export const EChart: FC<EChartProps> = ({
     useCoarsePointer,
     useDirtyRect,
     width
+  })
+
+  useEffect(() => {
+    if (getEchartsInstance) {
+      getEchartsInstance(echartsInstance)
+    }
   })
 
   useEChartsInstance(

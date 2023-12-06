@@ -1,0 +1,56 @@
+import { Callout } from 'nextra/components'
+
+# Bundle Size
+
+<Callout type='warning' emoji='⚠️'>
+  By default, and unless the `use` prop is specified all source code of ECharts
+  is included.
+</Callout>
+
+Controlling bundle size is crucial for optimizing the performance of your
+application. **By default, all source code of ECharts is included.**
+Nonetheless, you can leverage the tree-shakeable interface offered by ECharts by
+using the `use` prop.
+
+## `use` prop
+
+In the context of React ECharts, you have the flexibility to include only the
+necessary components by utilizing the `use` prop.
+
+For a more tailored approach, you can leverage the tree-shakeable interface
+offered by ECharts. This allows you to selectively bundle the required
+components, resulting in a more streamlined and minimal bundle size.
+
+```tsx
+import { EChart } from '@kbox-labs/react-echarts'
+import { BarChart } from 'echarts/charts'
+import { LabelLayout } from 'echarts/features'
+import { CanvasRenderer } from 'echarts/renderers'
+import {
+  TitleComponent,
+  TooltipComponent,
+  GridComponent
+} from 'echarts/components'
+
+function App() {
+  return (
+    <EChart
+      use={[
+        BarChart,
+        TitleComponent,
+        TooltipComponent,
+        GridComponent,
+        CanvasRenderer
+      ]}
+      // ...your other props
+    />
+  )
+}
+```
+
+This approach enhances the efficiency of your application by excluding
+unnecessary code and dependencies.
+
+## Reference
+
+https://echarts.apache.org/handbook/en/basics/import#shrinking-bundle-size

@@ -129,6 +129,8 @@ export const useEChartsInstance: UseEChartsInstance = (
   useEffect(() => {
     if (!echartsInstance) return
 
+    console.log('DRAWING')
+
     echartsInstance.clear()
     echartsInstance.setOption(
       {

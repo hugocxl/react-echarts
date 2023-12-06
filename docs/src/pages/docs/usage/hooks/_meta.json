@@ -1,9 +1,3 @@
 {
-  "use-connect": "useConnect",
-  "use-disconnect": "useDisconnect",
-  "use-dispose": "useDispose",
-  "use-get-map": "useGetMap",
-  "use-register-locale": "useRegisterLocale",
-  "use-register-map": "useRegisterMap",
-  "use-register-theme": "useRegisterTheme"
+  "use-connect": "useConnect"
 }

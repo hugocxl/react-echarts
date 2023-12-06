@@ -1,0 +1,42 @@
+# Performance
+
+While in most cases extra renders in React are not a problem, in some cases they
+can be. For example, if you are loading many charts on screen and heavy updating
+them, as this could lead to performance problems.
+
+If you are defining props inside a component, you should still try to give them
+a stable identity. **Store the props definitions in either a `useMemo` or
+`useState` hook.** This will help with performance and prevent unnecessary
+re-renders.
+
+```tsx
+import { EChart, EChartProps } from '@kbox-labs/react-echarts'
+import { useMemo } from 'react'
+
+const staticProps: EChartProps = {
+  xAxis: {
+    type: 'category'
+  },
+  yAxis: {
+    type: 'value',
+    boundaryGap: [0, '30%']
+  }
+}
+
+function App() {
+  const series = useMemo(
+    () => [
+      {
+        type: 'line',
+        data: [
+          ['2022-10-17', 300],
+          ['2022-10-18', 100]
+        ]
+      }
+    ],
+    []
+  )
+
+  return <EChart {...staticProps} series={series} />
+}
+```
