@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { EChart, useConnect } from '@kbox-labs/react-echarts'
+import { EChart } from '@kbox-labs/react-echarts'
 
 function MyChart2() {
   return (
@@ -31,8 +31,6 @@ function MyChart2() {
 
 function App() {
   const [count, setCount] = useState(0)
-
-  useConnect({ group: 'group1' }, [])
 
   return (
     <>

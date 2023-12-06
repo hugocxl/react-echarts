@@ -1,1 +1,11 @@
 # Examples
+
+## Creating your own `<EChart />` component
+
+```tsx
+export const EChart: FC<EChartProps> = props => {
+  const [ref, echartsInstance] = useECharts({ ...props })
+
+  return <div ref={containerRef} />
+}
+```

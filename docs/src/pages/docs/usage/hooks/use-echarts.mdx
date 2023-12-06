@@ -1,44 +1,48 @@
-# EChart
+# useECharts
 
-The `<EChart />` component offers a declarative way to interact with the ECharts
-API.
+In case you need to a more granular control over the container being used to
+render ECharts, or access directly to the `echartsInstance`, a special hook
+`useECharts` is provided.
 
 ## Usage
 
 ```tsx copy
-import { EChart } from '@kbox-labs/react-echarts'
+export const EChart: FC<UseEChartsOptions> = props => {
+  const [ref, echartsInstance] = useECharts({
+    xAxis: {
+      type: 'category',
+      boundaryGap: false,
+      data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+    },
+    yAxis: {
+      type: 'value'
+    },
+    series: [
+      {
+        data: [150, 230, 224, 218, 135, 147, 260],
+        type: 'line',
+        areaStyle: {}
+      }
+    ]
+  })
 
-function App() {
-  return (
-    <EChart
-      xAxis={{
-        type: 'category'
-      }}
-      yAxis={{
-        type: 'value',
-        boundaryGap: [0, '30%']
-      }}
-      series={[
-        {
-          type: 'line',
-          data: [
-            ['2022-10-17', 300],
-            ['2022-10-18', 100]
-          ]
-        }
-      ]}
-    />
-  )
+  return <div ref={containerRef} />
 }
 ```
 
-## Props
+## API
 
-The following props, grouped by category, are available:
+```typescript
+type UseECharts = (
+  options: UseEChartsOptions
+) => [(node: HTMLDivElement) => void, ECharts | undefined]
+```
 
-### Init
+### `UseEChartsOptions`
 
-https://echarts.apache.org/en/api.html#echarts.init
+The following options can be passed down to the component:
+
+#### [init](https://echarts.apache.org/en/api.html#echarts.init)
 
 | Prop                   | Description                                                                                                                       |         Type         |     Default |
 | :--------------------- | :-------------------------------------------------------------------------------------------------------------------------------- | :------------------: | ----------: |
@@ -53,21 +57,17 @@ https://echarts.apache.org/en/api.html#echarts.init
 | **`useCoarsePointer`** | Whether to expand the response area when interacting with elements                                                                |      `boolean`       | `undefined` |
 | **`useDirtyRect`**     | Enable dirty rectangle rendering or not                                                                                           |      `boolean`       |     `false` |
 
-### setOption
+#### [setOption](https://echarts.apache.org/en/api.html#echartsInstance.setOption)
 
-https://echarts.apache.org/en/api.html#echartsInstance.setOption
+| Prop               | Description                                                     |         Type         |     Default |
+| :----------------- | :-------------------------------------------------------------- | :------------------: | ----------: |
+| **`lazyUpdate`**   | Whether or not to update chart immediately;                     |      `boolean`       |     `false` |
+| **`notMerge`**     | Whether or not to merge with previous option                    |      `boolean`       |     `false` |
+| **`replaceMerge`** | Whether or not to merge with previous option                    | `string`, `string[]` |     `false` |
+| **`silent`**       | Whether not to prevent triggering events when calling setOption |      `boolean`       |     `false` |
+| **`transition`**   | UpdateLifecycleTransitionOpt                                    |          ``          | `undefined` |
 
-| Prop               | Description                                                     |              Type              |     Default |
-| :----------------- | :-------------------------------------------------------------- | :----------------------------: | ----------: |
-| **`lazyUpdate`**   | Whether or not to update chart immediately;                     |           `boolean`            |     `false` |
-| **`notMerge`**     | Whether or not to merge with previous option                    |           `boolean`            |     `false` |
-| **`replaceMerge`** | Whether or not to merge with previous option                    |     `string` or `string[]`     |     `false` |
-| **`silent`**       | Whether not to prevent triggering events when calling setOption |           `boolean`            |     `false` |
-| **`transition`**   | UpdateLifecycleTransitionOpt                                    | `UpdateLifecycleTransitionOpt` | `undefined` |
-
-### Option
-
-https://echarts.apache.org/en/option.html
+#### [option](https://echarts.apache.org/en/option.html)
 
 | Prop                                                                                        | Description                                                                                                                                                                                                         |   Type   |     Default |
 | :------------------------------------------------------------------------------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | :------: | ----------: |
@@ -108,9 +108,7 @@ https://echarts.apache.org/en/option.html
 | [`xAxis`](https://echarts.apache.org/option.html#xAxis)                                     | The x axis in cartesian (rectangular) coordinate                                                                                                                                                                    | `object` | `undefined` |
 | [`yAxis`](https://echarts.apache.org/option.html#yAxis)                                     | The y axis in cartesian (rectangular) coordinate                                                                                                                                                                    | `object` | `undefined` |
 
-### Events
-
-https://echarts.apache.org/en/api.html#events
+#### [events](https://echarts.apache.org/en/api.html#events)
 
 | Prop                                                                                           | Description                                                                                                 |    Type    |     Default |
 | :--------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | :--------: | ----------: |

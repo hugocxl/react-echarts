@@ -1,5 +1,4 @@
 {
-  "echart": "EChart",
-  "ssr-echart": "EChart Server",
+  "components": "Components",
   "hooks": "Hooks"
 }

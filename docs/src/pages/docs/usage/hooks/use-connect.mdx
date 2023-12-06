@@ -4,27 +4,34 @@ Connects interaction of multiple chart series.
 
 ## Usage
 
-```js
-import { useConnect } from '@kbox-labs/react-echarts'
+```tsx copy
+import { useConnect, EChart } from '@kbox-labs/react-echarts'
 
 function App() {
   const [isConnected, setIsConnected] = useConnect('group1')
 
-  return <div onClick={() => setIsConnected(true)}>{/* ... */}</div>
+  return (
+    <div>
+      <EChart
+        group='group1'
+        // ...rest of props
+      />
+      <EChart
+        group='group1'
+        // ...rest of props
+      />
+      <button onClick={() => setIsConnected(!isConnected)}>
+        {isConnected ? 'Disconnect' : 'Connect'}
+      </button>
+    </div>
+  )
 }
-
-/* 
-  To disconnect the group, 
-  just call "setIsConnected(false)" 
-  */
 ```
 
 ## API
 
 ```typescript
-const useConnect: (
-  group: string
-) => (boolean | ((connected: boolean) => void))[]
+const useConnect: (group: string) => [boolean | ((connected: boolean) => void)]
 ```
 
 ### Parameters

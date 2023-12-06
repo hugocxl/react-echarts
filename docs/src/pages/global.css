@@ -12,7 +12,9 @@ tr {
 }
 
 table * {
-  border-color: hsl(
-    var(--nextra-primary-hue) var(--nextra-primary-saturation) 94%/0.1
-  ) !important;
+  border-color: rgba(134, 152, 165, 0.1) !important;
+}
+
+pre {
+  background-color: rgba(134, 152, 165, 0.1) !important;
 }
