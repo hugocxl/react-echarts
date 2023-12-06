@@ -1,7 +1,25 @@
 {
-  "introduction": "Introduction",
-  "installation": "Installation",
-  "usage": "Usage",
-  "guides": "Guides",
-  "examples": "Examples"
+  "index": {
+    "display": "hidden",
+    "type": "page",
+    "theme": {
+      "layout": "full"
+    }
+  },
+  "docs": {
+    "title": "Docs",
+    "type": "page",
+    "href": "/docs/introduction"
+  },
+  "examples": {
+    "title": "Examples",
+    "type": "page",
+    "theme": {
+      "layout": "full"
+    }
+  },
+  "about": {
+    "title": "About",
+    "type": "page"
+  }
 }

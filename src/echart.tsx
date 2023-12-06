@@ -10,30 +10,28 @@ import type { EChartsType } from 'echarts'
 
 export type EChartProps = UseEChartsOptions &
   UseEChartsInstanceOptions & {
-    containerProps?: HTMLAttributes<HTMLDivElement>
     getEchartsInstance?: (echarts: EChartsType | undefined) => unknown
-  }
+  } & HTMLAttributes<HTMLDivElement>
 
 export const EChart: FC<EChartProps> = ({
-  containerProps = {},
   getEchartsInstance,
 
-  // useECharts
+  // Init
   devicePixelRatio,
   renderer,
   width,
   height,
   theme,
 
-  // useEChartsInstance
+  // eChartsInstance
   group,
 
-  // Option
+  // SetOption
   lazyUpdate,
   notMerge,
   silent,
 
-  // Series
+  // Option
   angleAxis,
   animation,
   animationDelay,
@@ -109,7 +107,9 @@ export const EChart: FC<EChartProps> = ({
   onRestore,
   onSelectChanged,
   onTimelineChanged,
-  onTimelinePlayChanged
+  onTimelinePlayChanged,
+
+  ...rest
 }) => {
   const [ref, echartsInstance, isMounted] = useECharts({
     devicePixelRatio,
@@ -217,5 +217,5 @@ export const EChart: FC<EChartProps> = ({
     }
   }, [isMounted])
 
-  return <div {...containerProps} ref={ref} />
+  return <div {...rest} ref={ref} />
 }

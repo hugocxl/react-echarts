@@ -1,3 +1,18 @@
 html {
   font-size: 14px !important;
 }
+
+td,
+th {
+  border: none;
+}
+
+tr {
+  background-color: transparent !important;
+}
+
+table * {
+  border-color: hsl(
+    var(--nextra-primary-hue) var(--nextra-primary-saturation) 94%/0.1
+  ) !important;
+}

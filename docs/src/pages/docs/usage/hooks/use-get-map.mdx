@@ -1,0 +1,42 @@
+# useGetMap
+
+Get a registered map.
+
+## Usage
+
+```js copy
+import { useGetMap } from '@kbox-labs/react-echarts';
+
+function App() {
+  useGetMap({ target: 'group1' }, [...deps]);
+
+  return (
+    ...
+  )
+}
+```
+
+## API
+
+```typescript
+type UseRegisterMap = (
+  mapName: {
+    enabled?: boolean
+    mapName: RegisterMapOptions[0]
+    geoJson: RegisterMapOptions[1]
+    specialAreas?: RegisterMapOptions[2]
+  },
+  deps: unknown[]
+) => void
+```
+
+### Parameters
+
+- **`target`**: Target to be destroyed.
+- **`enabled`**: Whether the hook should call the `disconnect` function or not.
+  Defaults to `true`.
+- **`deps`**: Array of reactive values that trigger the hook.
+
+### Reference
+
+- [ECharts API](https://echarts.apache.org/en/api.html#echarts.registerLocale)
