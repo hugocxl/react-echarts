@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 1.0.1
+
+### Patch Changes
+
+- 27c3f2d: Improved EChartProps typing
+
 ## 1.0.0
 
 ### Major Changes
