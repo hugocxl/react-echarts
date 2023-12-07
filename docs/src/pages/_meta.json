@@ -8,6 +8,14 @@
     "type": "page",
     "href": "/docs/introduction"
   },
+  "playground": {
+    "title": "Playground",
+    "type": "page",
+    "theme": {
+      "layout": "full",
+      "typesetting": "article"
+    }
+  },
   "examples": {
     "title": "Examples",
     "type": "page",
