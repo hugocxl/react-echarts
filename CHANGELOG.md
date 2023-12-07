@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 1.0.0
+
+### Major Changes
+
+- 28c6fce: v1.0.0
+- 9c28c74: v1
+
 ## 0.0.1
 
 ### Patch Changes
