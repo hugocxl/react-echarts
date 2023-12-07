@@ -5,7 +5,16 @@ import { useECharts } from './use-echarts'
 import type { UseEChartsOptions } from './use-echarts'
 import type { FC, HTMLAttributes } from 'react'
 
-export type EChartProps = HTMLAttributes<HTMLDivElement> & UseEChartsOptions
+type ContainerProps = Omit<
+  HTMLAttributes<HTMLDivElement>,
+  | 'onClick'
+  | 'onDoubleClick'
+  | 'onMouseDown'
+  | 'onMouseMove'
+  | 'onMouseOut'
+  | 'onMouseOver'
+>
+export type EChartProps = ContainerProps & UseEChartsOptions
 
 export const EChart: FC<EChartProps> = ({
   // Init

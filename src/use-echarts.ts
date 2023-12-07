@@ -7,17 +7,15 @@ import { echartsEvents as ev } from './events'
 
 // Types
 import type { EChartEventsProps } from './events'
-import type { EChartOption, SetOptionOpts } from 'echarts'
-import type { ECBasicOption } from 'echarts/types/dist/shared'
+import type { EChartsOption, SetOptionOpts } from 'echarts'
 
-export type UseECharts = (
+type UseECharts = (
   options: UseEChartsOptions
 ) => [(node: HTMLDivElement) => void, ECharts | undefined]
 
 export type UseEChartsOptions = EChartEventsProps &
   SetOptionOpts &
-  EChartOption &
-  ECBasicOption &
+  EChartsOption &
   Parameters<typeof init>[2] & {
     group?: ECharts['group']
     theme?: Parameters<typeof init>[1]
