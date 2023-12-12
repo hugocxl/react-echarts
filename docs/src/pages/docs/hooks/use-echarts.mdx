@@ -10,7 +10,7 @@ offering the flexibility needed for advanced customization.
 
 ```tsx copy
 export const EChart: FC<UseEChartsOptions> = props => {
-  const [ref, echartsInstance] = useECharts({
+  const [ref, echartsInstance] = useECharts<HTMLDivElement>({
     xAxis: {
       type: 'category',
       boundaryGap: false,
@@ -35,9 +35,9 @@ export const EChart: FC<UseEChartsOptions> = props => {
 ## API
 
 ```typescript
-type UseECharts = (
+type UseECharts<T extends HtmlElement> = (
   options: UseEChartsOptions
-) => [(node: HTMLDivElement) => void, ECharts | undefined]
+) => [(node: T) => void, ECharts | undefined]
 ```
 
 ### `UseEChartsOptions`

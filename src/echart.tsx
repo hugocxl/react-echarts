@@ -123,7 +123,7 @@ export const EChart: FC<EChartProps> = ({
 
   ...rest
 }) => {
-  const [ref] = useECharts({
+  const [ref] = useECharts<HTMLDivElement>({
     // Init
     devicePixelRatio,
     height,

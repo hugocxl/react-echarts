@@ -4,11 +4,11 @@ Some examples and use cases
 
 ## Creating your own `<EChart />` component
 
-```tsx
-import { type EChartProps } from '@kbox-labs/react-echarts'
+```tsx copy
+import { type UseEChartsOptions } from '@kbox-labs/react-echarts'
 
-export const EChart: FC<EChartProps> = props => {
-  const [ref, echartsInstance] = useECharts(props)
+export const EChart: FC<UseEChartsOptions> = props => {
+  const [ref, echartsInstance] = useECharts<HTMLDivElement>(props)
 
   return <div ref={ref} />
 }

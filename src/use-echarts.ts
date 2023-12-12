@@ -9,10 +9,6 @@ import { echartsEvents as ev } from './events'
 import type { EChartEventsProps } from './events'
 import type { EChartsOption, SetOptionOpts } from 'echarts'
 
-type UseECharts = (
-  options: UseEChartsOptions
-) => [(node: HTMLDivElement) => void, ECharts | undefined]
-
 export type UseEChartsOptions = EChartEventsProps &
   SetOptionOpts &
   EChartsOption &
@@ -22,7 +18,7 @@ export type UseEChartsOptions = EChartEventsProps &
     use?: Parameters<typeof echartsUse>[0]
   }
 
-export const useECharts: UseECharts = ({
+export function useECharts<T extends HTMLElement>({
   // Init
   devicePixelRatio,
   height,
@@ -126,14 +122,14 @@ export const useECharts: UseECharts = ({
   onSelectChanged,
   onTimelineChanged,
   onTimelinePlayChanged
-}: UseEChartsOptions) => {
-  const containerRef = useRef<HTMLDivElement>()
+}: UseEChartsOptions): [(node: T) => void, ECharts | undefined] {
+  const containerRef = useRef<T>()
   const echartsRef = useRef<ECharts>()
   const resizeObserverRef = useRef<ResizeObserver>()
   const [started, setStarted] = useState(false)
   const echartsInstance = echartsRef.current
 
-  async function setContainerRef(node: HTMLDivElement) {
+  async function setContainerRef(node: T) {
     if (containerRef.current && echartsRef.current) return
 
     containerRef.current = node
