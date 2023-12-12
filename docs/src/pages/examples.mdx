@@ -5,7 +5,7 @@ Some examples and use cases
 ## Creating your own `<EChart />` component
 
 ```tsx copy
-import { type UseEChartsOptions } from '@kbox-labs/react-echarts'
+import { useECharts, type UseEChartsOptions } from '@kbox-labs/react-echarts'
 
 export const EChart: FC<UseEChartsOptions> = props => {
   const [ref, echartsInstance] = useECharts<HTMLDivElement>(props)
