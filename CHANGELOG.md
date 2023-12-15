@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 1.0.3
+
+### Patch Changes
+
+- b2b7257: Update package.json
+
 ## 1.0.2
 
 ### Patch Changes
