@@ -171,7 +171,7 @@ export function useECharts<T extends HTMLElement>({
     if (!echartsInstance) return
 
     if (group) echartsInstance.group = group
-  }, [group, started])
+  }, [group, started, echartsInstance])
 
   useEffect(() => {
     if (!echartsInstance) return
@@ -179,51 +179,55 @@ export function useECharts<T extends HTMLElement>({
     echartsInstance.clear()
     echartsInstance.setOption(
       {
-        angleAxis,
-        animation,
-        animationDelay,
-        animationDelayUpdate,
-        animationDuration,
-        animationDurationUpdate,
-        animationEasing,
-        animationEasingUpdate,
-        animationThreshold,
-        aria,
-        axisPointer,
-        backgroundColor,
-        blendMode,
-        brush,
-        calendar,
-        color,
-        darkMode,
-        dataset,
-        dataZoom,
-        geo,
-        graphic,
-        grid,
-        hoverLayerThreshold,
-        legend,
-        media,
-        options,
-        parallel,
-        parallelAxis,
-        polar,
-        progressive,
-        progressiveThreshold,
-        radar,
-        radiusAxis,
         series,
-        singleAxis,
-        stateAnimation,
-        textStyle,
-        timeline,
-        title,
-        toolbox,
-        tooltip,
         useUTC,
-        visualMap,
         xAxis,
-        yAxis
+        yAxis,
+        progressive,
+        blendMode,
+        hoverLayerThreshold,
+        progressiveThreshold,
+        ...(angleAxis && { angleAxis }),
+        ...(animation && { animation }),
+        ...(animationDelay && { animationDelay }),
+        ...(animationDelayUpdate && { animationDelayUpdate }),
+        ...(animationDuration && { animationDuration }),
+        ...(animationDurationUpdate && { animationDurationUpdate }),
+        ...(animationEasing && { animationEasing }),
+        ...(animationEasingUpdate && { animationEasingUpdate }),
+        ...(animationThreshold && { animationThreshold }),
+        ...(aria && { aria }),
+        ...(axisPointer && { axisPointer }),
+        ...(backgroundColor && { backgroundColor }),
+        ...(brush && { brush }),
+        ...(calendar && { calendar }),
+        ...(color && { color }),
+        ...(darkMode && { darkMode }),
+        ...(dataset && { dataset }),
+        ...(dataZoom && { dataZoom }),
+        ...(geo && { geo }),
+        ...(graphic && { graphic }),
+        ...(grid && { grid }),
+        ...(legend && { legend }),
+        ...(media && { media }),
+        ...(options && { options }),
+        ...(parallel && { parallel }),
+        ...(parallelAxis && { parallelAxis }),
+        ...(polar && { polar }),
+        ...(radar && { radar }),
+        ...(radiusAxis && { radiusAxis }),
+        ...(series && { series }),
+        ...(singleAxis && { singleAxis }),
+        ...(stateAnimation && { stateAnimation }),
+        ...(textStyle && { textStyle }),
+        ...(timeline && { timeline }),
+        ...(title && { title }),
+        ...(toolbox && { toolbox }),
+        ...(tooltip && { tooltip }),
+        ...(useUTC && { useUTC }),
+        ...(visualMap && { visualMap }),
+        ...(xAxis && { xAxis }),
+        ...(yAxis && { yAxis })
       },
       {
         lazyUpdate,
@@ -288,7 +292,8 @@ export function useECharts<T extends HTMLElement>({
     transition,
 
     //
-    started
+    started,
+    echartsInstance
   ])
 
   useEffect(() => {
@@ -431,8 +436,8 @@ export function useECharts<T extends HTMLElement>({
     onTimelineChanged,
     onTimelinePlayChanged,
 
-    //
-    started
+    started,
+    echartsInstance
   ])
 
   return [setContainerRef, echartsRef.current]
