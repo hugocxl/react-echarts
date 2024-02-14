@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 1.0.4
+
+### Patch Changes
+
+- e8d96c3: fix: conditionally use of specific props to avoid ECharts error print
+  when using the prop use
+
 ## 1.0.3
 
 ### Patch Changes
