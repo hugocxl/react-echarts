@@ -18,6 +18,19 @@ export type UseEChartsOptions = EChartEventsProps &
     use?: Parameters<typeof echartsUse>[0]
   }
 
+async function getGlobalUse() {
+  const all = [
+    import('echarts/features'),
+    import('echarts/charts'),
+    import('echarts/components'),
+    import('echarts/renderers')
+  ]
+
+  const promise = await Promise.all(all.map(m => m.then(m => Object.values(m))))
+
+  return promise.flat()
+}
+
 export function useECharts<T extends HTMLElement>({
   // Init
   devicePixelRatio,
@@ -168,16 +181,14 @@ export function useECharts<T extends HTMLElement>({
   }
 
   useEffect(() => {
-    if (!echartsInstance) return
-
-    if (group) echartsInstance.group = group
-  }, [group, started, echartsInstance])
+    return () => echartsInstance?.clear?.()
+  }, [])
 
   useEffect(() => {
     if (!echartsInstance) return
 
-    return () => echartsInstance.clear()
-  }, [echartsInstance])
+    if (group) echartsInstance.group = group
+  }, [group, started, echartsInstance])
 
   useEffect(() => {
     if (!echartsInstance) return
@@ -441,22 +452,8 @@ export function useECharts<T extends HTMLElement>({
     onTimelineChanged,
     onTimelinePlayChanged,
 
-    started,
-    echartsInstance
+    started
   ])
 
   return [setContainerRef, echartsRef.current]
-}
-
-async function getGlobalUse() {
-  const all = [
-    import('echarts/features'),
-    import('echarts/charts'),
-    import('echarts/components'),
-    import('echarts/renderers')
-  ]
-
-  const promise = await Promise.all(all.map(m => m.then(m => Object.values(m))))
-
-  return promise.flat()
 }
