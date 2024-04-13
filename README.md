@@ -20,6 +20,41 @@
 
 Visit [introduction](https://hugocxl.github.io/react-echarts/docs/introduction) to get started with **React Echarts**.
 
+### Quick example
+
+A quick example of how to create a simple chart:
+
+```tsx
+import { EChart } from '@kbox-labs/react-echarts'
+
+function App() {
+  return (
+    <EChart
+      style={{
+        height: '600px',
+        width: '100%'
+      }}
+      xAxis={{
+        type: 'category',
+        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+      }}
+      yAxis={{
+        type: 'value'
+      }}
+      series={[
+        {
+          data: [23, 12, 26, 38, 94, 15, 62],
+          type: 'line',
+          areaStyle: {}
+        }
+      ]}
+    />
+  )
+}
+
+export default App
+```
+
 ## Documentation
 
 Visit [docs](khttps://hugocxl.github.io/react-echarts/docs/installation) to view the full documentation.
