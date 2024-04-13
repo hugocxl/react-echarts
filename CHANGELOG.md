@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 1.1.0
+
+### Minor Changes
+
+- 3dff79b: Fixed animation issue when updating charts data
+
 ## 1.0.4
 
 ### Patch Changes
