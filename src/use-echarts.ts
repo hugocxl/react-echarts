@@ -176,7 +176,12 @@ export function useECharts<T extends HTMLElement>({
   useEffect(() => {
     if (!echartsInstance) return
 
-    echartsInstance.clear()
+    return () => echartsInstance.clear()
+  }, [echartsInstance])
+
+  useEffect(() => {
+    if (!echartsInstance) return
+
     echartsInstance.setOption(
       {
         series,
