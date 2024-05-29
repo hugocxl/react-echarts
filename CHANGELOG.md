@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 2.0.0
+
+### Major Changes
+
+- d42cb70: Resolved issue that affected animation props not being passed down to
+  the echarts instance
+
 ## 1.1.0
 
 ### Minor Changes
