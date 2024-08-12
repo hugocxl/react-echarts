@@ -32,7 +32,10 @@
     "test:dev": "vitest dev -u",
     "test:coverage": "vitest run --coverage",
     "clean": "rm -rf dist && rm -rf node_modules",
-    "prepare": "husky"
+    "prepare": "husky",
+    "release": "changeset publish",
+    "release-dev": "changeset version --snapshot dev && changeset publish --tag dev",
+    "postversion": "git push && git push --tags"
   },
   "peerDependencies": {
     "echarts": "^5",
