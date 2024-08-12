@@ -1,32 +1,32 @@
 {
-  "index": {
-    "display": "hidden",
-    "type": "page"
-  },
-  "docs": {
-    "title": "Docs",
-    "type": "page",
-    "href": "/docs/introduction"
-  },
-  "playground": {
-    "title": "Playground",
-    "type": "page",
-    "theme": {
-      "layout": "full"
-    }
-  },
-  "examples": {
-    "title": "Examples",
-    "type": "page",
-    "theme": {
-      "typesetting": "article"
-    }
-  },
-  "about": {
-    "title": "About",
-    "type": "page",
-    "theme": {
-      "typesetting": "article"
-    }
-  }
+	"index": {
+		"display": "hidden",
+		"type": "page"
+	},
+	"docs": {
+		"title": "Docs",
+		"type": "page",
+		"href": "/docs/introduction"
+	},
+	"playground": {
+		"title": "Playground",
+		"type": "page",
+		"theme": {
+			"layout": "full"
+		}
+	},
+	"examples": {
+		"title": "Examples",
+		"type": "page",
+		"theme": {
+			"typesetting": "article"
+		}
+	},
+	"about": {
+		"title": "About",
+		"type": "page",
+		"theme": {
+			"typesetting": "article"
+		}
+	}
 }

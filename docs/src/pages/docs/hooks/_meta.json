@@ -1,4 +1,4 @@
 {
-  "use-echarts": "useECharts",
-  "use-connect": "useConnect"
+	"use-echarts": "useECharts",
+	"use-connect": "useConnect"
 }
