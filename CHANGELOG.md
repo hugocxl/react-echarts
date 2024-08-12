@@ -4,6 +4,12 @@
 
 ### Patch Changes
 
+- 2ac23ba: WIP
+
+## 1.2.1
+
+### Patch Changes
+
 - 16395e4: Update
 
 ## 1.2.1
