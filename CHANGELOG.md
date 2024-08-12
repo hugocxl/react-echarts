@@ -4,6 +4,12 @@
 
 ### Patch Changes
 
+- 16395e4: Update
+
+## 1.2.1
+
+### Patch Changes
+
 - fbcf123: Dispose echarts instance of hook unmount to prevent several ECharts instances in the DOM
 
 ## 1.2.0
