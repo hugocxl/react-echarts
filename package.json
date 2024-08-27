@@ -1,6 +1,6 @@
 {
   "name": "@kbox-labs/react-echarts",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "description": "ECharts for React",
   "productName": "React ECharts",
   "author": "Hugo Corta <corta.hugo@gmail.com>",
