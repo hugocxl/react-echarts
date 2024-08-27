@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 1.3.1
+
+### Patch Changes
+
+- e3e7ea6: v1.3.1
+
 ## 1.3.0
 
 ### Minor Changes
