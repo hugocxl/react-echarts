@@ -1,12 +1,11 @@
 // Dependencies
-import { init, use as echartsUse } from 'echarts/core'
+import { init, type ECharts, use as echartsUse } from 'echarts/core'
 import { useEffect, useRef, useState } from 'react'
 
 // Constants
 import { echartsEvents as ev } from './events'
 
 // Types
-import type { ECharts } from 'echarts/core'
 import type { EChartEventsProps } from './events'
 import type { EChartsOption, SetOptionOpts } from 'echarts'
 
@@ -19,22 +18,20 @@ export type UseEChartsOptions = EChartEventsProps &
 		use?: Parameters<typeof echartsUse>[0]
 	}
 
-async function getGlobalUse() {
-	const all = [
-		import('echarts/features'),
-		import('echarts/charts'),
-		import('echarts/components'),
-		import('echarts/renderers')
-	]
+let isEchartsLoaded = false
 
+async function getGlobalUse() {
 	const promise = await Promise.all(
-		all.map((m) => m.then((m) => Object.values(m)))
+		[
+			import('echarts/features'),
+			import('echarts/charts'),
+			import('echarts/components'),
+			import('echarts/renderers')
+		].map((m) => m.then((m) => Object.values(m)))
 	)
 
 	return promise.flat()
 }
-
-let isEchartsLoaded = false
 
 export function useECharts<T extends HTMLElement>({
 	// Init
@@ -48,10 +45,8 @@ export function useECharts<T extends HTMLElement>({
 	useCoarsePointer,
 	useDirtyRect,
 	width,
-
 	// eChartsInstance
 	group,
-
 	// SetOption
 	lazyUpdate,
 	notMerge,
@@ -62,7 +57,6 @@ export function useECharts<T extends HTMLElement>({
 	media,
 	options,
 	stateAnimation,
-
 	// Option
 	angleAxis,
 	animation,
@@ -105,7 +99,6 @@ export function useECharts<T extends HTMLElement>({
 	visualMap,
 	xAxis,
 	yAxis,
-
 	// Events
 	onAxisAreaSelected,
 	onBrush,
@@ -144,158 +137,31 @@ export function useECharts<T extends HTMLElement>({
 	const containerRef = useRef<T>()
 	const echartsRef = useRef<ECharts>()
 	const resizeObserverRef = useRef<ResizeObserver>()
-	const [isDomLoaded, setIsDomLoaded] = useState(false)
+	const [started, setStarted] = useState(false)
 	const echartsInstance = echartsRef.current
 
-	if (!isEchartsLoaded) {
-		throw loadEchartsModules()
-	}
+	async function setContainerRef(node: T) {
+		if (started) return
 
-	useEffect(() => {
-		return () => {
-			onClose()
-		}
-	}, [])
-
-	useEffect(() => {
-		if (isDomLoaded) onStart()
-	}, [
-		isDomLoaded,
-		containerRef.current?.clientHeight,
-		containerRef.current?.clientWidth
-	])
-
-	// useEffect(() => {
-	// 	if (group && echartsInstance) {
-	// 		echartsInstance.group = group
-	// 	}
-	// }, [group, echartsInstance?.id])
-
-	useEffect(() => {
-		setEchartsOptions()
-	}, [
-		angleAxis,
-		animation,
-		animationDelay,
-		animationDelayUpdate,
-		animationDuration,
-		animationDurationUpdate,
-		animationEasing,
-		animationEasingUpdate,
-		animationThreshold,
-		aria,
-		axisPointer,
-		backgroundColor,
-		blendMode,
-		brush,
-		calendar,
-		color,
-		darkMode,
-		dataset,
-		dataZoom,
-		geo,
-		graphic,
-		grid,
-		hoverLayerThreshold,
-		legend,
-		media,
-		options,
-		parallel,
-		parallelAxis,
-		polar,
-		progressive,
-		progressiveThreshold,
-		radar,
-		radiusAxis,
-		series,
-		singleAxis,
-		stateAnimation,
-		textStyle,
-		timeline,
-		title,
-		toolbox,
-		tooltip,
-		useUTC,
-		visualMap,
-		xAxis,
-		yAxis,
-
-		//
-		lazyUpdate,
-		notMerge,
-		replaceMerge,
-		silent,
-		transition
-	])
-
-	useEffect(() => {
-		setEchartsEvents()
-	}, [
-		onAxisAreaSelected,
-		onBrush,
-		onBrushEnd,
-		onBrushSelected,
-		onClick,
-		onContextMenu,
-		onDataRangeSelected,
-		onDataViewChanged,
-		onDataZoom,
-		onDoubleClick,
-		onDownplay,
-		onFinished,
-		onGeoSelectChanged,
-		onGeoSelected,
-		onGeoUnselected,
-		onGlobalCursorTaken,
-		onGlobalOut,
-		onHighlight,
-		onLegendInverseSelect,
-		onLegendScroll,
-		onLegendSelectChanged,
-		onLegendSelected,
-		onLegendUnselected,
-		onMagicTypeChanged,
-		onMouseDown,
-		onMouseMove,
-		onMouseOut,
-		onMouseOver,
-		onRendered,
-		onRestore,
-		onSelectChanged,
-		onTimelineChanged,
-		onTimelinePlayChanged
-	])
-
-	function onStart() {
-		echartsRef.current = startEcharts()
+		containerRef.current = node
+		echartsRef.current = await startEcharts()
 		resizeObserverRef.current = startResizeObserver()
+
+		setStarted(true)
 	}
 
-	function onClose() {
-		resizeObserverRef.current?.disconnect()
-		echartsRef.current?.dispose()
+	async function startEcharts() {
+		if (!containerRef.current || echartsRef.current) return
 
-		echartsRef.current = undefined
-		resizeObserverRef.current = undefined
-		containerRef.current = undefined
-	}
+		if (!isEchartsLoaded) {
+			const useOpts = use || (await getGlobalUse())
 
-	async function loadEchartsModules() {
-		const useOpts = use || (await getGlobalUse())
+			echartsUse(useOpts)
+		}
 
-		echartsUse(useOpts)
 		isEchartsLoaded = true
-	}
 
-	function startEcharts() {
-		if (echartsRef.current) return echartsRef.current
-		if (
-			!containerRef.current?.clientHeight ||
-			!containerRef.current?.clientWidth
-		)
-			return
-
-		const echarts = init(containerRef.current, theme, {
+		return init(containerRef.current, theme, {
 			devicePixelRatio,
 			height,
 			locale,
@@ -305,36 +171,34 @@ export function useECharts<T extends HTMLElement>({
 			useDirtyRect,
 			width
 		})
-
-		setEchartsEvents()
-		setEchartsOptions()
-
-		return echarts
 	}
 
 	function startResizeObserver() {
-		if (resizeObserverRef.current) return resizeObserverRef.current
-
 		const resizeObserver = new ResizeObserver(() => {
 			echartsRef.current?.resize()
 		})
 
 		if (containerRef.current) resizeObserver.observe(containerRef.current)
-
 		return resizeObserver
 	}
 
-	function setContainerRef(node: T) {
-		if (containerRef.current) return
-
-		if (node) {
-			containerRef.current = node
-			setIsDomLoaded(true)
+	useEffect(() => {
+		return () => {
+			echartsInstance?.dispose?.()
+			resizeObserverRef.current?.disconnect()
 		}
-	}
+	}, [])
 
-	function setEchartsOptions() {
-		echartsInstance?.setOption(
+	useEffect(() => {
+		if (!echartsInstance) return
+
+		if (group) echartsInstance.group = group
+	}, [group, started, echartsInstance])
+
+	useEffect(() => {
+		if (!echartsInstance) return
+
+		echartsInstance.setOption(
 			{
 				series,
 				useUTC,
@@ -394,9 +258,66 @@ export function useECharts<T extends HTMLElement>({
 				transition
 			}
 		)
-	}
+	}, [
+		angleAxis,
+		animation,
+		animationDelay,
+		animationDelayUpdate,
+		animationDuration,
+		animationDurationUpdate,
+		animationEasing,
+		animationEasingUpdate,
+		animationThreshold,
+		aria,
+		axisPointer,
+		backgroundColor,
+		blendMode,
+		brush,
+		calendar,
+		color,
+		darkMode,
+		dataset,
+		dataZoom,
+		geo,
+		graphic,
+		grid,
+		hoverLayerThreshold,
+		legend,
+		media,
+		options,
+		parallel,
+		parallelAxis,
+		polar,
+		progressive,
+		progressiveThreshold,
+		radar,
+		radiusAxis,
+		series,
+		singleAxis,
+		stateAnimation,
+		textStyle,
+		timeline,
+		title,
+		toolbox,
+		tooltip,
+		useUTC,
+		visualMap,
+		xAxis,
+		yAxis,
 
-	function setEchartsEvents() {
+		//
+		lazyUpdate,
+		notMerge,
+		replaceMerge,
+		silent,
+		transition,
+
+		//
+		started,
+		echartsInstance
+	])
+
+	useEffect(() => {
 		if (!echartsInstance) return
 
 		if (onAxisAreaSelected) {
@@ -535,7 +456,43 @@ export function useECharts<T extends HTMLElement>({
 			echartsInstance.off(ev.onTimelinePlayChanged)
 			echartsInstance.on(ev.onTimelinePlayChanged, onTimelinePlayChanged)
 		}
-	}
+	}, [
+		onAxisAreaSelected,
+		onBrush,
+		onBrushEnd,
+		onBrushSelected,
+		onClick,
+		onContextMenu,
+		onDataRangeSelected,
+		onDataViewChanged,
+		onDataZoom,
+		onDoubleClick,
+		onDownplay,
+		onFinished,
+		onGeoSelectChanged,
+		onGeoSelected,
+		onGeoUnselected,
+		onGlobalCursorTaken,
+		onGlobalOut,
+		onHighlight,
+		onLegendInverseSelect,
+		onLegendScroll,
+		onLegendSelectChanged,
+		onLegendSelected,
+		onLegendUnselected,
+		onMagicTypeChanged,
+		onMouseDown,
+		onMouseMove,
+		onMouseOut,
+		onMouseOver,
+		onRendered,
+		onRestore,
+		onSelectChanged,
+		onTimelineChanged,
+		onTimelinePlayChanged,
+
+		started
+	])
 
 	return [setContainerRef, echartsRef.current]
 }

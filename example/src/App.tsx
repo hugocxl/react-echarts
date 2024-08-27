@@ -1,12 +1,6 @@
 import { useState } from 'react'
 import { EChart } from '@kbox-labs/react-echarts'
-import { LineChart } from 'echarts/charts'
-import { CanvasRenderer } from 'echarts/renderers'
-import {
-	TitleComponent,
-	TooltipComponent,
-	GridComponent
-} from 'echarts/components'
+import { data } from './data'
 
 function App() {
 	const [count, setCount] = useState(0)
@@ -18,35 +12,88 @@ function App() {
 			<button type={'button'} onClick={() => setCount((prev) => prev + 1)}>
 				click
 			</button>
-
 			<EChart
-				use={[
-					LineChart,
-					TitleComponent,
-					TooltipComponent,
-					GridComponent,
-					CanvasRenderer
-				]}
-				group='group1'
-				style={{
-					height: '600px',
-					width: '100%'
-				}}
+				renderer='canvas'
+				style={{ width: '100%', height: '800px' }}
 				xAxis={{
-					type: 'category',
-					boundaryGap: false,
-					data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+					type: 'time'
 				}}
 				yAxis={{
-					type: 'value'
+					type: 'value',
+					scale: true
 				}}
+				dataset={data.datasets}
 				series={[
+					{ type: 'scatter', datasetIndex: 0, name: '2016' },
+					{ type: 'scatter', datasetIndex: 1, name: '2017' },
+					{ type: 'scatter', datasetIndex: 2, name: '2018' },
+					{ type: 'scatter', datasetIndex: 3, name: '2019' },
+					{ type: 'scatter', datasetIndex: 4, name: '2020' },
 					{
-						data: Array.from({ length: count }, () =>
-							Math.floor(Math.random() * 100)
-						),
 						type: 'line',
-						areaStyle: {}
+						datasetIndex: 5,
+						name: 'Polynomial Regression',
+						showSymbol: false
+					},
+					{ type: 'line', datasetIndex: 6, name: 'Mean', showSymbol: false }
+				]}
+				grid={{
+					top: 50,
+					bottom: 150
+				}}
+				legend={{
+					data: data.series.map((s) => s.name),
+					bottom: 0
+				}}
+				tooltip={{
+					trigger: 'item',
+					axisPointer: {
+						type: 'cross'
+					}
+				}}
+				toolbox={{
+					show: true,
+					feature: {
+						dataZoom: {
+							yAxisIndex: 'none'
+						},
+						restore: {}
+					}
+				}}
+				title={{
+					show: true,
+					text: 'Audi Q7 Prices',
+					left: 'center'
+				}}
+				dataZoom={[
+					{
+						type: 'slider',
+						show: true,
+						xAxisIndex: [0],
+						start: 0,
+						end: 35,
+						bottom: 80
+					},
+					{
+						type: 'slider',
+						show: true,
+						yAxisIndex: [0],
+						left: '93%',
+						start: 0,
+						end: 35000
+					},
+					{
+						type: 'inside',
+						xAxisIndex: [0],
+						start: 0,
+						end: 35
+					},
+					{
+						type: 'inside',
+						yAxisIndex: [0],
+						start: 0,
+						end: 35000,
+						zoomOnMouseWheel: 'shift'
 					}
 				]}
 			/>

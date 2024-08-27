@@ -7,7 +7,10 @@ import type { EChartsEventProp } from './events'
 import type { FC, HTMLAttributes } from 'react'
 
 export type EChartProps = UseEChartsOptions &
-	Omit<HTMLAttributes<HTMLDivElement>, EChartsEventProp & UseEChartsOptions>
+	Omit<
+		HTMLAttributes<HTMLDivElement>,
+		keyof UseEChartsOptions | EChartsEventProp
+	>
 
 export const EChart: FC<EChartProps> = ({
 	// Init
