@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 1.3.0
+
+### Minor Changes
+
+- e2bc176: v1.3.0
+
 ## 1.2.2
 
 ### Patch Changes
