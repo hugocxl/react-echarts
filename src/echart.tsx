@@ -7,6 +7,7 @@ import type { FC, HTMLAttributes } from 'react'
 
 type ContainerProps = Omit<
 	HTMLAttributes<HTMLDivElement>,
+	| 'title'
 	| 'onClick'
 	| 'onDoubleClick'
 	| 'onMouseDown'

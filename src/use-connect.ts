@@ -1,7 +1,7 @@
 import { connect, disconnect } from 'echarts/core'
 import { useState } from 'react'
 
-export const useConnect = (group: string) => {
+export function useConnect(group: string) {
 	const [isConnected, setIsConnected] = useState(false)
 
 	function onChange(connected: boolean) {
