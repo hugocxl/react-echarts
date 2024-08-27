@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 1.2.2
+
+### Patch Changes
+
+- 8894ade: v1.2.2
+
 ## 1.2.1
 
 ### Patch Changes
