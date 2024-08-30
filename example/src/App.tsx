@@ -3,7 +3,7 @@ import { EChart } from '@kbox-labs/react-echarts'
 import { data } from './data'
 
 function App() {
-	const [count, setCount] = useState(0)
+	const [count, setCount] = useState(6)
 
 	return (
 		<div style={{ width: '100dvw', height: '100dvh' }}>
@@ -13,8 +13,22 @@ function App() {
 				click
 			</button>
 			<EChart
-				renderer='canvas'
-				style={{ width: '100%', height: '800px' }}
+				animation={true}
+				animationDelay={1000}
+				animationDuration={100}
+				animationDelayUpdate={1000}
+				use={[
+					LineChart,
+					TitleComponent,
+					TooltipComponent,
+					GridComponent,
+					CanvasRenderer
+				]}
+				group='group1'
+				style={{
+					height: '600px',
+					width: '100%'
+				}}
 				xAxis={{
 					type: 'time'
 				}}
@@ -30,6 +44,9 @@ function App() {
 					{ type: 'scatter', datasetIndex: 3, name: '2019' },
 					{ type: 'scatter', datasetIndex: 4, name: '2020' },
 					{
+						data: Array.from({ length: 7 }, () =>
+							Math.floor(Math.random() * 100)
+						),
 						type: 'line',
 						datasetIndex: 5,
 						name: 'Polynomial Regression',

@@ -183,13 +183,6 @@ export function useECharts<T extends HTMLElement>({
 	}
 
 	useEffect(() => {
-		return () => {
-			echartsInstance?.dispose?.()
-			resizeObserverRef.current?.disconnect()
-		}
-	}, [])
-
-	useEffect(() => {
 		if (!echartsInstance) return
 
 		if (group) echartsInstance.group = group

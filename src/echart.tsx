@@ -9,7 +9,7 @@ import type { FC, HTMLAttributes } from 'react'
 export type EChartProps = UseEChartsOptions &
 	Omit<
 		HTMLAttributes<HTMLDivElement>,
-		keyof UseEChartsOptions | EChartsEventProp
+		EChartsEventProp | keyof UseEChartsOptions
 	>
 
 export const EChart: FC<EChartProps> = ({
