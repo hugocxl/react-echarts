@@ -9,7 +9,7 @@ import {
 } from 'echarts/components'
 
 function App() {
-	const [count, setCount] = useState(0)
+	const [count, setCount] = useState(6)
 
 	return (
 		<div style={{ width: '100dvw', height: '100dvh' }}>
@@ -20,6 +20,10 @@ function App() {
 			</button>
 
 			<EChart
+				animation={true}
+				animationDelay={1000}
+				animationDuration={100}
+				animationDelayUpdate={1000}
 				use={[
 					LineChart,
 					TitleComponent,
@@ -42,7 +46,7 @@ function App() {
 				}}
 				series={[
 					{
-						data: Array.from({ length: count }, () =>
+						data: Array.from({ length: 7 }, () =>
 							Math.floor(Math.random() * 100)
 						),
 						type: 'line',
