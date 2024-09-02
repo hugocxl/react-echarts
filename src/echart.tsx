@@ -2,19 +2,15 @@
 import { useECharts } from './use-echarts'
 
 // Types
-import type { UseEChartsOptions } from './use-echarts'
 import type { FC, HTMLAttributes } from 'react'
+import type { EChartsEventProp } from './events'
+import type { UseEChartsOptions } from './use-echarts'
 
-type ContainerProps = Omit<
-	HTMLAttributes<HTMLDivElement>,
-	| 'onClick'
-	| 'onDoubleClick'
-	| 'onMouseDown'
-	| 'onMouseMove'
-	| 'onMouseOut'
-	| 'onMouseOver'
->
-export type EChartProps = ContainerProps & UseEChartsOptions
+export type EChartProps = UseEChartsOptions &
+	Omit<
+		HTMLAttributes<HTMLDivElement>,
+		EChartsEventProp | keyof UseEChartsOptions
+	>
 
 export const EChart: FC<EChartProps> = ({
 	// Init
