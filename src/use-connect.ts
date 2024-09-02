@@ -10,6 +10,7 @@ export const useConnect = (group: string) => {
 		} else {
 			disconnect(group)
 		}
+
 		setIsConnected(connected)
 	}
 
