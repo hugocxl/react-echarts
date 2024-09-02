@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## 1.4.0
+
+### Minor Changes
+
+- 67febdd: Fix echart resize on window width change regression
+
+### Patch Changes
+
+- c900906: WIP
+
 ## 1.2.1
 
 ### Patch Changes
