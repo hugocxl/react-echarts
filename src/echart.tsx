@@ -12,8 +12,21 @@ export type EChartProps = UseEChartsOptions &
 		keyof UseEChartsOptions | EChartsEventProp
 	>
 
+/**
+ * EChart component that wraps ECharts functionality in a React component
+ *
+ * @example
+ * ```tsx
+ * <EChart
+ *   style={{ height: '400px' }}
+ *   xAxis={{ type: 'category', data: ['A', 'B', 'C'] }}
+ *   yAxis={{ type: 'value' }}
+ *   series={[{ type: 'bar', data: [1, 2, 3] }]}
+ * />
+ * ```
+ */
 export const EChart: FC<EChartProps> = ({
-	// Init
+	// Initialization options
 	devicePixelRatio,
 	height,
 	locale,
@@ -25,10 +38,10 @@ export const EChart: FC<EChartProps> = ({
 	useDirtyRect,
 	width,
 
-	// eChartsInstance
+	// ECharts instance options
 	group,
 
-	// SetOption
+	// SetOption options
 	lazyUpdate,
 	notMerge,
 	replaceMerge,
@@ -39,7 +52,7 @@ export const EChart: FC<EChartProps> = ({
 	options,
 	stateAnimation,
 
-	// Option
+	// Chart options
 	angleAxis,
 	animation,
 	animationDelay,
@@ -82,7 +95,7 @@ export const EChart: FC<EChartProps> = ({
 	xAxis,
 	yAxis,
 
-	// Events
+	// Event handlers
 	onAxisAreaSelected,
 	onBrush,
 	onBrushEnd,
@@ -119,8 +132,9 @@ export const EChart: FC<EChartProps> = ({
 
 	...rest
 }) => {
+	// Use ECharts hook
 	const [ref] = useECharts<HTMLDivElement>({
-		// Init
+		// Initialization options
 		devicePixelRatio,
 		height,
 		locale,
@@ -132,10 +146,10 @@ export const EChart: FC<EChartProps> = ({
 		useDirtyRect,
 		width,
 
-		// eChartsInstance
+		// ECharts instance options
 		group,
 
-		// SetOption
+		// SetOption options
 		lazyUpdate,
 		notMerge,
 		replaceMerge,
@@ -146,7 +160,7 @@ export const EChart: FC<EChartProps> = ({
 		options,
 		stateAnimation,
 
-		// Option
+		// Chart options
 		angleAxis,
 		animation,
 		animationDelay,
@@ -189,7 +203,7 @@ export const EChart: FC<EChartProps> = ({
 		xAxis,
 		yAxis,
 
-		// Events
+		// Event handlers
 		onAxisAreaSelected,
 		onBrush,
 		onBrushEnd,
@@ -225,5 +239,6 @@ export const EChart: FC<EChartProps> = ({
 		onTimelinePlayChanged
 	})
 
+	// Render the component
 	return <div {...rest} ref={ref} />
 }
