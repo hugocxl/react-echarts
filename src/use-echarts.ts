@@ -28,7 +28,8 @@ export function useECharts<T extends HTMLElement>(
 	const echartsInstance = echartsRef.current
 
 	const setContainerRef = async (node: T) => {
-		if (containerRef.current || echartsRef.current) return
+		if (!node || node === containerRef.current) return
+		if (echartsRef.current) echartsRef.current.dispose()
 
 		containerRef.current = node
 		echartsRef.current = await setupECharts(node, options)
@@ -49,7 +50,7 @@ export function useECharts<T extends HTMLElement>(
 	// Cleanup effect
 	useEffect(() => {
 		return () => echartsInstance?.dispose?.()
-	}, [])
+	}, [echartsInstance])
 
 	useEffect(() => {
 		if (!echartsInstance || !started) return
