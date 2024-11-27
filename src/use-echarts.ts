@@ -28,7 +28,7 @@ export function useECharts<T extends HTMLElement>(
 	const echartsInstance = echartsRef.current
 
 	const setContainerRef = async (node: T) => {
-		if (containerRef.current && echartsRef.current) return
+		if (containerRef.current || echartsRef.current) return
 
 		containerRef.current = node
 		echartsRef.current = await setupECharts(node, options)
