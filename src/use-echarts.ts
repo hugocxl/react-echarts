@@ -1,13 +1,13 @@
 // Dependencies
-import { init, type ECharts, use as echartsUse } from 'echarts/core'
 import { useEffect, useRef, useState } from 'react'
-
-// Constants
-import { echartsEvents as ev } from './events'
+import { setupECharts } from './utils/chart-init'
+import { buildChartOptions, getSetOptionConfig } from './utils/chart-options'
+import { setupEventHandlers } from './utils/event-handlers'
 
 // Types
 import type { EChartEventsProps } from './events'
 import type { EChartsOption, SetOptionOpts } from 'echarts'
+import type { init, ECharts, use as echartsUse } from 'echarts/core'
 
 export type UseEChartsOptions = EChartEventsProps &
 	SetOptionOpts &
@@ -18,162 +18,27 @@ export type UseEChartsOptions = EChartEventsProps &
 		use?: Parameters<typeof echartsUse>[0]
 	}
 
-async function getGlobalUse() {
-	const all = [
-		import('echarts/features'),
-		import('echarts/charts'),
-		import('echarts/components'),
-		import('echarts/renderers')
-	]
-
-	const promise = await Promise.all(
-		all.map((m) => m.then((m) => Object.values(m)))
-	)
-
-	return promise.flat()
-}
-
-export function useECharts<T extends HTMLElement>({
-	// Init
-	devicePixelRatio,
-	height,
-	locale,
-	pointerSize,
-	renderer,
-	theme,
-	use,
-	useCoarsePointer,
-	useDirtyRect,
-	width,
-
-	// eChartsInstance
-	group,
-
-	// SetOption
-	lazyUpdate,
-	notMerge,
-	replaceMerge,
-	silent,
-	transition,
-	darkMode,
-	media,
-	options,
-	stateAnimation,
-
-	// Option
-	angleAxis,
-	animation,
-	animationDelay,
-	animationDelayUpdate,
-	animationDuration,
-	animationDurationUpdate,
-	animationEasing,
-	animationEasingUpdate,
-	animationThreshold,
-	aria,
-	axisPointer,
-	backgroundColor,
-	blendMode,
-	brush,
-	calendar,
-	color,
-	dataZoom,
-	dataset,
-	geo,
-	graphic,
-	grid,
-	hoverLayerThreshold,
-	legend,
-	parallel,
-	parallelAxis,
-	polar,
-	progressive,
-	progressiveThreshold,
-	radar,
-	radiusAxis,
-	series,
-	singleAxis,
-	textStyle,
-	timeline,
-	title,
-	toolbox,
-	tooltip,
-	useUTC,
-	visualMap,
-	xAxis,
-	yAxis,
-
-	// Events
-	onAxisAreaSelected,
-	onBrush,
-	onBrushEnd,
-	onBrushSelected,
-	onClick,
-	onContextMenu,
-	onDataRangeSelected,
-	onDataViewChanged,
-	onDataZoom,
-	onDoubleClick,
-	onDownplay,
-	onFinished,
-	onGeoSelectChanged,
-	onGeoSelected,
-	onGeoUnselected,
-	onGlobalCursorTaken,
-	onGlobalOut,
-	onHighlight,
-	onLegendInverseSelect,
-	onLegendScroll,
-	onLegendSelectChanged,
-	onLegendSelected,
-	onLegendUnselected,
-	onMagicTypeChanged,
-	onMouseDown,
-	onMouseMove,
-	onMouseOut,
-	onMouseOver,
-	onRendered,
-	onRestore,
-	onSelectChanged,
-	onTimelineChanged,
-	onTimelinePlayChanged
-}: UseEChartsOptions): [(node: T) => void, ECharts | undefined] {
+export function useECharts<T extends HTMLElement>(
+	options: UseEChartsOptions
+): [(node: T) => void, ECharts | undefined] {
 	const containerRef = useRef<T>()
 	const echartsRef = useRef<ECharts>()
 	const resizeObserverRef = useRef<ResizeObserver>()
 	const [started, setStarted] = useState(false)
 	const echartsInstance = echartsRef.current
 
-	async function setContainerRef(node: T) {
-		if (containerRef.current && echartsRef.current) return
+	const setContainerRef = async (node: T) => {
+		if (!node || node === containerRef.current) return
+		if (echartsRef.current) echartsRef.current.dispose()
 
 		containerRef.current = node
-		echartsRef.current = await startEcharts()
+		echartsRef.current = await setupECharts(node, options)
 		resizeObserverRef.current = startResizeObserver()
 
 		setStarted(true)
 	}
 
-	async function startEcharts() {
-		if (!containerRef.current) return
-
-		const useOpts = use || (await getGlobalUse())
-
-		echartsUse(useOpts)
-
-		return init(containerRef.current, theme, {
-			devicePixelRatio,
-			height,
-			locale,
-			pointerSize,
-			renderer,
-			useCoarsePointer,
-			useDirtyRect,
-			width
-		})
-	}
-
-	function startResizeObserver() {
+	const startResizeObserver = () => {
 		const resizeObserver = new ResizeObserver(() => {
 			echartsRef.current?.resize()
 		})
@@ -182,313 +47,123 @@ export function useECharts<T extends HTMLElement>({
 		return resizeObserver
 	}
 
+	// Cleanup effect
 	useEffect(() => {
 		return () => echartsInstance?.dispose?.()
-	}, [])
+	}, [echartsInstance])
 
 	useEffect(() => {
-		if (!echartsInstance) return
+		if (!echartsInstance || !started) return
+		if (options.group) echartsInstance.group = options.group
+	}, [options.group, started, echartsInstance])
 
-		if (group) echartsInstance.group = group
-	}, [group, started, echartsInstance])
-
+	// Chart options effect
 	useEffect(() => {
-		if (!echartsInstance) return
+		if (!echartsInstance || !started) return
 
-		echartsInstance.setOption(
-			{
-				series,
-				useUTC,
-				xAxis,
-				yAxis,
-				progressive,
-				blendMode,
-				hoverLayerThreshold,
-				progressiveThreshold,
-				animation,
-				animationDelay,
-				animationDelayUpdate,
-				animationDuration,
-				animationDurationUpdate,
-				animationEasing,
-				animationEasingUpdate,
-				animationThreshold,
-				...(angleAxis && { angleAxis }),
-				...(aria && { aria }),
-				...(axisPointer && { axisPointer }),
-				...(backgroundColor && { backgroundColor }),
-				...(brush && { brush }),
-				...(calendar && { calendar }),
-				...(color && { color }),
-				...(darkMode && { darkMode }),
-				...(dataset && { dataset }),
-				...(dataZoom && { dataZoom }),
-				...(geo && { geo }),
-				...(graphic && { graphic }),
-				...(grid && { grid }),
-				...(legend && { legend }),
-				...(media && { media }),
-				...(options && { options }),
-				...(parallel && { parallel }),
-				...(parallelAxis && { parallelAxis }),
-				...(polar && { polar }),
-				...(radar && { radar }),
-				...(radiusAxis && { radiusAxis }),
-				...(series && { series }),
-				...(singleAxis && { singleAxis }),
-				...(stateAnimation && { stateAnimation }),
-				...(textStyle && { textStyle }),
-				...(timeline && { timeline }),
-				...(title && { title }),
-				...(toolbox && { toolbox }),
-				...(tooltip && { tooltip }),
-				...(useUTC && { useUTC }),
-				...(visualMap && { visualMap }),
-				...(xAxis && { xAxis }),
-				...(yAxis && { yAxis })
-			},
-			{
-				lazyUpdate,
-				notMerge,
-				replaceMerge,
-				silent,
-				transition
-			}
-		)
+		const chartOptions = buildChartOptions(options)
+		const setOptionConfig = getSetOptionConfig(options)
+
+		echartsInstance.setOption(chartOptions, setOptionConfig)
 	}, [
-		angleAxis,
-		animation,
-		animationDelay,
-		animationDelayUpdate,
-		animationDuration,
-		animationDurationUpdate,
-		animationEasing,
-		animationEasingUpdate,
-		animationThreshold,
-		aria,
-		axisPointer,
-		backgroundColor,
-		blendMode,
-		brush,
-		calendar,
-		color,
-		darkMode,
-		dataset,
-		dataZoom,
-		geo,
-		graphic,
-		grid,
-		hoverLayerThreshold,
-		legend,
-		media,
-		options,
-		parallel,
-		parallelAxis,
-		polar,
-		progressive,
-		progressiveThreshold,
-		radar,
-		radiusAxis,
-		series,
-		singleAxis,
-		stateAnimation,
-		textStyle,
-		timeline,
-		title,
-		toolbox,
-		tooltip,
-		useUTC,
-		visualMap,
-		xAxis,
-		yAxis,
+		options.angleAxis,
+		options.animation,
+		options.animationDelay,
+		options.animationDelayUpdate,
+		options.animationDuration,
+		options.animationDurationUpdate,
+		options.animationEasing,
+		options.animationEasingUpdate,
+		options.animationThreshold,
+		options.aria,
+		options.axisPointer,
+		options.backgroundColor,
+		options.blendMode,
+		options.brush,
+		options.calendar,
+		options.color,
+		options.darkMode,
+		options.dataset,
+		options.dataZoom,
+		options.geo,
+		options.graphic,
+		options.grid,
+		options.hoverLayerThreshold,
+		options.legend,
+		options.media,
+		options.options,
+		options.parallel,
+		options.parallelAxis,
+		options.polar,
+		options.progressive,
+		options.progressiveThreshold,
+		options.radar,
+		options.radiusAxis,
+		options.series,
+		options.singleAxis,
+		options.stateAnimation,
+		options.textStyle,
+		options.timeline,
+		options.title,
+		options.toolbox,
+		options.tooltip,
+		options.useUTC,
+		options.visualMap,
+		options.xAxis,
+		options.yAxis,
 
 		//
-		lazyUpdate,
-		notMerge,
-		replaceMerge,
-		silent,
-		transition,
+		options.lazyUpdate,
+		options.notMerge,
+		options.replaceMerge,
+		options.silent,
+		options.transition,
 
 		//
 		started,
 		echartsInstance
 	])
 
+	// Event handlers effect
 	useEffect(() => {
-		if (!echartsInstance) return
-
-		if (onAxisAreaSelected) {
-			echartsInstance.off(ev.onAxisAreaSelected)
-			echartsInstance.on(ev.onAxisAreaSelected, onAxisAreaSelected)
-		}
-		if (onBrush) {
-			echartsInstance.off(ev.onBrush)
-			echartsInstance.on(ev.onBrush, onBrush)
-		}
-		if (onBrushEnd) {
-			echartsInstance.off(ev.onBrushEnd)
-			echartsInstance.on(ev.onBrushEnd, onBrushEnd)
-		}
-		if (onBrushSelected) {
-			echartsInstance.off(ev.onBrushSelected)
-			echartsInstance.on(ev.onBrushSelected, onBrushSelected)
-		}
-		if (onClick) {
-			echartsInstance.off(ev.onClick)
-			echartsInstance.on(ev.onClick, onClick)
-		}
-		if (onContextMenu) {
-			echartsInstance.off(ev.onContextMenu)
-			echartsInstance.on(ev.onContextMenu, onContextMenu)
-		}
-		if (onDataRangeSelected) {
-			echartsInstance.off(ev.onDataRangeSelected)
-			echartsInstance.on(ev.onDataRangeSelected, onDataRangeSelected)
-		}
-		if (onDataViewChanged) {
-			echartsInstance.off(ev.onDataViewChanged)
-			echartsInstance.on(ev.onDataViewChanged, onDataViewChanged)
-		}
-		if (onDataZoom) {
-			echartsInstance.off(ev.onDataZoom)
-			echartsInstance.on(ev.onDataZoom, onDataZoom)
-		}
-		if (onDoubleClick) {
-			echartsInstance.off(ev.onDoubleClick)
-			echartsInstance.on(ev.onDoubleClick, onDoubleClick)
-		}
-		if (onDownplay) {
-			echartsInstance.off(ev.onDownplay)
-			echartsInstance.on(ev.onDownplay, onDownplay)
-		}
-		if (onFinished) {
-			echartsInstance.off(ev.onFinished)
-			echartsInstance.on(ev.onFinished, onFinished)
-		}
-		if (onGeoSelectChanged) {
-			echartsInstance.off(ev.onGeoSelectChanged)
-			echartsInstance.on(ev.onGeoSelectChanged, onGeoSelectChanged)
-		}
-		if (onGeoSelected) {
-			echartsInstance.off(ev.onGeoSelected)
-			echartsInstance.on(ev.onGeoSelected, onGeoSelected)
-		}
-		if (onGeoUnselected) {
-			echartsInstance.off(ev.onGeoUnselected)
-			echartsInstance.on(ev.onGeoUnselected, onGeoUnselected)
-		}
-		if (onGlobalCursorTaken) {
-			echartsInstance.off(ev.onGlobalCursorTaken)
-			echartsInstance.on(ev.onGlobalCursorTaken, onGlobalCursorTaken)
-		}
-		if (onGlobalOut) {
-			echartsInstance.off(ev.onGlobalOut)
-			echartsInstance.on(ev.onGlobalOut, onGlobalOut)
-		}
-		if (onHighlight) {
-			echartsInstance.off(ev.onHighlight)
-			echartsInstance.on(ev.onHighlight, onHighlight)
-		}
-		if (onLegendInverseSelect) {
-			echartsInstance.off(ev.onLegendInverseSelect)
-			echartsInstance.on(ev.onLegendInverseSelect, onLegendInverseSelect)
-		}
-		if (onLegendScroll) {
-			echartsInstance.off(ev.onLegendScroll)
-			echartsInstance.on(ev.onLegendScroll, onLegendScroll)
-		}
-		if (onLegendScroll) {
-			echartsInstance.off(ev.onLegendScroll)
-			echartsInstance.on(ev.onLegendScroll, onLegendScroll)
-		}
-		if (onLegendSelectChanged) {
-			echartsInstance.off(ev.onLegendSelectChanged)
-			echartsInstance.on(ev.onLegendSelectChanged, onLegendSelectChanged)
-		}
-		if (onLegendSelected) {
-			echartsInstance.off(ev.onLegendSelected)
-			echartsInstance.on(ev.onLegendSelected, onLegendSelected)
-		}
-		if (onLegendUnselected) {
-			echartsInstance.off(ev.onLegendUnselected)
-			echartsInstance.on(ev.onLegendUnselected, onLegendUnselected)
-		}
-		if (onMagicTypeChanged) {
-			echartsInstance.off(ev.onMagicTypeChanged)
-			echartsInstance.on(ev.onMagicTypeChanged, onMagicTypeChanged)
-		}
-		if (onMouseDown) {
-			echartsInstance.off(ev.onMouseDown)
-			echartsInstance.on(ev.onMouseDown, onMouseDown)
-		}
-		if (onMouseMove) {
-			echartsInstance.off(ev.onMouseMove)
-			echartsInstance.on(ev.onMouseMove, onMouseMove)
-		}
-		if (onMouseOut) {
-			echartsInstance.off(ev.onMouseOut)
-			echartsInstance.on(ev.onMouseOut, onMouseOut)
-		}
-		if (onMouseOver) {
-			echartsInstance.off(ev.onMouseOver)
-			echartsInstance.on(ev.onMouseOver, onMouseOver)
-		}
-		if (onRendered) {
-			echartsInstance.off(ev.onRendered)
-			echartsInstance.on(ev.onRendered, onRendered)
-		}
-		if (onRestore) {
-			echartsInstance.off(ev.onRestore)
-			echartsInstance.on(ev.onRestore, onRestore)
-		}
-		if (onSelectChanged) {
-			echartsInstance.off(ev.onSelectChanged)
-			echartsInstance.on(ev.onSelectChanged, onSelectChanged)
-		}
-		if (onTimelineChanged) {
-			echartsInstance.off(ev.onTimelineChanged)
-			echartsInstance.on(ev.onTimelineChanged, onTimelineChanged)
-		}
-		if (onTimelinePlayChanged) {
-			echartsInstance.off(ev.onTimelinePlayChanged)
-			echartsInstance.on(ev.onTimelinePlayChanged, onTimelinePlayChanged)
-		}
+		if (!echartsInstance || !started) return
+		setupEventHandlers(echartsInstance, options)
 	}, [
-		onAxisAreaSelected,
-		onBrush,
-		onBrushEnd,
-		onBrushSelected,
-		onClick,
-		onContextMenu,
-		onDataRangeSelected,
-		onDataViewChanged,
-		onDataZoom,
-		onDoubleClick,
-		onDownplay,
-		onFinished,
-		onGeoSelectChanged,
-		onGeoSelected,
-		onGeoUnselected,
-		onGlobalCursorTaken,
-		onGlobalOut,
-		onHighlight,
-		onLegendInverseSelect,
-		onLegendScroll,
-		onLegendSelectChanged,
-		onLegendSelected,
-		onLegendUnselected,
-		onMagicTypeChanged,
-		onMouseDown,
-		onMouseMove,
-		onMouseOut,
-		onMouseOver,
-		onRendered,
-		onRestore,
-		onSelectChanged,
-		onTimelineChanged,
-		onTimelinePlayChanged,
-
-		started
+		started,
+		echartsInstance,
+		options.onAxisAreaSelected,
+		options.onBrush,
+		options.onBrushEnd,
+		options.onBrushSelected,
+		options.onClick,
+		options.onContextMenu,
+		options.onDataRangeSelected,
+		options.onDataViewChanged,
+		options.onDataZoom,
+		options.onDoubleClick,
+		options.onDownplay,
+		options.onFinished,
+		options.onGeoSelectChanged,
+		options.onGeoSelected,
+		options.onGeoUnselected,
+		options.onGlobalCursorTaken,
+		options.onGlobalOut,
+		options.onHighlight,
+		options.onLegendInverseSelect,
+		options.onLegendScroll,
+		options.onLegendSelectChanged,
+		options.onLegendSelected,
+		options.onLegendUnselected,
+		options.onMagicTypeChanged,
+		options.onMouseDown,
+		options.onMouseMove,
+		options.onMouseOut,
+		options.onMouseOver,
+		options.onRendered,
+		options.onRestore,
+		options.onSelectChanged,
+		options.onTimelineChanged,
+		options.onTimelinePlayChanged
 	])
 
 	return [setContainerRef, echartsRef.current]
