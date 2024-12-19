@@ -10,6 +10,7 @@
   "module": "dist/index.mjs",
   "require": "dist/index.js",
   "types": "dist/index.d.ts",
+  "type": "module",
   "private": false,
   "repository": {
     "type": "git",
