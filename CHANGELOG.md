@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 1.4.1
+
+### Patch Changes
+
+- 776f11f: v1.4.0
+- 12ef05f: Adding type module in package json to avoid common js being loaded"
+
 ## 1.4.0
 
 ### Minor Changes
