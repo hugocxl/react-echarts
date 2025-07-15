@@ -26,6 +26,7 @@ A quick example of how to create a simple chart:
 
 ```tsx
 import { EChart } from '@kbox-labs/react-echarts'
+import * as echarts from 'echarts';
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
         height: '600px',
         width: '100%'
       }}
+      init={echarts.init}
       xAxis={{
         type: 'category',
         data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
