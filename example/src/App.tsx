@@ -8,6 +8,16 @@ import {
 	GridComponent
 } from 'echarts/components'
 
+import * as echarts from 'echarts/core'
+
+echarts.use([
+	LineChart,
+	TitleComponent,
+	TooltipComponent,
+	GridComponent,
+	CanvasRenderer
+])
+
 function App() {
 	const [count, setCount] = useState(0)
 
@@ -20,13 +30,7 @@ function App() {
 			</button>
 
 			<EChart
-				use={[
-					LineChart,
-					TitleComponent,
-					TooltipComponent,
-					GridComponent,
-					CanvasRenderer
-				]}
+				init={echarts.init}
 				group='group1'
 				style={{
 					height: '600px',

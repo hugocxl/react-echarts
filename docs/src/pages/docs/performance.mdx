@@ -11,9 +11,11 @@ re-renders.
 
 ```tsx
 import { EChart, EChartProps } from '@kbox-labs/react-echarts'
+import * as echarts from 'echarts';
 import { useMemo } from 'react'
 
 const staticProps: EChartProps = {
+  init: echarts.init,
   xAxis: {
     type: 'category'
   },

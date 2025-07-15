@@ -27,6 +27,7 @@ export type EChartProps = UseEChartsOptions &
  */
 export const EChart: FC<EChartProps> = ({
 	// Initialization options
+	init,
 	devicePixelRatio,
 	height,
 	locale,
@@ -135,6 +136,7 @@ export const EChart: FC<EChartProps> = ({
 	// Use ECharts hook
 	const [ref] = useECharts<HTMLDivElement>({
 		// Initialization options
+		init,
 		devicePixelRatio,
 		height,
 		locale,

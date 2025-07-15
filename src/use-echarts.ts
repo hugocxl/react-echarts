@@ -7,7 +7,7 @@ import { setupEventHandlers } from './utils/event-handlers'
 // Types
 import type { EChartEventsProps } from './events'
 import type { EChartsOption, SetOptionOpts } from 'echarts'
-import type { init, ECharts, use as echartsUse } from 'echarts/core'
+import type { init, ECharts } from 'echarts/core'
 
 export type UseEChartsOptions = EChartEventsProps &
 	SetOptionOpts &
@@ -15,7 +15,7 @@ export type UseEChartsOptions = EChartEventsProps &
 	Parameters<typeof init>[2] & {
 		group?: ECharts['group']
 		theme?: Parameters<typeof init>[1]
-		use?: Parameters<typeof echartsUse>[0]
+		init: typeof init
 	}
 
 export function useECharts<T extends HTMLElement>(
